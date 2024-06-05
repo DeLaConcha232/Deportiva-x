@@ -1,0 +1,19 @@
+{
+  "name": "deportiva-x",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "javascript",
+    "react",
+    "Vite",
+    "tailwind"
+  ],
+  "author": "DiegoDiazDeLaConcha <diegodiazdelaconcha23@gmail.com>",
+  "license": "MIT",
+  "description": ""
+}
