@@ -1,0 +1,20 @@
+
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+.title{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
