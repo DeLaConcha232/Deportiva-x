@@ -1,5 +1,5 @@
 import './SignUp.css'
-
+import { Link } from 'react-router-dom'
 
 export default function SignUp() {
     return (
@@ -30,7 +30,7 @@ export default function SignUp() {
                         <span>TELEFONO</span>
                         <input type="number" />
                         <div className='formulario' id='buttonsSign'>
-                            <button type='submit' className='btn' id='signup'>Sign Up</button>
+                            <Link to="/" type='submit' className='btn' id='signup'>Sign Up</Link>
                         </div>
                     </form>
                 </article>

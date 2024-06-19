@@ -1,4 +1,6 @@
-
+*{
+    font-family: 'Roboto';
+}
 
 header{
     display: none;
@@ -76,6 +78,8 @@ main{
     font-size: 1.5rem;
     padding: 1rem;
     color: #ffffff;
+    text-align: center;
+    text-decoration: none;
 }
 
 

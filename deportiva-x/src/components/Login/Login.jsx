@@ -1,5 +1,5 @@
 import './Login.css'
-// import SignUp from '../SignUp/SignUp'
+import { Link } from 'react-router-dom'
 
 
 export default function Login() {
@@ -25,7 +25,7 @@ export default function Login() {
                         <input type='password' />
                         <div className='formulario' id='buttons'>
                             <button type='submit' className='btn'>Login</button>
-                            <button type="button" className='btn'>Sign Up</button>
+                            <Link to="/Signup" type="button" className='btn'>Sign Up</Link>
                         </div>
                     </form>
                 </article>
