@@ -1,5 +1,5 @@
 import './SignUp.css'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 export default function SignUp() {
     return (
@@ -16,21 +16,22 @@ export default function SignUp() {
                         <h1 className="newA">Create New Account</h1>
                         <p id='signin'>Already Registered? Log in here</p>
                     </article>
-                    <form action="" className='formulario forms'>
+                    <form action="/" className='formulario forms'>
                         <span>NAME</span>
-                        <input type="text" />
+                        <input type="text" required/>
                         <span>EMAIL</span>
-                        <input type='email' />
+                        <input type='email' required/>
                         <span>PASSWORD</span>
-                        <input type='password' />
+                        <input type='password' required/>
                         <span>CODIGO POSTAL</span>
                         <input type="number" />
                         <span>DOMICILIO</span>
                         <input type="text" />
                         <span>TELEFONO</span>
-                        <input type="number" />
+                        <input type="number" required/>
                         <div className='formulario' id='buttonsSign'>
-                            <Link to="/" type='submit' className='btn' id='signup'>Sign Up</Link>
+                            <button type='submit' className='btn' id='signup'>Sign Up</button>
+                            {/* <Link to="/" type='submit' className='btn' id='signup'>Sign Up</Link> */}
                         </div>
                     </form>
                 </article>

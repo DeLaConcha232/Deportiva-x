@@ -26,6 +26,7 @@ export default function Login() {
                         <div className='formulario' id='buttons'>
                             <button type='submit' className='btn'>Login</button>
                             <Link to="/Signup" type="button" className='btn'>Sign Up</Link>
+                            <Link to="/Forgotpass" className='forgotPass'>Forgot Password?</Link>
                         </div>
                     </form>
                 </article>
