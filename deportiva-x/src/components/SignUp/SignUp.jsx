@@ -1,5 +1,5 @@
 import './SignUp.css'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function SignUp() {
     return (
@@ -14,7 +14,7 @@ export default function SignUp() {
                 <article className='container cont'>
                     <article className='title titleSign'>
                         <h1 className="newA">Create New Account</h1>
-                        <p id='signin'>Already Registered? Log in here</p>
+                        <Link to="/" id='signin'>Already Registered? Log in here</Link>
                     </article>
                     <form action="/" className='formulario forms'>
                         <span>NAME</span>
