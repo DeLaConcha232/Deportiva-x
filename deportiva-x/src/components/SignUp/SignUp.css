@@ -1,6 +1,11 @@
 
 /* It's taking all the styles of the Login.css screen and we just change some things to trasnform into SignUp screen*/
-
+#signup{
+    background: url('../../../public//assets//Login/background-movil-signup.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 
 .titleSign{
     text-align: center;
@@ -32,9 +37,10 @@
 }
 
 
-
 @media(min-width: 1024px){
-    
+    #signup{
+        background: url('../../../public//assets//Login/background.jpeg');
+    }
     .titleSign{
         .newA{
             font-size: 3rem;

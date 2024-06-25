@@ -9,7 +9,7 @@ export default function SignUp() {
                     <img src="../../../public/assets/Login/burguer-menu.png" alt="burguerMenu" className='burguer-Menu' />
                 </nav>
             </header>
-            <main>
+            <main id='signup'>
                 <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
                 <article className='container cont'>
                     <article className='title titleSign'>

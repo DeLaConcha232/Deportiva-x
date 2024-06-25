@@ -25,7 +25,7 @@ main{
     align-items: center;
     height: 100vh;
     background-color: #306fb8;
-    background: url('../../../public//assets//Login/background.jpeg');
+    background: url('../../../public//assets//Login/background-movil-login.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -91,6 +91,9 @@ main{
 
 
 @media (min-width: 768px) and (max-width: 1023px){
+    main{
+        background: url('../../../public//assets//Login/background.jpeg');
+    }
     .container{
         width: 50%;
     }
@@ -101,6 +104,7 @@ main{
         display: block;
     }
     main{
+        background: url('../../../public//assets//Login/background.jpeg');
         .logo{
             display: block;
         }
