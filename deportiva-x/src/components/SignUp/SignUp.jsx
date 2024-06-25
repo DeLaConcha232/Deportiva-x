@@ -30,7 +30,7 @@ export default function SignUp() {
                         <span>TELEFONO</span>
                         <input type="number" required/>
                         <div className='formulario' id='buttonsSign'>
-                            <button type='submit' className='btn' id='signup'>Sign Up</button>
+                            <button type='submit' className='btn' id='signupBtn'>Sign Up</button>
                             {/* <Link to="/" type='submit' className='btn' id='signup'>Sign Up</Link> */}
                         </div>
                     </form>

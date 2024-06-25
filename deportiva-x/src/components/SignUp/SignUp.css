@@ -31,7 +31,7 @@
         background-color: black;
         border: none;
     }
-    #signup{
+    #signupBtn{
         color: white;
     }
 }
@@ -40,6 +40,9 @@
 @media(min-width: 1024px){
     #signup{
         background: url('../../../public//assets//Login/background.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
     .titleSign{
         .newA{
@@ -57,7 +60,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        #signup{
+        #signupBtn{
             color: black;
             background-color: white;
         }
