@@ -1,0 +1,65 @@
+
+/* It's taking all the styles of the Login.css screen and we just change some things to trasnform into SignUp screen*/
+#signup{
+    background: url('../../../public//assets//Login/background-movil-signup.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.titleSign{
+    text-align: center;
+    margin: 0;
+    .newA{
+        font-size: 4rem;
+    }
+    #signin{
+        display: block;
+        color: white;
+        font-size: 1.2rem;
+        margin: 1rem;
+    }
+}
+.forms{
+    input{
+        background-color: rgba(163, 212, 214, 1);
+    }
+}
+
+#buttonsSign{
+    .btn{
+        background-color: black;
+        border: none;
+    }
+    #signup{
+        color: white;
+    }
+}
+
+
+@media(min-width: 1024px){
+    #signup{
+        background: url('../../../public//assets//Login/background.jpeg');
+    }
+    .titleSign{
+        .newA{
+            font-size: 3rem;
+        }
+    }
+    .forms{
+        padding: 0 3rem;
+        input{
+            background-color: black;
+            
+        }
+    }
+    #buttonsSign{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        #signup{
+            color: black;
+            background-color: white;
+        }
+    }
+}
