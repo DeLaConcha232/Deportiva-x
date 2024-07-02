@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function SignUp() {
     return (
         <>
-            <header>
+            <header id='headerLogin'>
                 <nav>
                     <img src="../../../public/assets/Login/burguer-menu.png" alt="burguerMenu" className='burguer-Menu' />
                 </nav>

@@ -5,12 +5,12 @@ import './Forgot.css'
 export default function ForgotPass() {
     return (
         <>
-            <header>
+            <header id='headerLogin'>
                 <nav>
                     <img src="../../../public/assets/Login/burguer-menu.png" alt="burguerMenu" className='burguer-Menu' />
                 </nav>
             </header>
-            <main>
+            <main id='mainLogin'>
                 <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
                 <article className='container'>
                     <article className='title'>
