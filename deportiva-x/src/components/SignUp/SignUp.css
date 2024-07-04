@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 3rem 0;
     background: url('../../../public//assets//Login/background-movil-signup.png');
     background-repeat: no-repeat;
     background-size: cover;

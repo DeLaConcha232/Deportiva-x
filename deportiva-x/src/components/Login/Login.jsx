@@ -18,11 +18,11 @@ export default function Login() {
                         <h1 className="">LOGIN</h1>
                         <p className='signin'>Sign in to continue</p>
                     </article>
-                    <form action="" className='formulario'>
+                    <form action="/" className='formulario'>
                         <span>EMAIL</span>
-                        <input type='email' />
+                        <input type='email' required/>
                         <span>PASSWORD</span>
-                        <input type='password' />
+                        <input type='password' required/>
                         <div className='formulario' id='buttons'>
                             <button type='submit' className='btn'>Login</button>
                             <Link to="/Signup" type="button" className='btn'>Sign Up</Link>

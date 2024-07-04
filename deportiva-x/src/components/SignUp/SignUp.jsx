@@ -14,9 +14,9 @@ export default function SignUp() {
                 <article className='container cont'>
                     <article className='title titleSign'>
                         <h1 className="newA">Create New Account</h1>
-                        <Link to="/" id='signin'>Already Registered? Log in here</Link>
+                        <Link to="/Login" id='signin'>Already Registered? Log in here</Link>
                     </article>
-                    <form action="/" className='formulario forms'>
+                    <form action="Login" className='formulario forms'>
                         <span>NAME</span>
                         <input type="text" required/>
                         <span>EMAIL</span>

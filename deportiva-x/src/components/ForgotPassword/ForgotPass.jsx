@@ -17,7 +17,7 @@ export default function ForgotPass() {
                         <h1 className="">Forgot Password</h1>
                         <p className='signin'>New Password</p>
                     </article>
-                    <form action="/" className='formulario'>
+                    <form action="Login" className='formulario'>
                         <span>EMAIL</span>
                         <input type='email' />
                         <div className='formulario' id='buttons'>
