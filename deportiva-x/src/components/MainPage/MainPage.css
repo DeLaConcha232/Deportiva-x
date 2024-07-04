@@ -1,0 +1,116 @@
+/* NavBar */
+#mainNavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    height: auto;
+}
+
+.nav-icon {
+    width: 5rem;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.5rem;
+    width: 100%;
+    height: auto;
+
+    input {
+        width: 100%;
+        height: 3rem;
+        border: none;
+        cursor: pointer;
+    }
+    input:focus {
+        border: none;
+        outline: none;
+    }
+
+    .input-icon {
+        width: 1.5rem;
+        height: auto;
+        cursor: pointer;
+    }
+    .input-icon-container {
+        padding: 0 0.5rem;
+    }
+}
+/* Galery College */
+#mainContent {
+    background: url(../../../public/assets/Login/background-movil-signup.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    color: white;
+}
+
+.collage {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+        "calzado calzado deportes "
+        "mujer jerseys accesorios "
+        "niños niños hombre";
+    grid-gap: 1rem;
+
+    .square {
+        background-color: #181818;
+        color: white;
+        padding: 1rem;
+        border-radius: 1rem;
+        text-decoration: none;
+        h1{
+            font-size: 1.5rem;
+        }
+        .img-collage{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .calzado {
+        grid-area: calzado;
+    }
+    .deportes {
+        grid-area: deportes;
+    }
+    .jerseys {
+        grid-area: jerseys;
+    }
+    .accesorios {
+        grid-area: accesorios;
+    }
+    .niños {
+        display: flex;
+        align-items: center;
+        justify-content:flex-start;
+        grid-area: niños;
+        h1{
+            font-size: 2rem;
+        }
+        .childs{
+            width: 50%;
+            height: auto;
+        
+        }
+    }
+    .hombres {
+        grid-area: hombre;
+    }
+    .mujeres {
+        grid-area: mujer;
+    }
+}

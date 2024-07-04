@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function SignUp() {
     return (
         <>
-            <header>
+            <header id='headerLogin'>
                 <nav>
                     <img src="../../../public/assets/Login/burguer-menu.png" alt="burguerMenu" className='burguer-Menu' />
                 </nav>
@@ -14,9 +14,9 @@ export default function SignUp() {
                 <article className='container cont'>
                     <article className='title titleSign'>
                         <h1 className="newA">Create New Account</h1>
-                        <Link to="/" id='signin'>Already Registered? Log in here</Link>
+                        <Link to="/Login" id='signin'>Already Registered? Log in here</Link>
                     </article>
-                    <form action="/" className='formulario forms'>
+                    <form action="Login" className='formulario forms'>
                         <span>NAME</span>
                         <input type="text" required/>
                         <span>EMAIL</span>
@@ -30,7 +30,7 @@ export default function SignUp() {
                         <span>TELEFONO</span>
                         <input type="number" required/>
                         <div className='formulario' id='buttonsSign'>
-                            <button type='submit' className='btn' id='signup'>Sign Up</button>
+                            <button type='submit' className='btn' id='signupBtn'>Sign Up</button>
                             {/* <Link to="/" type='submit' className='btn' id='signup'>Sign Up</Link> */}
                         </div>
                     </form>

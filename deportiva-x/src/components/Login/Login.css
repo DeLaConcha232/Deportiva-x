@@ -2,7 +2,7 @@
     font-family: 'Roboto';
 }
 
-header{
+#headerLogin{
     display: none;
     nav{
         display: flex;
@@ -19,7 +19,7 @@ header{
 }
 
 
-main{
+#mainLogin{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,8 +91,11 @@ main{
 
 
 @media (min-width: 768px) and (max-width: 1023px){
-    main{
+    #mainLogin{
         background: url('../../../public//assets//Login/background.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
     .container{
         width: 50%;
@@ -100,11 +103,14 @@ main{
 }
 
 @media(min-width: 1024px) {
-    header{
+    #headerLogin{
         display: block;
     }
-    main{
+    #mainLogin{
         background: url('../../../public//assets//Login/background.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
         .logo{
             display: block;
         }
