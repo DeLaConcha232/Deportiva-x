@@ -30,16 +30,29 @@ namespace UserRegistrationApi.Controllers
         {
             try
             {
+                // Verificar si el correo ya existe en la base de datos
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u =>
+                    u.Email == userDto.Email
+                );
+                if (existingUser != null)
+                {
+                    // Devolver un error si el correo ya está registrado
+                    return BadRequest("El correo electrónico ya está en uso.");
+                }
+
                 // Validar y registrar el usuario en la base de datos
-                var hashedPassword = HashPassword(userDto.Password);
+                var hashedPassword = HashPassword(userDto.Contrasena);
                 var newUser = new User
                 {
-                    Name = userDto.Name,
+                    Nombre = userDto.Nombre,
                     Email = userDto.Email,
-                    Password = hashedPassword,
+                    Contrasena = hashedPassword,
                     Postalcode = userDto.Postalcode,
                     Domicilio = userDto.Domicilio,
-                    Telefono = userDto.Telefono
+                    Telefono = userDto.Telefono,
+                    FechaRegistro = DateTime.Now,
+                    DescuentoInicial = 1, // Asegurar que DescuentoInicial siempre sea true
+                    Imagen = userDto.Imagen // Incluir imagen si es relevante
                 };
 
                 await _context.Users.AddAsync(newUser);
@@ -54,8 +67,8 @@ namespace UserRegistrationApi.Controllers
                     Token = token,
                     User = new
                     {
-                        newUser.Id,
-                        newUser.Name,
+                        newUser.idUsuarios,
+                        newUser.Nombre,
                         newUser.Email
                         // Agrega más campos según sea necesario
                     }
@@ -80,7 +93,10 @@ namespace UserRegistrationApi.Controllers
                 );
 
                 // Verificar si el usuario existe y la contraseña es válida
-                if (user == null || !BCrypt.Net.BCrypt.Verify(credentials.Password, user.Password))
+                if (
+                    user == null
+                    || !BCrypt.Net.BCrypt.Verify(credentials.Password, user.Contrasena)
+                )
                 {
                     // Devolver un error de autenticación
                     return Unauthorized("Credenciales inválidas");
@@ -95,8 +111,8 @@ namespace UserRegistrationApi.Controllers
                     Token = token,
                     User = new
                     {
-                        user.Id,
-                        user.Name,
+                        user.idUsuarios,
+                        user.Nombre,
                         user.Email
                         // Agrega más campos según sea necesario
                     }
@@ -121,7 +137,7 @@ namespace UserRegistrationApi.Controllers
                 Subject = new ClaimsIdentity(
                     new Claim[]
                     {
-                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.NameIdentifier, user.idUsuarios.ToString()),
                         new Claim(ClaimTypes.Email, user.Email),
                         // Puedes añadir más claims según tus necesidades (roles, etc.)
                     }
