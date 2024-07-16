@@ -5,7 +5,6 @@ import ForgotPass from './components/ForgotPassword/ForgotPass'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MainPage from './components/MainPage/MainPage'
 
-
 function App() {
   return (
     <>
