@@ -2,13 +2,15 @@ import './MainPage.css'
 import Discount from '../Discount/Discount'
 import Cookies from '../Cookies/Cookies'
 import Carousel from '../carousel/carousel'
+import BurguerMenu from '../BurguerMenu/BurguerMenu'
 
 export default function MainPage() {
     return (
         <>
             <header>
                 <nav id='mainNavbar'>
-                    <img src="../../../public/assets/BrandLogo-Navbar.png" alt="Brand Logo" className='nav-icon' />
+                    {/* <img src="../../../public/assets/BrandLogo-Navbar.png" alt="Brand Logo" className='nav-icon'/> */}
+                    <BurguerMenu />
                     <article className='search'>
                         <form action="" className='forms-input-search'>
                             <section className='input-icon-container'>
