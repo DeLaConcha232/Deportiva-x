@@ -1,6 +1,6 @@
 import './App.css'
 import Login from './Screens/Login/Login'
-import SignUp from './components/SignUp/SignUp'
+import SignUp from './Screens/SignUp/SignUp'
 import ForgotPass from './Screens/ForgotPassword/ForgotPass'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MainPage from './Screens/MainPage/MainPage'
