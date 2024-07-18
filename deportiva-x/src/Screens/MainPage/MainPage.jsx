@@ -1,15 +1,14 @@
 import './MainPage.css'
-import Discount from '../Discount/Discount'
-import Cookies from '../Cookies/Cookies'
-import Carousel from '../carousel/carousel'
-import BurguerMenu from '../BurguerMenu/BurguerMenu'
+import Discount from '../../components/Discount/Discount'
+import Cookies from '../../components/Cookies/Cookies'
+import Carousel from '../../components/carousel/carousel'
+import BurguerMenu from '../../components/BurguerMenu/BurguerMenu'
 
 export default function MainPage() {
     return (
         <>
             <header>
                 <nav id='mainNavbar'>
-                    {/* <img src="../../../public/assets/BrandLogo-Navbar.png" alt="Brand Logo" className='nav-icon'/> */}
                     <BurguerMenu />
                     <article className='search'>
                         <form action="" className='forms-input-search'>
@@ -86,7 +85,18 @@ export default function MainPage() {
                 </article>
                 <article className='carousel-products'>
                     <Carousel
-                        title='MujerMujer'
+                        title='Mujer'
+                        uno="../../../public/assets/MainPage/"
+                        dos="../../../public/assets/MainPage/"
+                        tres="../../../public/assets/MainPage/"
+                        cuatro="../../../public/assets/MainPage/"
+                        cinco="../../../public/assets/MainPage/"
+                        seis="../../../public/assets/MainPage/"
+                    />
+                </article>
+                <article className='carousel-products'>
+                    <Carousel
+                        title='Hombre'
                         uno="../../../public/assets/MainPage/"
                         dos="../../../public/assets/MainPage/"
                         tres="../../../public/assets/MainPage/"

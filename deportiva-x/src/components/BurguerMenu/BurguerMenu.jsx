@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './BurguerMenu.css'
 import { useState } from 'react'
 
@@ -17,7 +18,7 @@ export default function BurguerMenu() {
                         <section className='container-menu2'>
                             <img src="../../../public/assets/Login/User-icon.png" alt="" className='img-burguer' onClick={() => setOpen(!isOpen)} />
                             <button className='btn-burguer' onClick={() => setOpen(false)}>Iniciar Sesion</button>
-                            <button className='btn-burguer' onClick={() => setOpen(false)}>pedidos</button>
+                            <Link to='/Orders' className='btn-burguer' onClick={() => setOpen(false)}>pedidos</Link>
                             <button className='btn-burguer' onClick={() => setOpen(false)}>favoritos</button>
                             <button className='btn-burguer' onClick={() => setOpen(false)}>Vistos</button>
                             <button className='btn-burguer log-out'>Log Out</button>

@@ -1,0 +1,137 @@
+
+.container-body{
+    width: 100%;
+    height: auto;
+}
+
+.container-order {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 1rem;
+    background-color: rgba(237, 235, 236, 1);
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+}
+
+.container-img-order {
+    width: 10rem;
+    background-color: white;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.container-info-order {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    flex-direction: column;
+    .info-order {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .info2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        h3{
+            font-size: 1rem;
+            font-weight: bold;
+            color: rgba(114, 119, 134, 1);
+        }
+    }
+}
+
+.container-btn-order{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;   
+    .btn-order{
+        background-color: black;
+        border-radius: 3rem;
+        color: white;
+        border: none;
+        padding: 0.5rem 3rem;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    .btn-order:hover{
+        background-color: white;
+        color: rgb(0, 0, 0);
+    }
+}
+
+@media (min-width: 600px){
+    .container-order{
+        display: flex;
+        justify-content:space-around;
+        align-items: center;
+
+    }
+    .container-info-order{
+        flex-direction: row;
+        gap: 5rem;
+        .info-order{
+            .info2{
+                font-size: 2rem;
+            }
+            h3{
+                font-size: 1.5rem;
+            }
+        }
+    }
+    .container-btn-order{
+        .btn-order{
+            font-size: 1.5rem;
+        }
+    }
+}
+
+@media (min-width: 900px){
+    .container-order{
+        justify-content:space-around;
+    }
+    .container-info-order{
+        gap: 15rem;
+    }
+    .container-btn-order{
+        .btn-order{
+            font-size: 2rem;
+        }
+    }
+    .container-img-order {
+        width: 15rem;
+    }
+}
+@media (min-width: 1150px){
+    .container-info-order{
+        .info-order{
+            .info2{
+                font-size: 3rem;
+            }
+            h3{
+                font-size: 2rem;
+            }
+        }
+    }
+    .container-btn-order{
+        .btn-order{
+            font-size: 2.5rem;
+        }
+    }
+    .container-img-order {
+        width: 17rem;
+    }
+}
