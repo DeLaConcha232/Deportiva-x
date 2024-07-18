@@ -10,7 +10,6 @@ html{
     font-size: 2rem;
     text-align: center;
     color: white;
-
 }
 .main-all{
     width: 100%;
@@ -46,7 +45,10 @@ html{
     z-index: 10;
 }
 
-@media(min-width: 1024px){
+@media (min-width: 768px){
+    .title-slider{
+        font-size: 3rem;
+    }
     .img-contain{
         width: 20rem;
         height: 22rem;

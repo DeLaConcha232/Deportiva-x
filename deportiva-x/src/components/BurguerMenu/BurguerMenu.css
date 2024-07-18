@@ -1,0 +1,96 @@
+.Containers {
+    width: 7rem;
+    height: auto;
+    position: relative;
+}
+
+.menuOpen {
+    display: block;
+}
+
+.menuClosed {
+    display: none;
+}
+
+.container-close {
+    background-color: white;
+    border-radius: 5rem;
+    width: 2rem;
+    height: auto;
+
+    .btn-close-burguer {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
+/* .layout{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+} */
+.container-menu {
+    background-color: #000000;
+    padding: 2rem;
+    width: 20rem;
+    height: auto;
+    border-radius: 1rem;
+    position: absolute;
+    top: 0;
+}
+
+.container-menu2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+    margin: 2rem;
+
+    .btn-burguer {
+        font-size: 1.5rem;
+        border-radius: 1rem;
+        background-color: transparent;
+        padding: 1rem;
+        width: 100%;
+        color: white;
+        border: 1px solid white;
+    }
+
+    .log-out {
+        margin-top: 10rem;
+    }
+
+    .img-burguer {
+        width: 7rem;
+        height: auto;
+    }
+}
+
+.btn-burguer:hover {
+    background-color: white;
+    color: black;
+}
+
+.log-out:hover {
+    color: red;
+    background-color: black;
+}
+
+.brandLogo-burguer {
+    width: 15rem;
+    height: auto;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .container-menu {
+        height: 100vh;
+    }
+
+    .brandLogo-burguer {
+        display: block;
+    }
+}

@@ -1,9 +1,10 @@
 import './App.css'
-import Login from './components/Login/Login'
+import Login from './Screens/Login/Login'
 import SignUp from './components/SignUp/SignUp'
-import ForgotPass from './components/ForgotPassword/ForgotPass'
+import ForgotPass from './Screens/ForgotPassword/ForgotPass'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import MainPage from './components/MainPage/MainPage'
+import MainPage from './Screens/MainPage/MainPage'
+import Orders from './Screens/Orders/Orders'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path='Login' element={<Login/>}/>
           <Route path='Signup' element={<SignUp/>}/>
           <Route path='Forgotpass' element={<ForgotPass/>}/>
+          <Route path='Orders' element={<Orders/>}/>
         </Routes>
       </BrowserRouter>
     </>
