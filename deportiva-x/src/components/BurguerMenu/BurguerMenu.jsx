@@ -16,13 +16,13 @@ export default function BurguerMenu() {
                             <img src="../../../public/assets/MainPage/Close-icon.png" alt="" className='btn-close-burguer' onClick={() => setOpen(false)} />
                         </div>
                         <section className='container-menu2'>
-                            <img src="../../../public/assets/Login/User-icon.png" alt="" className='img-burguer' onClick={() => setOpen(!isOpen)} />
-                            <button className='btn-burguer' onClick={() => setOpen(false)}>Iniciar Sesion</button>
+                            <img src="../../../public/assets/Brand-logo.png" alt="" className='brandLogo-burguer' />
+                            <Link to='/' className='btn-burguer' onClick={() => setOpen(false)}>Inicio</Link>
                             <Link to='/Orders' className='btn-burguer' onClick={() => setOpen(false)}>pedidos</Link>
                             <button className='btn-burguer' onClick={() => setOpen(false)}>favoritos</button>
                             <button className='btn-burguer' onClick={() => setOpen(false)}>Vistos</button>
                             <button className='btn-burguer log-out'>Log Out</button>
-                            <img src="../../../public/assets/Brand-logo.png" alt="" className='brandLogo-burguer' />
+                            
                         </section>
                     </article>
                 </article>
