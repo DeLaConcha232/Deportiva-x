@@ -41,6 +41,28 @@ export default function MainPage() {
                 </article>
                 <article className='carousel-products'>
                     <Carousel
+                        title='Whishlist'
+                        uno="../../../public/assets/Imagenes Productos PNG/"
+                        dos="../../../public/assets/Imagenes Productos PNG/"
+                        tres="../../../public/assets/Imagenes Productos PNG/"
+                        cuatro="../../../public/assets/Imagenes Productos PNG/"
+                        cinco="../../../public/assets/Imagenes Productos PNG/"
+                        seis="../../../public/assets/Imagenes Productos PNG/"
+                    />
+                </article>
+                <article className='carousel-products'>
+                    <Carousel
+                        title='Visto Recientemente'
+                        uno="../../../public/assets/Imagenes Productos PNG/"
+                        dos="../../../public/assets/Imagenes Productos PNG/"
+                        tres="../../../public/assets/Imagenes Productos PNG/"
+                        cuatro="../../../public/assets/Imagenes Productos PNG/"
+                        cinco="../../../public/assets/Imagenes Productos PNG/"
+                        seis="../../../public/assets/Imagenes Productos PNG/"
+                    />
+                </article>
+                <article className='carousel-products'>
+                    <Carousel
                         title='Calzado'
                         uno="../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Gimnasio y Entrenamiento/Tenis Adidas Amplimove Trainer Red.png"
                         dos="../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Casual/Tenis Nike Air Max Excee.png"
