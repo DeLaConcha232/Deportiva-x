@@ -60,7 +60,7 @@
     }
 
     .log-out {
-        margin-top: 10rem;
+        margin-top: 5rem;
     }
 
     .img-burguer {
@@ -80,17 +80,21 @@
 }
 
 .brandLogo-burguer {
-    width: 15rem;
+    width: 12rem;
     height: auto;
-    display: none;
+    display: block;
 }
 
 @media (min-width: 768px) {
     .container-menu {
         height: 100vh;
     }
-
     .brandLogo-burguer {
-        display: block;
+        width: 15rem;
+    }
+    .container-menu2{
+        .log-out {
+            margin-top: 10rem;
+        }
     }
 }
