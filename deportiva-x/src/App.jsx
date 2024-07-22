@@ -5,6 +5,7 @@ import ForgotPass from './Screens/ForgotPassword/ForgotPass'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MainPage from './Screens/MainPage/MainPage'
 import Orders from './Screens/Orders/Orders'
+import Products from './Screens/Products/Products'
 
 function App() {
   return (
