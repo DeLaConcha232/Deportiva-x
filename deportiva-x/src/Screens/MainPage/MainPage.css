@@ -60,6 +60,7 @@
     background-position: center;
     width: 100%;
     height: auto;
+    position: relative;
 }
 /* Galery College */
 .collage-container {
@@ -129,6 +130,25 @@
     .mujeres {
         grid-area: mujer;
     }
+}
+/* Chats Icon */
+.container-Icons{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 6rem;
+    height: auto;
+    margin: 2rem;
+    gap: 1rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+}
+.chats-icon{
+    width: inherit;
+    height: auto;
+    cursor: pointer;
 }
 
 @media (min-width: 768px) and (max-width: 1023px){
