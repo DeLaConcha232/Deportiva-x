@@ -66,6 +66,12 @@ export default function MainPage() {
         { id: 48, img: "../../../public/assets/Imagenes Productos PNG/Niña/Ropa/Jerseys Equipos De Fútbol/adidas Mexico Soccer.png" },
     ];
 
+    const handleClickWhatsapp = () => {
+        const phoneNumber = '4495654099'; // Reemplaza con el número de teléfono al que deseas redirigir
+        const message = 'Hola, me gustaría obtener más información'; // Mensaje opcional prellenado
+        const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+      };
     return (
         <>
             <header>
@@ -89,6 +95,10 @@ export default function MainPage() {
             </header>
             <Discount />
             <main id='mainContent'>
+                <section className='container-Icons'>
+                    <img src="../../../public/assets/MainPage/Chat-icon.png" alt="Chat-Icon" className='chats-icon' />
+                    <img src="../../../public/assets/MainPage/Whatsapp-Icon.png" alt="Whatsapp-Icon" className='chats-icon' onClick={handleClickWhatsapp}/>
+                </section>
                 <article className='collage-container'>
                     <section className='collage'>
                         <a href="" className='calzado square'><h1>Calzado</h1><img src="../../../public/assets/MainPage/tenis-main-collage.png" alt="Calzado" className='img-collage' /></a>

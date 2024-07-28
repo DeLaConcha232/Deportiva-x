@@ -2,6 +2,7 @@
     width: 7rem;
     height: auto;
     position: relative;
+    z-index: 1;
 }
 
 .menuOpen {
