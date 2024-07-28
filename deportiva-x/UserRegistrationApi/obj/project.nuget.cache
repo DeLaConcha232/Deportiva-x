@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "THnVII3mvc8=",
+  "dgSpecHash": "qNeUygQfQy0=",
   "success": true,
-  "projectFilePath": "/Users/rios/Desktop/Deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
+  "projectFilePath": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
   "expectedPackageFiles": [
     "/Users/rios/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/rios/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

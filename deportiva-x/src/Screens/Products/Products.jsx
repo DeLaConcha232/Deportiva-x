@@ -1,9 +1,12 @@
-// import './Products.css';
+import './Products.css';
 import Discount from '../../components/Discount/Discount';
 import BurguerMenu from '../../components/BurguerMenu/BurguerMenu';
 import Product from '../../components/Product/Product';
+import { useParams } from 'react-router-dom';
 
 export default function Products() {
+    const { idProductos } = useParams();
+
     return (
         <>
             <header>
@@ -26,7 +29,7 @@ export default function Products() {
                 </nav>
             </header>
             <Discount />
-            <Product />
+            <Product productId={idProductos} />
         </>
-    )
+    );
 }

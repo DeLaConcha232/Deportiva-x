@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'; // Asegúrate de importar tus estilos CSS aquí
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate(); // Usa useNavigate
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,26 +23,23 @@ export default function Login() {
                 }),
             });
 
-            if (response.ok) {
-                console.log('User logged in successfully');
-            }
-            else {
+            if (!response.ok) {
                 const errorMessage = await response.text();
                 throw new Error(errorMessage);
             }
 
             const data = await response.json();
-            localStorage.setItem('token', data.token); // Almacena el token JWT en localStorage para q luego lo use
+            localStorage.setItem('token', data.token); // Almacena el token JWT en localStorage
 
-            // para q luego redirija a donde queramos
-            // history.push('/profile');
+            console.log('User logged in successfully:', data); // Log para confirmar el inicio de sesión exitoso
 
+            // Redirige al usuario a la mainpage después del login
+            navigate('/');
         } catch (error) {
             console.error('Error logging in:', error);
-
+            setError('Error logging in: ' + error.message); // Muestra el error al usuario
         }
     };
-
 
     return (
         <>
@@ -57,6 +56,7 @@ export default function Login() {
                         <h1 className="">LOGIN</h1>
                         <p className='signin'>Sign in to continue</p>
                     </article>
+                    {error && <div className="error-message">{error}</div>}
                     <form onSubmit={handleSubmit} className='formulario'>
                         <span>EMAIL</span>
                         <input type='email' required value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -64,8 +64,8 @@ export default function Login() {
                         <input type='password' required value={password} onChange={(e) => setPassword(e.target.value)} />
                         <div className='formulario' id='buttons'>
                             <button type='submit' className='btn'>Login</button>
-                            <Link to="/Signup" type="button" className='btn'>Sign Up</Link>
-                            <Link to="/Forgotpass" className='forgotPass'>Forgot Password?</Link>
+                            <Link to="/signup" type="button" className='btn'>Sign Up</Link>
+                            <Link to="/forgotpass" className='forgotPass'>Forgot Password?</Link>
                         </div>
                     </form>
                 </article>

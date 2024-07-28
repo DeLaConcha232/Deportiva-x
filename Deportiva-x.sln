@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deportiva-x", "deportiva-x", "{B0250C4A-9DE7-4402-9E6E-2082F73DB6BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRegistrationApi", "deportiva-x\UserRegistrationApi\UserRegistrationApi.csproj", "{C684EDAB-777F-43E0-9773-B2181FE7F806}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C684EDAB-777F-43E0-9773-B2181FE7F806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C684EDAB-777F-43E0-9773-B2181FE7F806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C684EDAB-777F-43E0-9773-B2181FE7F806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C684EDAB-777F-43E0-9773-B2181FE7F806}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C684EDAB-777F-43E0-9773-B2181FE7F806} = {B0250C4A-9DE7-4402-9E6E-2082F73DB6BA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72E44BBA-948C-4B16-8C23-D7FFA4E00C9F}
+	EndGlobalSection
+EndGlobal

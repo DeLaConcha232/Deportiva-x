@@ -2,8 +2,16 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import './carousel.css'
+import './carousel.css';
+import { useNavigate } from 'react-router-dom';
+
 function Responsive(props) {
+  const navigate = useNavigate();
+
+  const handleProductClick = (id) => {
+    navigate(`/product/${id}`);
+  };
+
   var settings = {
     dots: true,
     infinite: true,
@@ -38,6 +46,7 @@ function Responsive(props) {
       }
     ]
   };
+
   return (
     <>
       <section id="main-all">
@@ -45,32 +54,32 @@ function Responsive(props) {
         <div className="slider-container">
           <Slider {...settings}>
             <div className="img-contain">
-              <a href="">
+              <a onClick={() => handleProductClick(props.ids[0])}>
                 <img src={props.uno} alt="" />
               </a>
             </div>
             <div className="img-contain">
-              <a href="">
+              <a onClick={() => handleProductClick(props.ids[1])}>
                 <img src={props.dos} alt="" />
               </a>
             </div>
             <div className="img-contain">
-              <a href="">
+              <a onClick={() => handleProductClick(props.ids[2])}>
                 <img src={props.tres} alt="" />
               </a>
             </div>
             <div className="img-contain">
-              <a href="">
+              <a onClick={() => handleProductClick(props.ids[3])}>
                 <img src={props.cuatro} alt="" />
               </a>
             </div>
             <div className="img-contain">
-              <a href="">
+              <a onClick={() => handleProductClick(props.ids[4])}>
                 <img src={props.cinco} alt="" />
               </a>
             </div>
             <div className="img-contain">
-              <a href="">
+              <a onClick={() => handleProductClick(props.ids[5])}>
                 <img src={props.seis} alt="" />
               </a>
             </div>
@@ -82,5 +91,3 @@ function Responsive(props) {
 }
 
 export default Responsive;
-
-

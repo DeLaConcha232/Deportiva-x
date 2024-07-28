@@ -25,22 +25,37 @@ namespace UserRegistrationApi.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("register")] // Endpoint para registrar usuarios
+        [HttpGet("products")]
+        public async Task<IActionResult> GetProducts()
+        {
+            var products = await _context.Products.ToListAsync();
+            return Ok(products);
+        }
+
+        [HttpGet("products/{id}")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
+        }
+
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] User userDto)
         {
             try
             {
-                // Verificar si el correo ya existe en la base de datos
                 var existingUser = await _context.Users.FirstOrDefaultAsync(u =>
                     u.Email == userDto.Email
                 );
                 if (existingUser != null)
                 {
-                    // Devolver un error si el correo ya está registrado
                     return BadRequest("El correo electrónico ya está en uso.");
                 }
 
-                // Validar y registrar el usuario en la base de datos
                 var hashedPassword = HashPassword(userDto.Contrasena);
                 var newUser = new User
                 {
@@ -51,17 +66,15 @@ namespace UserRegistrationApi.Controllers
                     Domicilio = userDto.Domicilio,
                     Telefono = userDto.Telefono,
                     FechaRegistro = DateTime.Now,
-                    DescuentoInicial = 1, // Asegurar que DescuentoInicial siempre sea true
-                    Imagen = userDto.Imagen // Incluir imagen si es relevante
+                    DescuentoInicial = 1,
+                    Imagen = userDto.Imagen
                 };
 
                 await _context.Users.AddAsync(newUser);
                 await _context.SaveChangesAsync();
 
-                // Generar token JWT
                 var token = GenerateJwtToken(newUser);
 
-                // Devolver el token junto con otros detalles si es necesario
                 var response = new
                 {
                     Token = token,
@@ -70,15 +83,14 @@ namespace UserRegistrationApi.Controllers
                         newUser.idUsuarios,
                         newUser.Nombre,
                         newUser.Email
-                        // Agrega más campos según sea necesario
                     }
                 };
 
-                return Ok(response); // 200 OK
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}"); // 500 Internal Server Error
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
         }
 
@@ -87,25 +99,20 @@ namespace UserRegistrationApi.Controllers
         {
             try
             {
-                // Buscar el usuario por email en la base de datos
                 var user = await _context.Users.FirstOrDefaultAsync(u =>
                     u.Email == credentials.Email
                 );
 
-                // Verificar si el usuario existe y la contraseña es válida
                 if (
                     user == null
                     || !BCrypt.Net.BCrypt.Verify(credentials.Password, user.Contrasena)
                 )
                 {
-                    // Devolver un error de autenticación
                     return Unauthorized("Credenciales inválidas");
                 }
 
-                // Generar token JWT
                 var token = GenerateJwtToken(user);
 
-                // Devolver el token junto con otros detalles si es necesario
                 var response = new
                 {
                     Token = token,
@@ -114,19 +121,17 @@ namespace UserRegistrationApi.Controllers
                         user.idUsuarios,
                         user.Nombre,
                         user.Email
-                        // Agrega más campos según sea necesario
                     }
                 };
 
-                return Ok(response); // 200 OK
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}"); // 500 Internal Server Error
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
         }
 
-        // Método para generar un token JWT
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -135,11 +140,10 @@ namespace UserRegistrationApi.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(
-                    new Claim[]
+                    new[]
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.idUsuarios.ToString()),
-                        new Claim(ClaimTypes.Email, user.Email),
-                        // Puedes añadir más claims según tus necesidades (roles, etc.)
+                        new Claim(ClaimTypes.Email, user.Email)
                     }
                 ),
                 Expires = DateTime.UtcNow.AddDays(
@@ -155,7 +159,6 @@ namespace UserRegistrationApi.Controllers
             return tokenHandler.WriteToken(token);
         }
 
-        // Método para hashear la contraseña
         private string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
