@@ -4312,11 +4312,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rios/Desktop/Deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
+      "projectUniqueName": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
       "projectName": "UserRegistrationApi",
-      "projectPath": "/Users/rios/Desktop/Deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
+      "projectPath": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
       "packagesPath": "/Users/rios/.nuget/packages/",
-      "outputPath": "/Users/rios/Desktop/Deportiva-x/UserRegistrationApi/obj/",
+      "outputPath": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/rios/.nuget/NuGet/NuGet.Config"

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using UserRegistrationApi.Models;
 
 #nullable disable
 
@@ -13,7 +14,8 @@ namespace UserRegistrationApi.Migrations
             migrationBuilder.RenameColumn(
                 name: "IdUsuarios",
                 table: "Users",
-                newName: "idUsuarios");
+                newName: "idUsuarios"
+            );
         }
 
         /// <inheritdoc />
@@ -22,7 +24,8 @@ namespace UserRegistrationApi.Migrations
             migrationBuilder.RenameColumn(
                 name: "idUsuarios",
                 table: "Users",
-                newName: "IdUsuarios");
+                newName: "IdUsuarios"
+            );
         }
     }
 }
