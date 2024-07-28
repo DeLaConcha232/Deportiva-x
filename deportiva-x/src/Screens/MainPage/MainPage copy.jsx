@@ -65,7 +65,13 @@ export default function MainPage() {
         { id: 47, img: "/assets/Imagenes Productos PNG/Niño/Ropa/Playeras/Playera Under Armour Golazo 3.0.png" },
         { id: 48, img: "/assets/Imagenes Productos PNG/Niña/Ropa/Jerseys Equipos De Fútbol/adidas Mexico Soccer.png" },
     ];
-
+    
+    const handleClickWhatsapp = () => {
+        const phoneNumber = '4495654099'; // Reemplaza con el número de teléfono al que deseas redirigir
+        const message = 'Hola, me gustaría obtener más información'; // Mensaje opcional prellenado
+        const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+      };
     return (
         <>
             <header>
