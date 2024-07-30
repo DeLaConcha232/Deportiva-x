@@ -3,7 +3,8 @@ import Discount from '../../components/Discount/Discount';
 import Cookies from '../../components/Cookies/Cookies';
 import Carousel from '../../components/carousel/carousel';
 import BurguerMenu from '../../components/BurguerMenu/BurguerMenu';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Element } from 'react-scroll';
 
 export default function MainPage() {
     const navigate = useNavigate();
@@ -110,9 +111,9 @@ export default function MainPage() {
                         <a href="" className='mujeres square'><h1>Mujer</h1><img src="../../../public/assets/MainPage/woman-main-collage.png" alt="Mujer" className='img-collage' /></a>
                     </section>
                 </article>
-                <article className='carousel-products'>
+                <Element className='carousel-products wishlist'>
                     <Carousel
-                        title='Whishlist'
+                        title='Favoritos'
                         uno="../../../public/assets/Imagenes Productos PNG/placeholder1.png"
                         dos="../../../public/assets/Imagenes Productos PNG/placeholder2.png"
                         tres="../../../public/assets/Imagenes Productos PNG/placeholder3.png"
@@ -120,8 +121,8 @@ export default function MainPage() {
                         cinco="../../../public/assets/Imagenes Productos PNG/placeholder5.png"
                         seis="../../../public/assets/Imagenes Productos PNG/placeholder6.png"
                     />
-                </article>
-                <article className='carousel-products'>
+                </Element>
+                <Element className='carousel-products View'>
                     <Carousel
                         title='Visto Recientemente'
                         uno="../../../public/assets/Imagenes Productos PNG/placeholder7.png"
@@ -131,7 +132,7 @@ export default function MainPage() {
                         cinco="../../../public/assets/Imagenes Productos PNG/placeholder11.png"
                         seis="../../../public/assets/Imagenes Productos PNG/placeholder12.png"
                     />
-                </article>
+                </Element>
                 <article className='carousel-products'>
                     <Carousel
                         title='Calzado'

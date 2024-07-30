@@ -59,6 +59,7 @@
         width: 100%;
         color: white;
         border: 1px solid white;
+        text-decoration: none;
     }
 
     .log-out {

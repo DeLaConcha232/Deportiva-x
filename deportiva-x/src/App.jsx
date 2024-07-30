@@ -8,6 +8,7 @@ import Orders from './Screens/Orders/Orders';
 import Products from './Screens/Products/Products';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import { useEffect } from 'react';
+import BurguerMenu from './components/BurguerMenu/BurguerMenu.jsx';
 
 function App() {
   useEffect(() => {
