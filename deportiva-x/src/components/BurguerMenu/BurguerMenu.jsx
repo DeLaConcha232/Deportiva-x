@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './BurguerMenu.css';
 import { useState, useEffect } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
 
 export default function BurguerMenu() {
     const [isOpen, setOpen] = useState(false);
@@ -32,8 +33,8 @@ export default function BurguerMenu() {
                             <img src="../../../public/assets/Brand-logo.png" alt="" className='brandLogo-burguer' />
                             <Link to='/' className='btn-burguer' onClick={() => setOpen(false)}>Inicio</Link>
                             <Link to='/orders' className='btn-burguer' onClick={() => setOpen(false)}>Pedidos</Link>
-                            <button className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</button>
-                            <button className='btn-burguer' onClick={() => setOpen(false)}>Vistos</button>
+                            <ScrollLink to="wishlist" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</ScrollLink>
+                            <ScrollLink to="View" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Vistos</ScrollLink>
                             {isLoggedIn && (
                                 <button className='btn-burguer log-out' onClick={handleLogout}>Log Out</button>
                             )}
