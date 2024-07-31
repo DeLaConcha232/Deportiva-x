@@ -1,0 +1,107 @@
+
+
+.Container-ProductCart{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.1fr;
+    background-color: rgba(237, 235, 236, 1);
+    border: 1px solid rgb(168, 168, 168);
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.container-ProductInfo{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    .container-MainInfo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .title-mainInfo{
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+    }
+    .container-MainSize{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .subtitle-mainSize{
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    }
+    .container-MainAmount{
+        width: 100%;
+        height: auto;
+        select{
+            width: 10rem;
+            height: auto;
+            font-size: 1.5rem;
+        }
+    }
+}
+.container-ProductImg{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    .ProductImg{
+        width: 10rem;
+        height: auto;
+    }
+}
+.container-productClose{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+@media (min-width: 600px){
+.container-ProductInfo{
+    .container-MainInfo{
+        flex-direction: row;
+        gap: 1rem;
+        .title-mainInfo{
+            font-size: 2rem;
+        }
+    }
+    .container-MainSize{
+        .subtitle-mainSize{
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+    }
+    .container-MainAmount{
+        select{
+            width: 10rem;
+            font-size: 1.8rem;
+        }
+    }
+}
+.container-ProductImg{
+    .ProductImg{
+        width: 12rem;
+    }
+}
+.CloseIcon-productClose{
+    width: 3rem;
+}
+}
+
+@media (min-width: 850px){
+
+}

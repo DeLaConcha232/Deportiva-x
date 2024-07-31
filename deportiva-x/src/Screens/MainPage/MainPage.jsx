@@ -2,8 +2,8 @@ import './MainPage.css';
 import Discount from '../../components/Discount/Discount';
 import Cookies from '../../components/Cookies/Cookies';
 import Carousel from '../../components/carousel/carousel';
-import BurguerMenu from '../../components/BurguerMenu/BurguerMenu';
-import { Link, useNavigate } from 'react-router-dom';
+import NavBar from '../../components/NavBar/NavBar';
+import { useNavigate } from 'react-router-dom';
 import { Element } from 'react-scroll';
 
 export default function MainPage() {
@@ -72,33 +72,15 @@ export default function MainPage() {
         const message = 'Hola, me gustaría obtener más información'; // Mensaje opcional prellenado
         const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
-      };
+    };
     return (
         <>
-            <header>
-                <nav id='mainNavbar'>
-                    <BurguerMenu />
-                    <article className='search'>
-                        <form action="" className='forms-input-search'>
-                            <section className='input-icon-container'>
-                                <img src="../../../public/assets/MainPage/Search-icon.png" alt="search-icon" className='input-icon' />
-                            </section>
-                            <input type="text" />
-                            <section className='input-icon-container'>
-                                <button type='reset' className='button-reset'>
-                                    <img type="reset" src="../../../public/assets/MainPage/Close-icon.png" alt="close-icon" className='input-icon' />
-                                </button>
-                            </section>
-                        </form>
-                    </article>
-                    <img src="../../../public/assets/MainPage/ShoppingCar.png" alt="shopping-car" className='nav-icon' />
-                </nav>
-            </header>
+            <NavBar />
             <Discount />
             <main id='mainContent'>
                 <section className='container-Icons'>
                     <img src="../../../public/assets/MainPage/Chat-icon.png" alt="Chat-Icon" className='chats-icon' />
-                    <img src="../../../public/assets/MainPage/Whatsapp-Icon.png" alt="Whatsapp-Icon" className='chats-icon' onClick={handleClickWhatsapp}/>
+                    <img src="../../../public/assets/MainPage/Whatsapp-Icon.png" alt="Whatsapp-Icon" className='chats-icon' onClick={handleClickWhatsapp} />
                 </section>
                 <article className='collage-container'>
                     <section className='collage'>

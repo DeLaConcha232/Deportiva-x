@@ -1,0 +1,111 @@
+
+
+.ContainerCart{
+    background: url('../../../public/assets/Login/background-movil-signup.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+    font-weight:lighter;
+}
+.container-productsCart{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    font-size: 2rem;
+    gap: 3rem;
+    color: white;
+}
+.container-productsCart-component{
+    width: 100%;
+    height: auto;
+    color: #000000;
+}
+.container-resumeCart{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 1.5rem;
+    padding: 2rem;
+    color: white;
+    .Title-Cart{
+        font-size: 3rem;
+    }
+    .subtitle-cart{
+        font-size: 2rem;
+    }
+    .btn-Pay{
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        width: 50%;
+        height: auto;
+        background-color: #000000;
+        padding: 1rem;
+        border: 1px solid white;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        color: white;
+        .btn-flecha{
+            width: 5rem;
+            height: auto;
+        }
+    }
+}
+@media (min-width: 800px){
+    .ContainerCart{
+        padding: 5rem 12rem;
+  
+    }
+    .container-productsCart{
+        font-size: 3rem;
+    }
+    .container-resumeCart{
+        .Title-Cart{
+            font-size: 3rem;
+        }
+        .subtitle-cart{
+            font-size: 2rem;
+        }
+    }
+}
+@media (min-width: 1000px){
+    .ContainerCart{
+        padding: 10rem 7rem;
+        flex-direction: row;
+        gap: 0;
+    }
+    .container-productsCart{
+        align-self: flex-start;
+        font-size: 3.5rem;
+        gap: 5rem;
+    }
+    .container-resumeCart{
+        align-self: flex-start;
+        .Title-Cart{
+            font-size: 4rem;
+        }
+        .subtitle-cart{
+            font-size: 2.5rem;
+        }
+        .btn-Pay{
+            width: 70%;
+            .btn-flecha{
+                width: 5rem;
+                height: auto;
+            }
+        }
+    }
+}
