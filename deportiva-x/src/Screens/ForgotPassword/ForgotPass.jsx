@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Forgot.css'
 
 
@@ -11,7 +12,9 @@ export default function ForgotPass() {
                 </nav>
             </header>
             <main id='mainLogin'>
-                <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
+                <Link to='/'>
+                    <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
+                </Link>
                 <article className='container'>
                     <article className='title'>
                         <h1 className="">Forgot Password</h1>

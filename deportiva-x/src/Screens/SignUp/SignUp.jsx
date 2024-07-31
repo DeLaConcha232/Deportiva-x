@@ -46,7 +46,9 @@ export default function SignUp() {
                 </nav>
             </header>
             <main id='signup'>
-                <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
+                <Link to='/'>
+                    <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
+                </Link>
                 <article className='container cont'>
                     <article className='title titleSign'>
                         <h1 className="newA">Create New Account</h1>

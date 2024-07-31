@@ -2,7 +2,7 @@ import './MainPage.css';
 import Discount from '../../components/Discount/Discount';
 import Cookies from '../../components/Cookies/Cookies';
 import Carousel from '../../components/carousel/carousel';
-import BurguerMenu from '../../components/BurguerMenu/BurguerMenu';
+import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 export default function MainPage() {
@@ -65,36 +65,22 @@ export default function MainPage() {
         { id: 47, img: "/assets/Imagenes Productos PNG/Niño/Ropa/Playeras/Playera Under Armour Golazo 3.0.png" },
         { id: 48, img: "/assets/Imagenes Productos PNG/Niña/Ropa/Jerseys Equipos De Fútbol/adidas Mexico Soccer.png" },
     ];
-    
+
     const handleClickWhatsapp = () => {
         const phoneNumber = '4495654099'; // Reemplaza con el número de teléfono al que deseas redirigir
         const message = 'Hola, me gustaría obtener más información'; // Mensaje opcional prellenado
         const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
-      };
+    };
     return (
         <>
-            <header>
-                <nav id='mainNavbar'>
-                    <BurguerMenu />
-                    <article className='search'>
-                        <form action="" className='forms-input-search'>
-                            <section className='input-icon-container'>
-                                <img src="/assets/MainPage/Search-icon.png" alt="search-icon" className='input-icon' />
-                            </section>
-                            <input type="text" />
-                            <section className='input-icon-container'>
-                                <button type='reset' className='button-reset'>
-                                    <img type="reset" src="/assets/MainPage/Close-icon.png" alt="close-icon" className='input-icon' />
-                                </button>
-                            </section>
-                        </form>
-                    </article>
-                    <img src="/assets/MainPage/ShoppingCar.png" alt="shopping-car" className='nav-icon' />
-                </nav>
-            </header>
+            <NavBar />
             <Discount />
             <main id='mainContent'>
+                <section className='container-Icons'>
+                    <img src="../../../public/assets/MainPage/Chat-icon.png" alt="Chat-Icon" className='chats-icon' />
+                    <img src="../../../public/assets/MainPage/Whatsapp-Icon.png" alt="Whatsapp-Icon" className='chats-icon' onClick={handleClickWhatsapp} />
+                </section>
                 <article className='collage-container'>
                     <section className='collage'>
                         <a href="" className='calzado square'><h1>Calzado</h1><img src="/assets/MainPage/tenis-main-collage.png" alt="" className='img-collage' /></a>

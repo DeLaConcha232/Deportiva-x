@@ -7,8 +7,8 @@ import MainPage from './Screens/MainPage/MainPage';
 import Orders from './Screens/Orders/Orders';
 import Products from './Screens/Products/Products';
 import ProtectedRoute from './ProtectedRoute.jsx';
+import ShoppingCart from './Screens/ShoppingCart/ShoppingCart.jsx';
 import { useEffect } from 'react';
-import BurguerMenu from './components/BurguerMenu/BurguerMenu.jsx';
 
 function App() {
   useEffect(() => {
@@ -28,6 +28,7 @@ function App() {
         <Route path='/' element={<MainPage />} />
         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path='/product/:idProductos' element={<Products />} /> {/* Asegúrate de que esta ruta coincide */}
+        <Route path='/ShoppingCart' element={<ShoppingCart/>} />
       </Routes>
     </BrowserRouter>
   );
