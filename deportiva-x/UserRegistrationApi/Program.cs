@@ -50,8 +50,8 @@ builder
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false, // No se valida el emisor
-            ValidateAudience = false, // No se valida la audiencia
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ClockSkew = TimeSpan.Zero
         };
     });

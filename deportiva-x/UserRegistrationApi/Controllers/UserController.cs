@@ -192,7 +192,7 @@ namespace UserRegistrationApi.Controllers
                 .Select(uw => uw.idProducto)
                 .ToListAsync();
 
-            if (wishlist == null)
+            if (wishlist == null || !wishlist.Any())
             {
                 return NotFound("Wishlist not found.");
             }
@@ -203,6 +203,7 @@ namespace UserRegistrationApi.Controllers
 
             return Ok(products);
         }
+
 
 
         public class WishlistDto

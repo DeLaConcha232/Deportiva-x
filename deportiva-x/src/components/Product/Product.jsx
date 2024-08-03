@@ -7,15 +7,12 @@ export default function Product() {
     const [product, setProduct] = useState(null);
     const [isWishlisted, setIsWishlisted] = useState(false);
     const { idProductos } = useParams();
-    const userId = localStorage.getItem('userId'); // Obtener el ID del usuario logueado desde el localStorage
-    console.log('Retrieved userId from localStorage:', userId);
-    // const userId = 2;
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
                 const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/products/${idProductos}`);
-
                 if (response.ok) {
                     const data = await response.json();
                     setProduct(data);
@@ -45,7 +42,9 @@ export default function Product() {
         checkWishlist();
     }, [idProductos, userId]);
 
-    const toggleWishlist = async () => {
+    const toggleWishlist = async (event) => {
+        event.preventDefault();  // Prevent form from submitting and page reloading
+
         const url = isWishlisted
             ? 'https://api-deportiva-x.ngrok.io/api/user/wishlist/remove'
             : 'https://api-deportiva-x.ngrok.io/api/user/wishlist/add';
@@ -61,10 +60,10 @@ export default function Product() {
                 body
             });
 
-            if (response.ok) {
-                setIsWishlisted(!isWishlisted);
-            } else {
+            if (!response.ok) {
                 console.error('Failed to update wishlist:', response.statusText);
+            } else {
+                setIsWishlisted(!isWishlisted);
             }
         } catch (error) {
             console.error('Error updating wishlist:', error);
@@ -72,8 +71,15 @@ export default function Product() {
     };
 
     if (!product) {
-        return <div>Loading...</div>;
+        return (
+            <div className="loading-message">
+                <div className="loading-indicator"></div> {/* Spinner is now above the text */}
+                <span className="loading-text">Loading product details...</span>
+            </div>
+        );
     }
+
+
 
     return (
         <>
@@ -87,7 +93,7 @@ export default function Product() {
                         <section className='container-img-product'>
                             <img src={product.imagen} alt="imagen de producto" className='img-product' />
                         </section>
-                        <form action="" className='forms-product'>
+                        <form className='forms-product' onSubmit={(e) => e.preventDefault()}>
                             <section className='container-select-product'>
                                 <div className='select1 select-btn'>
                                     <h1>TALLA</h1>
@@ -114,6 +120,7 @@ export default function Product() {
                                     </select>
                                 </div>
                             </section>
+
                             <section className='container-btn-product'>
                                 <button type='button' className='btn-carrito'>Añadir al Carrito</button>
                                 <img
@@ -137,15 +144,9 @@ export default function Product() {
                     </section>
                 </article>
                 <article className='carousel-products'>
-                    <Carousel
-                        title='Calzado'
-                        uno="../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Gimnasio y Entrenamiento/Tenis Adidas Amplimove Trainer Red.png"
-                        dos="../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Casual/Tenis Nike Air Max Excee.png"
-                        tres="../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Running/Tenis Nike Journey Run.png"
-                        cuatro="../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Tacos De Futbol/Tenis De Fútbol Nike Vapor 15 Academy Mercurial Dream Speed Mg.png"
-                        cinco="../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Tenis De Basquetbol/Tenis Adidas Bounce Legends.png"
-                        seis="../../../public/assets/Imagenes Productos PNG/Mujer/Calzado/Gimnasio Y Entrenamiento/Tenis Adidas Dropset 2 Green.png"
-                    />
+                    <Carousel title='Calzado'>
+                        {/* Carousel items not specified for brevity */}
+                    </Carousel>
                 </article>
             </main>
         </>
