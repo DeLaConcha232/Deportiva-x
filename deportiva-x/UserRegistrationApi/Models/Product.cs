@@ -11,8 +11,13 @@ namespace UserRegistrationApi.Models
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
 
+        public int Stock { get; set; }
+
+        public string Categoria { get; set; }
+
+        public string Marca { get; set; }
+
         [Column(TypeName = "nvarchar(max)")]
         public List<string> Tallas { get; set; }
-        public string Confeccion { get; set; }
     }
 }
