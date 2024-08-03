@@ -2,8 +2,9 @@ import './MainPage.css';
 import Discount from '../../components/Discount/Discount';
 import Cookies from '../../components/Cookies/Cookies';
 import Carousel from '../../components/carousel/carousel';
-import BurguerMenu from '../../components/BurguerMenu/BurguerMenu';
+import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
+import { Element } from 'react-scroll';
 
 export default function MainPage() {
     const navigate = useNavigate();
@@ -66,29 +67,21 @@ export default function MainPage() {
         { id: 48, img: "../../../public/assets/Imagenes Productos PNG/Niña/Ropa/Jerseys Equipos De Fútbol/adidas Mexico Soccer.png" },
     ];
 
+    const handleClickWhatsapp = () => {
+        const phoneNumber = '4495654099'; // Reemplaza con el número de teléfono al que deseas redirigir
+        const message = 'Hola, me gustaría obtener más información'; // Mensaje opcional prellenado
+        const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    };
     return (
         <>
-            <header>
-                <nav id='mainNavbar'>
-                    <BurguerMenu />
-                    <article className='search'>
-                        <form action="" className='forms-input-search'>
-                            <section className='input-icon-container'>
-                                <img src="../../../public/assets/MainPage/Search-icon.png" alt="search-icon" className='input-icon' />
-                            </section>
-                            <input type="text" />
-                            <section className='input-icon-container'>
-                                <button type='reset' className='button-reset'>
-                                    <img type="reset" src="../../../public/assets/MainPage/Close-icon.png" alt="close-icon" className='input-icon' />
-                                </button>
-                            </section>
-                        </form>
-                    </article>
-                    <img src="../../../public/assets/MainPage/ShoppingCar.png" alt="shopping-car" className='nav-icon' />
-                </nav>
-            </header>
+            <NavBar />
             <Discount />
             <main id='mainContent'>
+                <section className='container-Icons'>
+                    <img src="../../../public/assets/MainPage/Chat-icon.png" alt="Chat-Icon" className='chats-icon' />
+                    <img src="../../../public/assets/MainPage/Whatsapp-Icon.png" alt="Whatsapp-Icon" className='chats-icon' onClick={handleClickWhatsapp} />
+                </section>
                 <article className='collage-container'>
                     <section className='collage'>
                         <a href="" className='calzado square'><h1>Calzado</h1><img src="../../../public/assets/MainPage/tenis-main-collage.png" alt="Calzado" className='img-collage' /></a>
@@ -100,9 +93,9 @@ export default function MainPage() {
                         <a href="" className='mujeres square'><h1>Mujer</h1><img src="../../../public/assets/MainPage/woman-main-collage.png" alt="Mujer" className='img-collage' /></a>
                     </section>
                 </article>
-                <article className='carousel-products'>
+                <Element className='carousel-products wishlist'>
                     <Carousel
-                        title='Whishlist'
+                        title='Favoritos'
                         uno="../../../public/assets/Imagenes Productos PNG/placeholder1.png"
                         dos="../../../public/assets/Imagenes Productos PNG/placeholder2.png"
                         tres="../../../public/assets/Imagenes Productos PNG/placeholder3.png"
@@ -110,8 +103,8 @@ export default function MainPage() {
                         cinco="../../../public/assets/Imagenes Productos PNG/placeholder5.png"
                         seis="../../../public/assets/Imagenes Productos PNG/placeholder6.png"
                     />
-                </article>
-                <article className='carousel-products'>
+                </Element>
+                <Element className='carousel-products View'>
                     <Carousel
                         title='Visto Recientemente'
                         uno="../../../public/assets/Imagenes Productos PNG/placeholder7.png"
@@ -121,7 +114,7 @@ export default function MainPage() {
                         cinco="../../../public/assets/Imagenes Productos PNG/placeholder11.png"
                         seis="../../../public/assets/Imagenes Productos PNG/placeholder12.png"
                     />
-                </article>
+                </Element>
                 <article className='carousel-products'>
                     <Carousel
                         title='Calzado'

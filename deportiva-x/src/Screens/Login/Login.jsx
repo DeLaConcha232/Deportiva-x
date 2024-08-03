@@ -49,7 +49,9 @@ export default function Login() {
                 </nav>
             </header>
             <main id='mainLogin'>
-                <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
+                <Link to='/'>
+                    <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
+                </Link>
                 <article className='container'>
                     <article className='title'>
                         <img src="../../../public/assets/Login/User-icon.png" alt="user-icon" />

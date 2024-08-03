@@ -2,6 +2,7 @@
     width: 7rem;
     height: auto;
     position: relative;
+    z-index: 1;
 }
 
 .menuOpen {
@@ -22,6 +23,7 @@
         width: 100%;
         height: auto;
         object-fit: contain;
+        cursor: pointer;
     }
 }
 /* .layout{
@@ -57,6 +59,7 @@
         width: 100%;
         color: white;
         border: 1px solid white;
+        text-decoration: none;
     }
 
     .log-out {
