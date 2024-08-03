@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 export default function Product() {
     const [product, setProduct] = useState(null);
+    const [relatedProducts, setRelatedProducts] = useState([]);
     const [isWishlisted, setIsWishlisted] = useState(false);
     const { idProductos } = useParams();
     const userId = localStorage.getItem('userId');
@@ -16,6 +17,15 @@ export default function Product() {
                 if (response.ok) {
                     const data = await response.json();
                     setProduct(data);
+
+                    // Fetch related products by category
+                    const relatedResponse = await fetch(`https://api-deportiva-x.ngrok.io/api/user/products?category=${data.categoria}`);
+                    if (relatedResponse.ok) {
+                        const relatedData = await relatedResponse.json();
+                        setRelatedProducts(relatedData.filter(p => p.idProductos !== data.idProductos)); // Exclude the current product
+                    } else {
+                        console.error('Failed to fetch related products:', relatedResponse.statusText);
+                    }
                 } else {
                     console.error('Failed to fetch product:', response.statusText);
                 }
@@ -140,11 +150,11 @@ export default function Product() {
                         <p>{product.confeccion}</p>
                     </section>
                 </article>
-                <article className='carousel-products'>
-                    <Carousel title='Calzado'>
-                        {/* Carousel items not specified for brevity */}
-                    </Carousel>
-                </article>
+                {relatedProducts.length > 0 && (
+                    <article className='carousel-products'>
+                        <Carousel title={`Más en ${product.categoria}`} products={relatedProducts} />
+                    </article>
+                )}
             </main>
         </>
     );
