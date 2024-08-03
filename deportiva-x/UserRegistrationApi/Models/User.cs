@@ -23,5 +23,8 @@ namespace UserRegistrationApi.Models
 
         // Navegación virtual
         public virtual ICollection<UserWishlist> Wishlists { get; set; }
+
+        // Añadir esto para la relación con CarritoItems
+        public virtual ICollection<CarritoItems> CarritoItems { get; set; }
     }
 }

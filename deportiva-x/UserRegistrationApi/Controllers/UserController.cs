@@ -204,13 +204,63 @@ namespace UserRegistrationApi.Controllers
             return Ok(products);
         }
 
-
-
         public class WishlistDto
         {
             public int UserId { get; set; }
             public int ProductId { get; set; }
         }
+
+        [HttpPost("cart/add")]
+        public async Task<IActionResult> AddToCart([FromBody] CartItemDto cartItemDto)
+        {
+            var user = await _context.Users.FindAsync(cartItemDto.UserId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var product = await _context.Products.FindAsync(cartItemDto.ProductId);
+            if (product == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            var cart = await _context.Carrito.FirstOrDefaultAsync(c => c.idUsuarios == user.idUsuarios);
+            if (cart == null)
+            {
+                cart = new Carrito { idUsuarios = user.idUsuarios };
+                _context.Carrito.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            var cartItem = await _context.CarritoItems.FirstOrDefaultAsync(ci => ci.idCarrito == cart.idCarrito && ci.idProductos == product.idProductos);
+            if (cartItem != null)
+            {
+                cartItem.Cantidad += cartItemDto.Cantidad; // Incrementa la cantidad
+            }
+            else
+            {
+                cartItem = new CarritoItems
+                {
+                    idCarrito = cart.idCarrito,
+                    idProductos = product.idProductos,
+                    Cantidad = cartItemDto.Cantidad,
+                    Precio = product.Precio // Suponemos que el precio del producto ya está definido
+                };
+                _context.CarritoItems.Add(cartItem);
+            }
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        public class CartItemDto
+        {
+            public int UserId { get; set; }
+            public int ProductId { get; set; }
+            public int Cantidad { get; set; }
+        }
+
 
         private string GenerateJwtToken(User user)
         {

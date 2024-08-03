@@ -79,7 +79,7 @@ export default function Product() {
         );
     }
 
-
+    const cantidadOptions = Array.from({ length: product.stock }, (_, i) => i + 1);
 
     return (
         <>
@@ -99,8 +99,8 @@ export default function Product() {
                                     <h1>TALLA</h1>
                                     <select name="talla" id="select-talla">
                                         <option value="0">Elige</option>
-                                        {product.tallas && product.tallas.length > 0 ? (
-                                            product.tallas.map((talla, index) => (
+                                        {product.talla && product.talla.length > 0 ? (
+                                            product.talla.map((talla, index) => (
                                                 <option key={index} value={talla}>{talla}</option>
                                             ))
                                         ) : (
@@ -111,12 +111,9 @@ export default function Product() {
                                 <div className='select2 select-btn'>
                                     <h1>CANTIDAD</h1>
                                     <select name="cantidad" id="select-cantidad">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
+                                        {cantidadOptions.map((cantidad, index) => (
+                                            <option key={index} value={cantidad}>{cantidad}</option>
+                                        ))}
                                     </select>
                                 </div>
                             </section>
