@@ -18,6 +18,6 @@ namespace UserRegistrationApi.Models
         public string Marca { get; set; }
 
         [Column(TypeName = "nvarchar(max)")]
-        public List<string> Tallas { get; set; }
+        public List<string> Talla { get; set; }
     }
 }

@@ -15,10 +15,12 @@ export default function SignUp() {
             Postalcode: formData.get('postalcode'),
             Domicilio: formData.get('domicilio'),
             Telefono: formData.get('telefono'),
+            // Imagen: formData.get('imagen')
         };
 
         try {
-            const response = await fetch('http://localhost:5033/api/User/register', {
+            // const response = await fetch('http://localhost:5033/api/User/register', {
+            const response = await fetch('https://12f75ff73a48.ngrok.app/api/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

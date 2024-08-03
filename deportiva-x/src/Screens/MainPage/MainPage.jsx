@@ -5,6 +5,7 @@ import Carousel from '../../components/carousel/carousel';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import { Element } from 'react-scroll';
+import useTawkTo from '../../components/livechat/useTawkTo';
 
 export default function MainPage() {
     const navigate = useNavigate();
@@ -12,6 +13,8 @@ export default function MainPage() {
     const handleProductClick = (id) => {
         navigate(`/product/${id}`);
     };
+
+    useTawkTo();
 
     const calzadoProductos = [
         { id: 1, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Gimnasio y Entrenamiento/Tenis Adidas Amplimove Trainer Red.png" },
@@ -73,6 +76,9 @@ export default function MainPage() {
         const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
     };
+
+
+
     return (
         <>
             <NavBar />

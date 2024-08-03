@@ -14,9 +14,7 @@ export default function Product() {
                 // const response = await fetch(`http://localhost:5033/api/user/products/${idProductos}`);
 
 
-                // const response = await fetch(`https://4511c07a1e89.ngrok.app/api/user/products/${idProductos}`);
-                const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/products/${idProductos}`);
-
+                const response = await fetch(`https://f59f76bb14a0.ngrok.app/api/user/products/${idProductos}`);
                 // const response = await fetch('https://www.deportiva-x.com/api/products');
 
 

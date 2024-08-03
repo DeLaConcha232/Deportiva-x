@@ -48,6 +48,11 @@ namespace UserRegistrationApi.Controllers
         {
             try
             {
+                // if (userDto.Imagen == null)
+                // {
+                //     return BadRequest("The Imagen field is required.");
+                // }
+
                 var existingUser = await _context.Users.FirstOrDefaultAsync(u =>
                     u.Email == userDto.Email
                 );
@@ -66,8 +71,8 @@ namespace UserRegistrationApi.Controllers
                     Domicilio = userDto.Domicilio,
                     Telefono = userDto.Telefono,
                     FechaRegistro = DateTime.Now,
-                    DescuentoInicial = 1,
-                    Imagen = userDto.Imagen
+                    descuentoInicial = 1,
+                    // Imagen = userDto.Imagen
                 };
 
                 await _context.Users.AddAsync(newUser);

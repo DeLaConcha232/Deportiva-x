@@ -11,10 +11,22 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Registrar el contexto de la base de datos
+// Configuración de la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
 );
+
+// Configuración de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("https://www.deportiva-x.com").AllowAnyMethod().AllowAnyHeader();
+        }
+    );
+});
 
 // Configuración del JWT
 var jwtSettings = configuration.GetSection("JwtSettings");
@@ -41,21 +53,8 @@ builder
         };
     });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Configuración de CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        "AllowAll",
-        builder =>
-        {
-            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        }
-    );
-});
 
 var app = builder.Build();
 
@@ -66,10 +65,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowSpecificOrigin"); // Habilitar CORS usando la política configurada
 app.UseHttpsRedirection();
 app.UseAuthentication(); // Habilitar autenticación con JWT
 app.UseAuthorization();
-app.UseCors("AllowAll"); // Habilitar CORS usando la política configurada
 app.MapControllers();
 
 app.Run();

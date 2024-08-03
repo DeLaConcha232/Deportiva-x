@@ -23,7 +23,7 @@ namespace UserRegistrationApi.Models
 
             modelBuilder
                 .Entity<Product>()
-                .Property(p => p.Tallas)
+                .Property(p => p.Talla)
                 .HasConversion(
                     v => string.Join(',', v),
                     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
