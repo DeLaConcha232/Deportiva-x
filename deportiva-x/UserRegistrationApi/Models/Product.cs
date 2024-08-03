@@ -19,5 +19,8 @@ namespace UserRegistrationApi.Models
 
         [Column(TypeName = "nvarchar(max)")]
         public List<string> Talla { get; set; }
+
+        // Navegación virtual
+        public virtual ICollection<UserWishlist> Wishlists { get; set; }
     }
 }

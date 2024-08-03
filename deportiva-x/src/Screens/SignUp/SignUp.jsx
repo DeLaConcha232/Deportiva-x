@@ -20,7 +20,7 @@ export default function SignUp() {
 
         try {
             // const response = await fetch('http://localhost:5033/api/User/register', {
-            const response = await fetch('https://12f75ff73a48.ngrok.app/api/user/register', {
+            const response = await fetch('https://api-deportiva-x.ngrok.io/api/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

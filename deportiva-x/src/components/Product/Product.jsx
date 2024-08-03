@@ -7,18 +7,14 @@ export default function Product() {
     const [product, setProduct] = useState(null);
     const [isWishlisted, setIsWishlisted] = useState(false);
     const { idProductos } = useParams();
+    const userId = localStorage.getItem('userId'); // Obtener el ID del usuario logueado desde el localStorage
+    console.log('Retrieved userId from localStorage:', userId);
+    // const userId = 2;
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                // const response = await fetch(`http://localhost:5033/api/user/products/${idProductos}`);
-
-
-                // const response = await fetch(`https://4511c07a1e89.ngrok.app/api/user/products/${idProductos}`);
                 const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/products/${idProductos}`);
-
-                // const response = await fetch('https://www.deportiva-x.com/api/products');
-
 
                 if (response.ok) {
                     const data = await response.json();
@@ -31,11 +27,48 @@ export default function Product() {
             }
         };
 
-        fetchProduct();
-    }, [idProductos]);
+        const checkWishlist = async () => {
+            try {
+                const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/wishlist/${userId}`);
+                if (response.ok) {
+                    const wishlist = await response.json();
+                    setIsWishlisted(wishlist.some(product => product.idProductos === parseInt(idProductos)));
+                } else {
+                    console.error('Failed to fetch wishlist:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching wishlist:', error);
+            }
+        };
 
-    const toggleWishlist = () => {
-        setIsWishlisted(!isWishlisted);
+        fetchProduct();
+        checkWishlist();
+    }, [idProductos, userId]);
+
+    const toggleWishlist = async () => {
+        const url = isWishlisted
+            ? 'https://api-deportiva-x.ngrok.io/api/user/wishlist/remove'
+            : 'https://api-deportiva-x.ngrok.io/api/user/wishlist/add';
+
+        const body = JSON.stringify({ UserId: userId, ProductId: parseInt(idProductos) });
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body
+            });
+
+            if (response.ok) {
+                setIsWishlisted(!isWishlisted);
+            } else {
+                console.error('Failed to update wishlist:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating wishlist:', error);
+        }
     };
 
     if (!product) {
@@ -82,7 +115,7 @@ export default function Product() {
                                 </div>
                             </section>
                             <section className='container-btn-product'>
-                                <button className='btn-carrito'>Añadir al Carrito</button>
+                                <button type='button' className='btn-carrito'>Añadir al Carrito</button>
                                 <img
                                     src={isWishlisted ? '../../../public/assets/Product/me-gusta-color.png' : '../../../public/assets/Product/me-gusta.png'}
                                     alt="Wishlist Button"

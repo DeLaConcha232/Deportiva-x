@@ -137,6 +137,80 @@ namespace UserRegistrationApi.Controllers
             }
         }
 
+
+
+
+        [HttpPost("wishlist/add")]
+        public async Task<IActionResult> AddToWishlist([FromBody] WishlistDto wishlistDto)
+        {
+            var user = await _context.Users.FindAsync(wishlistDto.UserId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var product = await _context.Products.FindAsync(wishlistDto.ProductId);
+            if (product == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            var wishlistItem = new UserWishlist
+            {
+                idUsuario = wishlistDto.UserId,
+                idProducto = wishlistDto.ProductId
+            };
+
+            _context.UserWishlist.Add(wishlistItem);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("wishlist/remove")]
+        public async Task<IActionResult> RemoveFromWishlist([FromBody] WishlistDto wishlistDto)
+        {
+            var wishlistItem = await _context.UserWishlist
+                .FirstOrDefaultAsync(uw => uw.idUsuario == wishlistDto.UserId && uw.idProducto == wishlistDto.ProductId);
+
+            if (wishlistItem == null)
+            {
+                return NotFound("Wishlist item not found.");
+            }
+
+            _context.UserWishlist.Remove(wishlistItem);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpGet("wishlist/{userId}")]
+        public async Task<IActionResult> GetWishlist(int userId)
+        {
+            var wishlist = await _context.UserWishlist
+                .Where(uw => uw.idUsuario == userId)
+                .Select(uw => uw.idProducto)
+                .ToListAsync();
+
+            if (wishlist == null)
+            {
+                return NotFound("Wishlist not found.");
+            }
+
+            var products = await _context.Products
+                .Where(p => wishlist.Contains(p.idProductos))
+                .ToListAsync();
+
+            return Ok(products);
+        }
+
+
+        public class WishlistDto
+        {
+            public int UserId { get; set; }
+            public int ProductId { get; set; }
+        }
+
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -170,3 +244,4 @@ namespace UserRegistrationApi.Controllers
         }
     }
 }
+

@@ -12,9 +12,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-
-            // const response = await fetch('http://localhost:5033/api/user/login', {
-            const response = await fetch('https://12f75ff73a48.ngrok.app/api/user/login', {
+            const response = await fetch('https://api-deportiva-x.ngrok.io/api/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,12 +29,21 @@ export default function Login() {
             }
 
             const data = await response.json();
-            localStorage.setItem('token', data.token); // Almacena el token JWT en localStorage
+            console.log('Response from server:', data); // Verifica la respuesta del servidor
 
-            console.log('User logged in successfully:', data); // Log para confirmar el inicio de sesión exitoso
+            // Asegúrate de que la respuesta contenga los campos esperados
+            if (data.token && data.user && data.user.idUsuarios) {
+                localStorage.setItem('token', data.token); // Almacena el token JWT en localStorage
+                localStorage.setItem('userId', data.user.idUsuarios); // Almacena el ID del usuario en localStorage
 
-            // Redirige al usuario a la mainpage después del login
-            navigate('/');
+                console.log('userId stored in localStorage:', localStorage.getItem('userId')); // Verifica que el userId se haya almacenado
+
+                // Redirige al usuario a la mainpage después del login
+                navigate('/');
+            } else {
+                console.error('Response missing token or userId');
+                setError('Response missing token or userId'); // Muestra el error al usuario
+            }
         } catch (error) {
             console.error('Error logging in:', error);
             setError('Error logging in: ' + error.message); // Muestra el error al usuario

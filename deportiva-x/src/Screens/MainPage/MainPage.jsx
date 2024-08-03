@@ -14,6 +14,9 @@ export default function MainPage() {
         navigate(`/product/${id}`);
     };
 
+    const userId = localStorage.getItem('userId');
+    console.log('Retrieved userId from localStorage for the wishlist:', userId);
+
     useTawkTo();
 
     const calzadoProductos = [
@@ -99,17 +102,19 @@ export default function MainPage() {
                         <a href="" className='mujeres square'><h1>Mujer</h1><img src="../../../public/assets/MainPage/woman-main-collage.png" alt="Mujer" className='img-collage' /></a>
                     </section>
                 </article>
-                <Element className='carousel-products wishlist'>
-                    <Carousel
-                        title='Favoritos'
-                        uno="../../../public/assets/Imagenes Productos PNG/placeholder1.png"
-                        dos="../../../public/assets/Imagenes Productos PNG/placeholder2.png"
-                        tres="../../../public/assets/Imagenes Productos PNG/placeholder3.png"
-                        cuatro="../../../public/assets/Imagenes Productos PNG/placeholder4.png"
-                        cinco="../../../public/assets/Imagenes Productos PNG/placeholder5.png"
-                        seis="../../../public/assets/Imagenes Productos PNG/placeholder6.png"
-                    />
-                </Element>
+                {userId && userId !== "undefined" && (
+                    <Element className='carousel-products wishlist'>
+                        <Carousel
+                            title='Favoritos'
+                            uno="../../../public/assets/Imagenes Productos PNG/placeholder1.png"
+                            dos="../../../public/assets/Imagenes Productos PNG/placeholder2.png"
+                            tres="../../../public/assets/Imagenes Productos PNG/placeholder3.png"
+                            cuatro="../../../public/assets/Imagenes Productos PNG/placeholder4.png"
+                            cinco="../../../public/assets/Imagenes Productos PNG/placeholder5.png"
+                            seis="../../../public/assets/Imagenes Productos PNG/placeholder6.png"
+                        />
+                    </Element>
+                )}
                 <Element className='carousel-products View'>
                     <Carousel
                         title='Visto Recientemente'

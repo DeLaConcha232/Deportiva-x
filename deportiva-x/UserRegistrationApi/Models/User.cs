@@ -19,6 +19,9 @@ namespace UserRegistrationApi.Models
         public string Telefono { get; set; }
         public DateTime FechaRegistro { get; set; }
         public byte descuentoInicial { get; set; } // Cambiado a byte
-        // public string Imagen { get; set; }
+                                                   // public string Imagen { get; set; }
+
+        // Navegación virtual
+        public virtual ICollection<UserWishlist> Wishlists { get; set; }
     }
 }

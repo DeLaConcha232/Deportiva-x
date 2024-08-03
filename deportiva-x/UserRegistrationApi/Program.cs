@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 
 // Configuración de la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+    options.UseSqlServer("Server=localhost,1433;Database=Deportivax3;User ID=sa;Password=TuContraseña123;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;")
 );
 
 // Configuración de CORS
@@ -23,7 +23,10 @@ builder.Services.AddCors(options =>
         "AllowSpecificOrigin",
         builder =>
         {
-            builder.WithOrigins("https://www.deportiva-x.com").AllowAnyMethod().AllowAnyHeader();
+            builder.WithOrigins("https://www.deportiva-x.com")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials();
         }
     );
 });
