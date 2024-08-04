@@ -11,10 +11,25 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Registrar el contexto de la base de datos
+// Configuración de la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+    options.UseSqlServer("Server=localhost,1433;Database=Deportivax3;User ID=sa;Password=TuContraseña123;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;")
 );
+
+// Configuración de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("https://www.deportiva-x.com")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials();
+        }
+    );
+});
 
 // Configuración del JWT
 var jwtSettings = configuration.GetSection("JwtSettings");
@@ -35,27 +50,14 @@ builder
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false, // No se valida el emisor
-            ValidateAudience = false, // No se valida la audiencia
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ClockSkew = TimeSpan.Zero
         };
     });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Configuración de CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        "AllowAll",
-        builder =>
-        {
-            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        }
-    );
-});
 
 var app = builder.Build();
 
@@ -66,10 +68,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowSpecificOrigin"); // Habilitar CORS usando la política configurada
 app.UseHttpsRedirection();
 app.UseAuthentication(); // Habilitar autenticación con JWT
 app.UseAuthorization();
-app.UseCors("AllowAll"); // Habilitar CORS usando la política configurada
 app.MapControllers();
 
 app.Run();

@@ -258,4 +258,37 @@
             font-size: 2.5rem;
         }
     }
+    /* CSS for the loading message container */
+.loading-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Use full viewport height */
+    text-align: center;
+}
+
+/* CSS for the loading indicator */
+.loading-indicator {
+    display: inline-block;
+    margin-right: 10px; /* Space between the spinner and the text */
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid #ccc; /* Lighter grey border */
+    border-top-color: #333; /* Darker border color for the top border */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* CSS for the loading text */
+.loading-text {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Keyframes for the spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 }

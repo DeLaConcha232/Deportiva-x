@@ -108,3 +108,23 @@
         padding: 5rem 20rem;
     }
 }
+
+/* CSS para el indicador de carga */
+.loading-indicator {
+    display: inline-block; /* Muestra el indicador en línea con otros elementos */
+    margin-left: 10px; /* Espacio entre el botón y el indicador de carga */
+    color: transparent; /* Hace que el texto sea invisible */
+    background-color: #f0f0f0; /* Color de fondo para el indicador de carga */
+    width: 1.5rem; /* Tamaño del indicador de carga */
+    height: 1.5rem; /* Tamaño del indicador de carga */
+    border: 2px solid #333; /* Borde del indicador de carga */
+    border-radius: 50%; /* Hace el indicador de carga redondo */
+    border-top: 2px solid #f0f0f0; /* Color de la parte superior del borde para crear el efecto de carga */
+    animation: spin 1s linear infinite; /* Animación de rotación */
+}
+
+/* Animación de rotación */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

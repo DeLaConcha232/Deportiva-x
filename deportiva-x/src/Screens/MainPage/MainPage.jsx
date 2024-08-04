@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import './MainPage.css';
 import Discount from '../../components/Discount/Discount';
 import Cookies from '../../components/Cookies/Cookies';
@@ -5,17 +6,39 @@ import Carousel from '../../components/carousel/carousel';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import { Element } from 'react-scroll';
+import useTawkTo from '../../components/livechat/useTawkTo';
+import axios from 'axios';
+
+const API_URL = 'https://api-deportiva-x.ngrok.io';
 
 export default function MainPage() {
     const navigate = useNavigate();
+    const [wishlistProducts, setWishlistProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false); // Estado de carga
+    const userId = localStorage.getItem('userId');
+
+    useEffect(() => {
+        if (userId) {
+            axios.get(`${API_URL}/api/user/wishlist/${userId}`)
+                .then(response => {
+                    setWishlistProducts(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching wishlist:', error);
+                });
+        }
+    }, [userId]);
 
     const handleProductClick = (id) => {
-        navigate(`/product/${id}`);
+        setIsLoading(true); // Activa el estado de carga
+        navigate(`/product/${id}`); // Navega al producto
     };
+
+    useTawkTo();
 
     const calzadoProductos = [
         { id: 1, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Gimnasio y Entrenamiento/Tenis Adidas Amplimove Trainer Red.png" },
-        { id: 14, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Casual/Tenis Nike Air Max Excee.png" },
+        { id: 2, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Casual/Tenis Nike Air Max Excee.png" },
         { id: 15, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Running/Tenis Nike Journey Run.png" },
         { id: 16, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Tacos De Futbol/Tenis De Fútbol Nike Vapor 15 Academy Mercurial Dream Speed Mg.png" },
         { id: 17, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Tenis De Basquetbol/Tenis Adidas Bounce Legends.png" },
@@ -73,6 +96,7 @@ export default function MainPage() {
         const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
     };
+
     return (
         <>
             <NavBar />
@@ -93,18 +117,25 @@ export default function MainPage() {
                         <a href="" className='mujeres square'><h1>Mujer</h1><img src="../../../public/assets/MainPage/woman-main-collage.png" alt="Mujer" className='img-collage' /></a>
                     </section>
                 </article>
-                <Element className='carousel-products wishlist'>
-                    <Carousel
-                        title='Favoritos'
-                        uno="../../../public/assets/Imagenes Productos PNG/placeholder1.png"
-                        dos="../../../public/assets/Imagenes Productos PNG/placeholder2.png"
-                        tres="../../../public/assets/Imagenes Productos PNG/placeholder3.png"
-                        cuatro="../../../public/assets/Imagenes Productos PNG/placeholder4.png"
-                        cinco="../../../public/assets/Imagenes Productos PNG/placeholder5.png"
-                        seis="../../../public/assets/Imagenes Productos PNG/placeholder6.png"
-                    />
-                </Element>
-                <Element className='carousel-products View'>
+                {/* {userId && userId !== "undefined" && wishlistProducts.length > 0 && (
+                    <Element className='carousel-products wishlist'>
+                        <Carousel
+                            title='Favoritos'
+                            products={wishlistProducts}
+                        />
+                    </Element>
+                )} */}
+                {userId && userId !== "undefined" && wishlistProducts.length > 0 && (
+                    <Element className='carousel-products wishlist'>
+                        <Carousel
+                            title='Favoritos'
+                            products={wishlistProducts}
+                            isWishlist={true} // Indica que este es el carrusel de favoritos
+                        />
+                    </Element>
+                )}
+
+                {/* <Element className='carousel-products View'>
                     <Carousel
                         title='Visto Recientemente'
                         uno="../../../public/assets/Imagenes Productos PNG/placeholder7.png"
@@ -114,77 +145,41 @@ export default function MainPage() {
                         cinco="../../../public/assets/Imagenes Productos PNG/placeholder11.png"
                         seis="../../../public/assets/Imagenes Productos PNG/placeholder12.png"
                     />
-                </Element>
+                </Element> */}
                 <article className='carousel-products'>
                     <Carousel
                         title='Calzado'
-                        uno={calzadoProductos[0].img}
-                        dos={calzadoProductos[1].img}
-                        tres={calzadoProductos[2].img}
-                        cuatro={calzadoProductos[3].img}
-                        cinco={calzadoProductos[4].img}
-                        seis={calzadoProductos[5].img}
-                        ids={[calzadoProductos[0].id, calzadoProductos[1].id, calzadoProductos[2].id, calzadoProductos[3].id, calzadoProductos[4].id, calzadoProductos[5].id]}
+                        products={calzadoProductos.map(p => ({ idProductos: p.id, imagen: p.img }))}
                     />
                 </article>
                 <article className='carousel-products'>
                     <Carousel
                         title='Accesorios'
-                        uno={accesoriosProductos[0].img}
-                        dos={accesoriosProductos[1].img}
-                        tres={accesoriosProductos[2].img}
-                        cuatro={accesoriosProductos[3].img}
-                        cinco={accesoriosProductos[4].img}
-                        seis={accesoriosProductos[5].img}
-                        ids={[accesoriosProductos[0].id, accesoriosProductos[1].id, accesoriosProductos[2].id, accesoriosProductos[3].id, accesoriosProductos[4].id, accesoriosProductos[5].id]}
+                        products={accesoriosProductos.map(p => ({ idProductos: p.id, imagen: p.img }))}
                     />
                 </article>
                 <article className='carousel-products'>
                     <Carousel
                         title='Deportes'
-                        uno={deportesProductos[0].img}
-                        dos={deportesProductos[1].img}
-                        tres={deportesProductos[2].img}
-                        cuatro={deportesProductos[3].img}
-                        cinco={deportesProductos[4].img}
-                        seis={deportesProductos[5].img}
-                        ids={[deportesProductos[0].id, deportesProductos[1].id, deportesProductos[2].id, deportesProductos[3].id, deportesProductos[4].id, deportesProductos[5].id]}
+                        products={deportesProductos.map(p => ({ idProductos: p.id, imagen: p.img }))}
                     />
                 </article>
                 <article className='carousel-products'>
                     <Carousel
                         title='Mujer'
-                        uno={mujerProductos[0].img}
-                        dos={mujerProductos[1].img}
-                        tres={mujerProductos[2].img}
-                        cuatro={mujerProductos[3].img}
-                        cinco={mujerProductos[4].img}
-                        seis={mujerProductos[5].img}
-                        ids={[mujerProductos[0].id, mujerProductos[1].id, mujerProductos[2].id, mujerProductos[3].id, mujerProductos[4].id, mujerProductos[5].id]}
+                        products={mujerProductos.map(p => ({ idProductos: p.id, imagen: p.img }))}
                     />
                 </article>
                 <article className='carousel-products'>
                     <Carousel
                         title='Hombre'
-                        uno={hombreProductos[0].img}
-                        dos={hombreProductos[1].img}
-                        tres={hombreProductos[2].img}
-                        cuatro={hombreProductos[3].img}
-                        cinco={hombreProductos[4].img}
-                        seis={hombreProductos[5].img}
-                        ids={[hombreProductos[0].id, hombreProductos[1].id, hombreProductos[2].id, hombreProductos[3].id, hombreProductos[4].id, hombreProductos[5].id]}
+                        products={hombreProductos.map(p => ({ idProductos: p.id, imagen: p.img }))}
                     />
                 </article>
                 <article className='carousel-products'>
                     <Carousel
                         title='Niños'
-                        uno={ninosProductos[0].img}
-                        dos={ninosProductos[1].img}
-                        tres={ninosProductos[2].img}
-                        cuatro={ninosProductos[3].img}
-                        cinco={ninosProductos[4].img}
-                        seis={ninosProductos[5].img}
-                        ids={[ninosProductos[0].id, ninosProductos[1].id, ninosProductos[2].id, ninosProductos[3].id, ninosProductos[4].id, ninosProductos[5].id]}
+                        products={ninosProductos.map(p => ({ idProductos: p.id, imagen: p.img }))}
                     />
                 </article>
             </main>

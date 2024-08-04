@@ -276,3 +276,5 @@
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/Debug/net8.0/UserRegistrationApi.pdb
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/Debug/net8.0/UserRegistrationApi.genruntimeconfig.cache
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/Debug/net8.0/ref/UserRegistrationApi.dll
+/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Castle.Core.dll
+/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Proxies.dll

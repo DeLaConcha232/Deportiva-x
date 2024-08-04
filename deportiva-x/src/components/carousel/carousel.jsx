@@ -12,40 +12,46 @@ function Responsive(props) {
     navigate(`/product/${id}`);
   };
 
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
+  // Configuración condicional para el carrusel
+  const getCarouselSettings = (numProducts, isWishlist) => {
+    // Determina si el carrusel debería ser infinito basándose en el número de productos
+    const isInfinite = numProducts > 2 && !isWishlist;
+
+    return {
+      dots: true,
+      infinite: isInfinite,
+      speed: 500,
+      slidesToShow: numProducts === 1 ? 1 : (isWishlist ? 2 : 4),
+      slidesToScroll: numProducts === 1 ? 1 : (isWishlist ? 2 : 4),
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: numProducts === 1 ? 1 : (isWishlist ? 2 : 3),
+            slidesToScroll: numProducts === 1 ? 1 : (isWishlist ? 2 : 3),
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: numProducts === 1 ? 1 : (isWishlist ? 1 : 2),
+            slidesToScroll: numProducts === 1 ? 1 : (isWishlist ? 1 : 2),
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: numProducts === 1 ? 1 : (isWishlist ? 1 : 2),
+            slidesToScroll: numProducts === 1 ? 1 : (isWishlist ? 1 : 1),
+          }
         }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      }
-    ]
+      ]
+    };
   };
+
+  const numProducts = props.products ? props.products.length : 0;
+  const settings = getCarouselSettings(numProducts, props.isWishlist);
 
   return (
     <>
@@ -53,36 +59,17 @@ function Responsive(props) {
         <h1 className="title-slider">{props.title}</h1>
         <div className="slider-container">
           <Slider {...settings}>
-            <div className="img-contain">
-              <a onClick={() => handleProductClick(props.ids[0])}>
-                <img src={props.uno} alt="" />
-              </a>
-            </div>
-            <div className="img-contain">
-              <a onClick={() => handleProductClick(props.ids[1])}>
-                <img src={props.dos} alt="" />
-              </a>
-            </div>
-            <div className="img-contain">
-              <a onClick={() => handleProductClick(props.ids[2])}>
-                <img src={props.tres} alt="" />
-              </a>
-            </div>
-            <div className="img-contain">
-              <a onClick={() => handleProductClick(props.ids[3])}>
-                <img src={props.cuatro} alt="" />
-              </a>
-            </div>
-            <div className="img-contain">
-              <a onClick={() => handleProductClick(props.ids[4])}>
-                <img src={props.cinco} alt="" />
-              </a>
-            </div>
-            <div className="img-contain">
-              <a onClick={() => handleProductClick(props.ids[5])}>
-                <img src={props.seis} alt="" />
-              </a>
-            </div>
+            {props.products && props.products.length > 0 ? (
+              props.products.map((product) => (
+                <div key={product.idProductos} className="img-contain">
+                  <a onClick={() => handleProductClick(product.idProductos)}>
+                    <img src={product.imagen} alt={product.nombre} />
+                  </a>
+                </div>
+              ))
+            ) : (
+              <div>No products found.</div>
+            )}
           </Slider>
         </div>
       </section>
@@ -90,4 +77,14 @@ function Responsive(props) {
   );
 }
 
-export default Responsive;
+function Carousel(props) {
+  return (
+    <Responsive
+      title={props.title}
+      products={props.products}
+      isWishlist={props.isWishlist}
+    />
+  );
+}
+
+export default Carousel;
