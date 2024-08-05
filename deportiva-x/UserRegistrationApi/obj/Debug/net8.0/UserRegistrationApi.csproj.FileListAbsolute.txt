@@ -147,6 +147,7 @@
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Azure.Core.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Azure.Identity.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Castle.Core.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Humanizer.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll
@@ -158,6 +159,7 @@
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Proxies.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
@@ -276,5 +278,3 @@
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/Debug/net8.0/UserRegistrationApi.pdb
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/Debug/net8.0/UserRegistrationApi.genruntimeconfig.cache
 /Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/Debug/net8.0/ref/UserRegistrationApi.dll
-/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Castle.Core.dll
-/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Proxies.dll

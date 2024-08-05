@@ -14,14 +14,14 @@ const API_URL = 'https://api-deportiva-x.ngrok.io';
 export default function MainPage() {
     const navigate = useNavigate();
     const [wishlistProducts, setWishlistProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false); // Estado de carga
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         if (userId) {
             axios.get(`${API_URL}/api/user/wishlist/${userId}`)
                 .then(response => {
-                    setWishlistProducts(response.data);
+                    const wishlistData = response.data.$values;
+                    setWishlistProducts(wishlistData);
                 })
                 .catch(error => {
                     console.error('Error fetching wishlist:', error);
@@ -30,8 +30,7 @@ export default function MainPage() {
     }, [userId]);
 
     const handleProductClick = (id) => {
-        setIsLoading(true); // Activa el estado de carga
-        navigate(`/product/${id}`); // Navega al producto
+        navigate(`/product/${id}`);
     };
 
     useTawkTo();
@@ -117,35 +116,15 @@ export default function MainPage() {
                         <a href="" className='mujeres square'><h1>Mujer</h1><img src="../../../public/assets/MainPage/woman-main-collage.png" alt="Mujer" className='img-collage' /></a>
                     </section>
                 </article>
-                {/* {userId && userId !== "undefined" && wishlistProducts.length > 0 && (
-                    <Element className='carousel-products wishlist'>
-                        <Carousel
-                            title='Favoritos'
-                            products={wishlistProducts}
-                        />
-                    </Element>
-                )} */}
                 {userId && userId !== "undefined" && wishlistProducts.length > 0 && (
                     <Element className='carousel-products wishlist'>
                         <Carousel
                             title='Favoritos'
-                            products={wishlistProducts}
+                            products={wishlistProducts.map(p => ({ idProductos: p.idProductos, imagen: p.imagen, nombre: p.nombre }))}
                             isWishlist={true} // Indica que este es el carrusel de favoritos
                         />
                     </Element>
                 )}
-
-                {/* <Element className='carousel-products View'>
-                    <Carousel
-                        title='Visto Recientemente'
-                        uno="../../../public/assets/Imagenes Productos PNG/placeholder7.png"
-                        dos="../../../public/assets/Imagenes Productos PNG/placeholder8.png"
-                        tres="../../../public/assets/Imagenes Productos PNG/placeholder9.png"
-                        cuatro="../../../public/assets/Imagenes Productos PNG/placeholder10.png"
-                        cinco="../../../public/assets/Imagenes Productos PNG/placeholder11.png"
-                        seis="../../../public/assets/Imagenes Productos PNG/placeholder12.png"
-                    />
-                </Element> */}
                 <article className='carousel-products'>
                     <Carousel
                         title='Calzado'

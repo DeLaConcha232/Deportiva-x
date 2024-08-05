@@ -9,6 +9,8 @@ export default function Product() {
     const [isWishlisted, setIsWishlisted] = useState(false);
     const { idProductos } = useParams();
     const userId = localStorage.getItem('userId');
+    const [selectedTalla, setSelectedTalla] = useState('');
+    const [selectedCantidad, setSelectedCantidad] = useState(1);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -22,7 +24,11 @@ export default function Product() {
                     const relatedResponse = await fetch(`https://api-deportiva-x.ngrok.io/api/user/products?category=${data.categoria}`);
                     if (relatedResponse.ok) {
                         const relatedData = await relatedResponse.json();
-                        setRelatedProducts(relatedData.filter(p => p.idProductos !== data.idProductos)); // Exclude the current product
+                        if (Array.isArray(relatedData.$values)) {
+                            setRelatedProducts(relatedData.$values.filter(p => p.idProductos !== data.idProductos)); // Exclude the current product
+                        } else {
+                            console.error('Related data is not an array:', relatedData);
+                        }
                     } else {
                         console.error('Failed to fetch related products:', relatedResponse.statusText);
                     }
@@ -39,7 +45,11 @@ export default function Product() {
                 const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/wishlist/${userId}`);
                 if (response.ok) {
                     const wishlist = await response.json();
-                    setIsWishlisted(wishlist.some(product => product.idProductos === parseInt(idProductos)));
+                    if (Array.isArray(wishlist.$values)) {
+                        setIsWishlisted(wishlist.$values.some(product => product.idProductos === parseInt(idProductos)));
+                    } else {
+                        console.error('Wishlist data is not an array:', wishlist);
+                    }
                 } else {
                     console.error('Failed to fetch wishlist:', response.statusText);
                 }
@@ -80,6 +90,37 @@ export default function Product() {
         }
     };
 
+    const addToCart = async () => {
+        if (!userId || !product) {
+            console.error('User ID or Product is not defined');
+            return;
+        }
+
+        const body = JSON.stringify({
+            UserId: userId,
+            ProductId: parseInt(idProductos),
+            Cantidad: selectedCantidad
+        });
+
+        try {
+            const response = await fetch('https://api-deportiva-x.ngrok.io/api/user/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body
+            });
+
+            if (!response.ok) {
+                console.error('Failed to add to cart:', response.statusText);
+            } else {
+                alert('Producto añadido al carrito');
+            }
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+        }
+    };
+
     if (!product) {
         return (
             <div className="loading-message">
@@ -107,11 +148,16 @@ export default function Product() {
                             <section className='container-select-product'>
                                 <div className='select1 select-btn'>
                                     <h1>TALLA</h1>
-                                    <select name="talla" id="select-talla">
+                                    <select
+                                        name="talla"
+                                        id="select-talla"
+                                        value={selectedTalla}
+                                        onChange={(e) => setSelectedTalla(e.target.value)}
+                                    >
                                         <option value="0">Elige</option>
-                                        {product.talla && product.talla.length > 0 ? (
-                                            product.talla.map((talla, index) => (
-                                                <option key={index} value={talla}>{talla}</option>
+                                        {product.tallaDb && product.tallaDb.length > 0 ? (
+                                            product.tallaDb.split(',').map((talla, index) => (
+                                                <option key={index} value={talla.trim()}>{talla.trim()}</option>
                                             ))
                                         ) : (
                                             <option value="">No hay tallas disponibles</option>
@@ -120,7 +166,12 @@ export default function Product() {
                                 </div>
                                 <div className='select2 select-btn'>
                                     <h1>CANTIDAD</h1>
-                                    <select name="cantidad" id="select-cantidad">
+                                    <select
+                                        name="cantidad"
+                                        id="select-cantidad"
+                                        value={selectedCantidad}
+                                        onChange={(e) => setSelectedCantidad(e.target.value)}
+                                    >
                                         {cantidadOptions.map((cantidad, index) => (
                                             <option key={index} value={cantidad}>{cantidad}</option>
                                         ))}
@@ -129,7 +180,7 @@ export default function Product() {
                             </section>
 
                             <section className='container-btn-product'>
-                                <button type='button' className='btn-carrito'>Añadir al Carrito</button>
+                                <button type='button' className='btn-carrito' onClick={addToCart}>Añadir al Carrito</button>
                                 <img
                                     src={isWishlisted ? '../../../public/assets/Product/me-gusta-color.png' : '../../../public/assets/Product/me-gusta.png'}
                                     alt="Wishlist Button"
