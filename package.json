@@ -20,10 +20,7 @@
   "license": "MIT",
   "description": "",
   "devDependencies": {
-    "vite": "^5.3.3"
   },
   "dependencies": {
-    "react-router-dom": "^6.24.1",
-    "sweetalert": "^2.1.2"
   }
 }
