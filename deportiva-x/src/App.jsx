@@ -10,6 +10,7 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 import ShoppingCart from './Screens/ShoppingCart/ShoppingCart.jsx';
 import { useEffect } from 'react';
 
+
 function App() {
   useEffect(() => {
     // Limpiar el localStorage al montar la aplicación si no hay token

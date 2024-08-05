@@ -29,10 +29,9 @@ html{
 .img-contain{
     width: 15rem;
     height: 17rem;
-    background-color: #181818;
-    border-radius: 2rem;
-    border: 2px solid rgb(0, 0, 0);
+    background-color: #eaeeef;
     cursor: pointer;
+    border: 10px solid white;
     img{
         width: 100%;
         height: 100%;
