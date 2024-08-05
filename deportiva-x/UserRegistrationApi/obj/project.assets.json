@@ -4437,25 +4437,24 @@
     ]
   },
   "packageFolders": {
-    "/Users/rios/.nuget/packages/": {}
+    "/Users/diegodiaz/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
+      "projectUniqueName": "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
       "projectName": "UserRegistrationApi",
-      "projectPath": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
-      "packagesPath": "/Users/rios/.nuget/packages/",
-      "outputPath": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/",
+      "projectPath": "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
+      "packagesPath": "/Users/diegodiaz/.nuget/packages/",
+      "outputPath": "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/rios/.nuget/NuGet/NuGet.Config"
+        "/Users/diegodiaz/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4527,7 +4526,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

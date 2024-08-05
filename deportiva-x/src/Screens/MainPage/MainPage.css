@@ -1,13 +1,15 @@
-
-#mainContent{
-    background: url('../../../public/assets/Login/background-movil-signup.png');
+#mainContent {
+    /* background: url('../../../public/assets/Login/background-movil-signup.png'); */
+    background-color: rgb(255, 255, 255);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
     height: auto;
     position: relative;
+    padding: 0 1rem;
 }
+
 /* Galery College */
 .collage-container {
     display: flex;
@@ -35,10 +37,12 @@
         padding: 1rem;
         border-radius: 1rem;
         text-decoration: none;
-        h1{
+
+        h1 {
             font-size: 1.5rem;
         }
-        .img-collage{
+
+        .img-collage {
             width: 100%;
             height: auto;
         }
@@ -47,38 +51,47 @@
     .calzado {
         grid-area: calzado;
     }
+
     .deportes {
         grid-area: deportes;
     }
+
     .jerseys {
         grid-area: jerseys;
     }
+
     .accesorios {
         grid-area: accesorios;
     }
+
     .niños {
         display: flex;
         align-items: center;
-        justify-content:flex-start;
+        justify-content: flex-start;
         grid-area: niños;
-        h1{
+
+        h1 {
             font-size: 2rem;
         }
-        .childs{
+
+        .childs {
             width: 50%;
             height: auto;
             margin: 1rem;
         }
     }
+
     .hombres {
         grid-area: hombre;
     }
+
     .mujeres {
         grid-area: mujer;
     }
 }
+
 /* Chats Icon */
-.container-Icons{
+.container-Icons {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -91,20 +104,31 @@
     right: 0;
     z-index: 1000;
 }
-.chats-icon{
+
+.chats-icon {
     width: inherit;
     height: auto;
     cursor: pointer;
+    margin-bottom: 8rem;
 }
 
-@media (min-width: 768px) and (max-width: 1023px){
-    .collage-container{
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    #mainContent {
+        padding: 0 5rem;
+    }
+
+    .collage-container {
         padding: 2rem 10rem;
     }
 }
 
-@media(min-width: 1024px){
-    .collage-container{
+@media(min-width: 1024px) {
+    #mainContent {
+        padding: 0 10rem;
+    }
+    .collage-container {
         padding: 5rem 20rem;
     }
 }

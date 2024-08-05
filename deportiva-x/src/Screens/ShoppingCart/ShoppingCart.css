@@ -1,10 +1,9 @@
-
+*{
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
 .ContainerCart{
-    background: url('../../../public/assets/Login/background-movil-signup.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: white;
     width: 100%;
     min-height: 100vh;
     padding: 2rem 2rem;
@@ -16,14 +15,12 @@
 }
 .container-productsCart{
     display: flex;
-    justify-items: center;
-    align-items: center;
     flex-direction: column;
     width: 100%;
     height: auto;
     font-size: 2rem;
     gap: 3rem;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 .container-productsCart-component{
     width: 100%;
@@ -39,7 +36,7 @@
     height: auto;
     gap: 1.5rem;
     padding: 2rem;
-    color: white;
+    color: rgb(0, 0, 0);
     .Title-Cart{
         font-size: 3rem;
     }
@@ -52,12 +49,12 @@
         align-items: center;
         width: 50%;
         height: auto;
-        background-color: #000000;
+        background-color: #ffffff;
         padding: 1rem;
-        border: 1px solid white;
+        border: 1px solid rgb(0, 0, 0);
         border-radius: 0.5rem;
         cursor: pointer;
-        color: white;
+        color: rgb(0, 0, 0);
         .btn-flecha{
             width: 5rem;
             height: auto;

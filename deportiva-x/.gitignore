@@ -16,11 +16,44 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.dll
-*.pdb
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+// aqui se ignoran 
+# Archivos de construcción y directorios de salida
+bin/
+obj/
+
+# Archivos de depuración
+*.pdb
+
+# Archivos de caché
+*.cache
+
+# Archivos de configuración específicos del entorno
+*.user
+*.vspscc
+*.vssscc
+.vscode/
+
+# Archivos específicos del sistema
+.DS_Store
+../.DS_Store
+
+# Archivos de configuración de paquetes
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Dependencias de NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Archivos de publicación
+*.publishsettings
+

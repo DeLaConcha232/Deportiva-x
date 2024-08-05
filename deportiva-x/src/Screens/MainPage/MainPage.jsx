@@ -102,8 +102,8 @@ export default function MainPage() {
             <Discount />
             <main id='mainContent'>
                 <section className='container-Icons'>
-                    <img src="../../../public/assets/MainPage/Chat-icon.png" alt="Chat-Icon" className='chats-icon' />
                     <img src="../../../public/assets/MainPage/Whatsapp-Icon.png" alt="Whatsapp-Icon" className='chats-icon' onClick={handleClickWhatsapp} />
+                    {/* <img src="../../../public/assets/MainPage/Chat-icon.png" alt="Chat-Icon" className='chats-icon chatbot' /> */}
                 </section>
                 <article className='collage-container'>
                     <section className='collage'>

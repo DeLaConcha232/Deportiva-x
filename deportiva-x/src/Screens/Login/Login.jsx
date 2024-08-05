@@ -59,11 +59,13 @@ export default function Login() {
             </header>
             <main id='mainLogin'>
                 <Link to='/'>
-                    <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
+                    <img src="../../../public/assets/Logo Final_2 PNG.png" alt="Brand-logo" className='logo' />
                 </Link>
                 <article className='container'>
                     <article className='title'>
-                        <img src="../../../public/assets/Login/User-icon.png" alt="user-icon" />
+                        <Link to='/'>
+                            <img src="../../../public/assets/Logo Horizontal WHITE.png" alt="user-icon" />
+                        </Link>
                         <h1 className="">LOGIN</h1>
                         <p className='signin'>Sign in to continue</p>
                     </article>

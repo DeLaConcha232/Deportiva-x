@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     padding: 3rem 0;
-    background: url('../../../public//assets//Login/background-movil-signup.png');
+    /* background: url('../../../public//assets//Login/background-movil-signup.png'); */
+    background-color: white;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -23,14 +24,14 @@
     }
     #signin{
         display: block;
-        color: white;
+        color: rgb(0, 0, 0);
         font-size: 1.2rem;
         margin: 1rem;
     }
 }
 .forms{
     input{
-        background-color: rgba(163, 212, 214, 1);
+        background-color: rgb(255, 255, 255);
     }
 }
 
@@ -47,11 +48,8 @@
 
 @media(min-width: 1024px){
     #signup{
-        background: url('../../../public//assets//Login/background.jpeg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
         .logo{
+            width: 50rem;
             display: block;
         }
     }
@@ -63,7 +61,7 @@
     .forms{
         padding: 0 3rem;
         input{
-            background-color: black;
+            background-color: rgb(255, 255, 255);
             
         }
     }
@@ -72,8 +70,8 @@
         justify-content: center;
         align-items: center;
         #signupBtn{
-            color: black;
-            background-color: white;
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
         }
     }
 }
