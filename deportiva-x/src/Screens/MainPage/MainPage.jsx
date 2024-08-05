@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './MainPage.css';
 import Discount from '../../components/Discount/Discount';
 import Cookies from '../../components/Cookies/Cookies';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { Element } from 'react-scroll';
 import useTawkTo from '../../components/livechat/useTawkTo';
 import axios from 'axios';
+import Whatsapp from '../../components/whatsapp/Whatsapp';
 
 const API_URL = 'https://api-deportiva-x.ngrok.io';
 
@@ -89,22 +90,12 @@ export default function MainPage() {
         { id: 48, img: "../../../public/assets/Imagenes Productos PNG/Niña/Ropa/Jerseys Equipos De Fútbol/adidas Mexico Soccer.png" },
     ];
 
-    const handleClickWhatsapp = () => {
-        const phoneNumber = '4495654099'; // Reemplaza con el número de teléfono al que deseas redirigir
-        const message = 'Hola, me gustaría obtener más información'; // Mensaje opcional prellenado
-        const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
-    };
-
     return (
         <>
             <NavBar />
             <Discount />
             <main id='mainContent'>
-                <section className='container-Icons'>
-                    <img src="../../../public/assets/MainPage/Whatsapp-Icon.png" alt="Whatsapp-Icon" className='chats-icon' onClick={handleClickWhatsapp} />
-                    {/* <img src="../../../public/assets/MainPage/Chat-icon.png" alt="Chat-Icon" className='chats-icon chatbot' /> */}
-                </section>
+                <Whatsapp />
                 <article className='collage-container'>
                     <section className='collage'>
                         <a href="" className='calzado square'><h1>Calzado</h1><img src="../../../public/assets/MainPage/tenis-main-collage.png" alt="Calzado" className='img-collage' /></a>

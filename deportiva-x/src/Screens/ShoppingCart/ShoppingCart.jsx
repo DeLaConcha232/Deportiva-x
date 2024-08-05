@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ShoppingCart.css';
 import NavBar from '../../components/NavBar/NavBar';
 import Discount from '../../components/Discount/Discount';
 import ProductCart from '../../components/ProductCart/ProductCart';
+import Payment from '../../components/Payment/Payment';
+import Whatsapp from '../../components/whatsapp/Whatsapp';
+
 
 export default function ShoppingCart() {
+    const [isOpen, setIsOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     const userId = localStorage.getItem('userId'); // Asume que el ID del usuario está almacenado en localStorage
@@ -54,10 +58,20 @@ export default function ShoppingCart() {
         }
     };
 
+    const handleBtnPay = () => {
+        setIsOpen(!isOpen);
+        console.log('Click', isOpen);
+        
+    }
+    const handleClosePayment = () => {
+        setIsOpen(false);
+    }
+
     return (
         <>
             <NavBar />
             <Discount />
+            <Whatsapp />
             <main className='ContainerCart'>
                 <article className='container-productsCart'>
                     <h1>Tu Carrito</h1>
@@ -71,12 +85,13 @@ export default function ShoppingCart() {
                     <h1 className='Title-Cart'>Resumen del Pedido</h1>
                     <h3 className='subtitle-cart'>Total de Productos: {cartItems.length}</h3>
                     <h3 className='subtitle-cart'>Total: ${total.toFixed(2)}</h3>
-                    <button className='btn-Pay'>
+                    <button className='btn-Pay' onClick={handleBtnPay}>
                         Ir a Pagar
                         <img src="../../../public/assets/Carrito de compras/flecha.png" alt="flecha" className='btn-flecha' />
                     </button>
                 </article>
             </main>
+            {isOpen && <Payment onClose={handleClosePayment}/> }
         </>
     );
 }
