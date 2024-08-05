@@ -25,7 +25,7 @@ namespace UserRegistrationApi.Models
 
             modelBuilder.Entity<Product>()
                 .Property(p => p.TallaDb)
-                .HasColumnName("Talla"); // Asegúrate de que la columna se llama "Talla"
+                .HasColumnName("Talla");
 
             modelBuilder.Entity<UserWishlist>().HasKey(uw => uw.Id);
             modelBuilder
@@ -44,6 +44,10 @@ namespace UserRegistrationApi.Models
             modelBuilder.Entity<CarritoItems>().HasKey(ci => ci.idCarritoItems);
 
             modelBuilder.Entity<CarritoItems>()
+                .Property(ci => ci.idCarritoItems)
+                .ValueGeneratedOnAdd(); // Configura idCarritoItems como columna de identidad
+
+            modelBuilder.Entity<CarritoItems>()
                 .HasOne(ci => ci.Carrito)
                 .WithMany(c => c.CarritoItems)
                 .HasForeignKey(ci => ci.idCarrito);
@@ -52,7 +56,16 @@ namespace UserRegistrationApi.Models
                 .HasOne(ci => ci.Productos)
                 .WithMany(p => p.CarritoItems)
                 .HasForeignKey(ci => ci.idProductos);
+
+            modelBuilder.Entity<Carrito>()
+                .Property(c => c.idUsuarios)
+                .HasColumnName("idUsuarios");
+
+            modelBuilder.Entity<Carrito>()
+                .Property(c => c.UseridUsuarios)
+                .HasColumnName("UseridUsuarios");
         }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

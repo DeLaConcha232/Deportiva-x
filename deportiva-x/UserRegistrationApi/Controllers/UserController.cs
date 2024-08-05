@@ -138,6 +138,95 @@ namespace UserRegistrationApi.Controllers
         }
 
 
+        [HttpPost("cart/add")]
+        public async Task<IActionResult> AddToCart([FromBody] CartItemDto cartItemDto)
+        {
+            var user = await _context.Users.FindAsync(cartItemDto.UserId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var product = await _context.Products.FindAsync(cartItemDto.ProductId);
+            if (product == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            // Verifica si existe un carrito para el usuario
+            var cart = await _context.Carrito.FirstOrDefaultAsync(c => c.idUsuarios == user.idUsuarios);
+            if (cart == null)
+            {
+                // Si no existe, crea uno nuevo
+                cart = new Carrito { idUsuarios = user.idUsuarios };
+                _context.Carrito.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            // Verifica si el producto ya está en el carrito
+            var cartItem = await _context.CarritoItems.FirstOrDefaultAsync(ci => ci.idCarrito == cart.idCarrito && ci.idProductos == product.idProductos);
+            if (cartItem != null)
+            {
+                // Si ya está, incrementa la cantidad
+                cartItem.Cantidad += cartItemDto.Cantidad;
+            }
+            else
+            {
+                // Si no está, agrega el nuevo producto al carrito
+                cartItem = new CarritoItems
+                {
+                    idCarrito = cart.idCarrito,
+                    idProductos = product.idProductos,
+                    Cantidad = cartItemDto.Cantidad,
+                    Precio = product.Precio
+                };
+                _context.CarritoItems.Add(cartItem);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        public class CartItemDto
+        {
+            public int UserId { get; set; }
+            public int ProductId { get; set; }
+            public int Cantidad { get; set; }
+        }
+
+        [HttpGet("cart/{userId}")]
+        public async Task<IActionResult> GetCartItems(int userId)
+        {
+            var cart = await _context.Carrito
+                .Include(c => c.CarritoItems)
+                .ThenInclude(ci => ci.Productos)
+                .FirstOrDefaultAsync(c => c.idUsuarios == userId);
+
+            if (cart == null)
+            {
+                return NotFound("Cart not found.");
+            }
+
+            return Ok(cart.CarritoItems);
+        }
+
+        [HttpDelete("cart/remove/{idCarritoItems}")]
+        public async Task<IActionResult> RemoveFromCart(int idCarritoItems)
+        {
+            var cartItem = await _context.CarritoItems.FindAsync(idCarritoItems);
+            if (cartItem == null)
+            {
+                return NotFound("Cart item not found.");
+            }
+
+            _context.CarritoItems.Remove(cartItem);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+
 
 
         [HttpPost("wishlist/add")]
@@ -210,56 +299,29 @@ namespace UserRegistrationApi.Controllers
             public int ProductId { get; set; }
         }
 
-        [HttpPost("cart/add")]
-        public async Task<IActionResult> AddToCart([FromBody] CartItemDto cartItemDto)
+
+
+
+        [HttpGet("products/search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string query)
         {
-            var user = await _context.Users.FindAsync(cartItemDto.UserId);
-            if (user == null)
+            if (string.IsNullOrEmpty(query))
             {
-                return NotFound("User not found.");
+                return BadRequest("Query parameter is required.");
             }
 
-            var product = await _context.Products.FindAsync(cartItemDto.ProductId);
-            if (product == null)
+            var products = await _context.Products
+                .Where(p => p.Nombre.Contains(query) || p.Descripcion.Contains(query))
+                .ToListAsync();
+
+            if (!products.Any())
             {
-                return NotFound("Product not found.");
+                return NotFound("No products found matching the query.");
             }
 
-            var cart = await _context.Carrito.FirstOrDefaultAsync(c => c.idUsuarios == user.idUsuarios);
-            if (cart == null)
-            {
-                cart = new Carrito { idUsuarios = user.idUsuarios };
-                _context.Carrito.Add(cart);
-                await _context.SaveChangesAsync();
-            }
-
-            var cartItem = await _context.CarritoItems.FirstOrDefaultAsync(ci => ci.idCarrito == cart.idCarrito && ci.idProductos == product.idProductos);
-            if (cartItem != null)
-            {
-                cartItem.Cantidad += cartItemDto.Cantidad; // Incrementa la cantidad
-            }
-            else
-            {
-                cartItem = new CarritoItems
-                {
-                    idCarrito = cart.idCarrito,
-                    idProductos = product.idProductos,
-                    Cantidad = cartItemDto.Cantidad,
-                    Precio = product.Precio // Suponemos que el precio del producto ya está definido
-                };
-                _context.CarritoItems.Add(cartItem);
-            }
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            return Ok(products);
         }
 
-        public class CartItemDto
-        {
-            public int UserId { get; set; }
-            public int ProductId { get; set; }
-            public int Cantidad { get; set; }
-        }
 
 
         private string GenerateJwtToken(User user)

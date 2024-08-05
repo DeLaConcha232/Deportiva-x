@@ -14,8 +14,12 @@ export default function ShoppingCart() {
             const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/cart/${userId}`);
             if (response.ok) {
                 const data = await response.json();
-                setCartItems(data);
-                calculateTotal(data);
+
+                // Asegúrate de que los datos sean un array
+                const items = Array.isArray(data) ? data : data.$values;
+
+                setCartItems(items);
+                calculateTotal(items);
             } else {
                 console.error('Failed to fetch cart items');
             }
@@ -25,8 +29,29 @@ export default function ShoppingCart() {
     }, [userId]);
 
     const calculateTotal = (items) => {
-        const total = items.reduce((acc, item) => acc + item.Precio * item.Cantidad, 0);
+        const total = items.reduce((acc, item) => acc + item.productos.precio * item.cantidad, 0);
         setTotal(total);
+    };
+
+    const handleRemoveItem = async (idCarritoItems) => {
+        try {
+            const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/cart/remove/${idCarritoItems}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const updatedItems = cartItems.filter(item => item.idCarritoItems !== idCarritoItems);
+                setCartItems(updatedItems);
+                calculateTotal(updatedItems);
+            } else {
+                console.error('Failed to remove item from cart');
+            }
+        } catch (error) {
+            console.error('Error removing item from cart:', error);
+        }
     };
 
     return (
@@ -38,7 +63,7 @@ export default function ShoppingCart() {
                     <h1>Tu Carrito</h1>
                     <section className='container-productsCart-component'>
                         {cartItems.map(item => (
-                            <ProductCart key={item.idCarritoItems} item={item} />
+                            <ProductCart key={item.idCarritoItems} item={item} onRemove={handleRemoveItem} />
                         ))}
                     </section>
                 </article>
