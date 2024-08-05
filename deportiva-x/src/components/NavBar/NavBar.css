@@ -118,7 +118,6 @@ input[type="text"] {
 
 /* Estilos para los resultados de búsqueda */
 .search-results {
-    margin-top: 20px;
     padding: 10px;
     background: #f9f9f9;
     border-radius: 5px;

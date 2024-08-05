@@ -9,7 +9,7 @@ html{
 .title-slider{
     font-size: 2rem;
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 .main-all{
     width: 100%;
@@ -53,4 +53,40 @@ html{
         width: 20rem;
         height: 22rem;
     }
+}
+
+/* Estilos personalizados para las flechas del carrusel de slick */
+.slick-prev,
+.slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 2rem; /* Aumentar el tamaño para mayor visibilidad */
+    height: 2rem; /* Aumentar el tamaño para mayor visibilidad */
+    padding: 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro opaco */
+    border-radius: 50%;
+    z-index: 10;
+}
+
+/* Personalización de las flechas */
+.slick-prev::before,
+.slick-next::before {
+    font-size: 2rem; /* Tamaño del icono de la flecha */
+    color: white; /* Color de la flecha */
+}
+
+.slick-prev {
+    left: -3rem; /* Ajustar la posición según sea necesario */
+}
+
+.slick-next {
+    right: -3rem; /* Ajustar la posición según sea necesario */
 }

@@ -32,8 +32,8 @@
     grid-gap: 1rem;
 
     .square {
-        background-color: #eaeeef;
-        color: rgb(0, 0, 0);
+        background-color: #181818;
+        color: white;
         padding: 1rem;
         border-radius: 1rem;
         text-decoration: none;
@@ -133,6 +133,8 @@
     }
 }
 
+
+
 /* CSS para el indicador de carga */
 .loading-indicator {
     display: inline-block; /* Muestra el indicador en línea con otros elementos */
@@ -152,3 +154,4 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+

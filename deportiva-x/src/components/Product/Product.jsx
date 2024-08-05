@@ -196,10 +196,10 @@ export default function Product() {
                         <h1>Detalles</h1>
                         <p>{product.descripcion}</p>
                     </section>
-                    <section className='container-info'>
+                    {/* <section className='container-info'>
                         <h1>Confeccion</h1>
                         <p>{product.confeccion}</p>
-                    </section>
+                    </section> */}
                 </article>
                 {relatedProducts.length > 0 && (
                     <article className='carousel-products'>

@@ -8,7 +8,13 @@ export default function NavBar() {
     const [searchResults, setSearchResults] = useState([]);
 
     const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
+        const value = event.target.value;
+        setSearchTerm(value);
+
+        // Limpia los resultados si el campo de búsqueda está vacío
+        if (value === '') {
+            setSearchResults([]);
+        }
     };
 
     const handleSearch = async (event) => {
@@ -20,13 +26,22 @@ export default function NavBar() {
             const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/products/search?query=${searchTerm}`);
             if (response.ok) {
                 const data = await response.json();
-                setSearchResults(data);
+                if (data && data.$values) {
+                    setSearchResults(data.$values);
+                } else {
+                    setSearchResults([]);
+                }
             } else {
                 console.error('Failed to fetch search results:', response.statusText);
             }
         } catch (error) {
             console.error('Error fetching search results:', error);
         }
+    };
+
+    const handleReset = () => {
+        setSearchTerm('');
+        setSearchResults([]);
     };
 
     return (
@@ -46,10 +61,7 @@ export default function NavBar() {
                                 placeholder="Buscar productos..."
                             />
                             <section className='input-icon-container'>
-                                <button type='submit' className='button-search'>
-                                    <img src="../../../public/assets/MainPage/Search-icon.png" alt="search-icon" className='input-icon' />
-                                </button>
-                                <button type='reset' className='button-reset' onClick={() => setSearchTerm('')}>
+                                <button type='reset' className='button-reset' onClick={handleReset}>
                                     <img src="../../../public/assets/MainPage/Close-icon.png" alt="close-icon" className='input-icon' />
                                 </button>
                             </section>

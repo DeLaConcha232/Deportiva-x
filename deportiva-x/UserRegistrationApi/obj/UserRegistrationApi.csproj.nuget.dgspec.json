@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj": {}
+    "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj": {}
   },
   "projects": {
-    "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj": {
+    "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
+        "projectUniqueName": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
         "projectName": "UserRegistrationApi",
-        "projectPath": "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
-        "packagesPath": "/Users/diegodiaz/.nuget/packages/",
-        "outputPath": "/Users/diegodiaz/Desktop/carpetas/Deportiva-x/deportiva-x/UserRegistrationApi/obj/",
+        "projectPath": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/UserRegistrationApi.csproj",
+        "packagesPath": "/Users/rios/.nuget/packages/",
+        "outputPath": "/Users/rios/Desktop/Deportiva-x/deportiva-x/UserRegistrationApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/diegodiaz/.nuget/NuGet/NuGet.Config"
+          "/Users/rios/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -91,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

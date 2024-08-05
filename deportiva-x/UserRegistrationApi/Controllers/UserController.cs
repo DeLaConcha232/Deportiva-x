@@ -310,8 +310,11 @@ namespace UserRegistrationApi.Controllers
                 return BadRequest("Query parameter is required.");
             }
 
+            // Convertimos la consulta a minúsculas para una búsqueda insensible a mayúsculas/minúsculas
+            var lowercaseQuery = query.ToLower();
+
             var products = await _context.Products
-                .Where(p => p.Nombre.Contains(query) || p.Descripcion.Contains(query))
+                .Where(p => EF.Functions.Like(p.Nombre.ToLower(), $"%{lowercaseQuery}%") || EF.Functions.Like(p.Descripcion.ToLower(), $"%{lowercaseQuery}%"))
                 .ToListAsync();
 
             if (!products.Any())
@@ -321,6 +324,8 @@ namespace UserRegistrationApi.Controllers
 
             return Ok(products);
         }
+
+
 
 
 
