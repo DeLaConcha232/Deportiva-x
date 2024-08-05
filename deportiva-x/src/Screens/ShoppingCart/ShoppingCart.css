@@ -12,6 +12,7 @@
     flex-direction: column;
     gap: 3rem;
     font-weight:lighter;
+    position: absolute;
 }
 .container-productsCart{
     display: flex;

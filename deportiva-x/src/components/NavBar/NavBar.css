@@ -45,6 +45,8 @@
         cursor: pointer;
     }
     .input-icon-container {
+        display: flex;
+        gap: 1rem;
         padding: 0 0.5rem;
         margin: 0 1rem;
         .button-reset{
@@ -109,7 +111,7 @@
     cursor: pointer;
 }
 
-input[type="text"] {
+.input-search-navbar {
     border: none;
     outline: none;
     padding: 5px;

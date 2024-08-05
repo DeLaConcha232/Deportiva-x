@@ -44,6 +44,7 @@ export default function NavBar() {
                                 value={searchTerm}
                                 onChange={handleInputChange}
                                 placeholder="Buscar productos..."
+                                className="input-search-navbar"
                             />
                             <section className='input-icon-container'>
                                 <button type='submit' className='button-search'>

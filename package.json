@@ -18,9 +18,5 @@
   ],
   "author": "DiegoDiazDeLaConcha <diegodiazdelaconcha23@gmail.com>",
   "license": "MIT",
-  "description": "",
-  "devDependencies": {
-  },
-  "dependencies": {
-  }
+  "description": ""
 }
