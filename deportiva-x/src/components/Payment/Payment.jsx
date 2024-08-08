@@ -30,40 +30,9 @@ export default function Payment({ onClose }) {
         }
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        const data = {
-            cvv,
-            expiryDate,
-        };
-
-        try {
-            const response = await fetch('/api/payment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (response.ok) {
-                // Manejar la respuesta exitosa
-                console.log('Pago realizado con éxito');
-                Swal.fire({
-                    icon: "success",
-                    title: "Alright...",
-                    text: "Your order was Payed Succesfully!",
-                    footer: '<a href="#">Have a Good Day</a>'
-                });
-            } else {
-                // Manejar errores
-                console.error('Error en el pago');
-            }
-        } catch (error) {
-            console.error('Error en la solicitud:', error);
-        }
-    };
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevenir el comportamiento predeterminado de recargar la página
+      };
 
     const Swal1 = () => {
         Swal.fire({
@@ -76,7 +45,7 @@ export default function Payment({ onClose }) {
 
     return (
         <>
-            <body className='body-Payment'>
+            <body className='body-Payment' onSubmit={onClose}>
                 <main className='container-pay'>
                     <form className='container-infoPay' onSubmit={handleSubmit}>
                         <article className='container-closePay' onClick={onClose}>
@@ -122,7 +91,7 @@ export default function Payment({ onClose }) {
                             </div>
                         </section>
                         <section className='container-btnPay'>
-                            <button type='submit'>Realizar el pedido</button>
+                            <button type='submit' onClick={Swal1}>Realizar el pedido</button>
                         </section>
                         <section className='container-imgPay'>
                             <img src="../../../public/assets/Payment/VISA.jpg" alt="VISA" />

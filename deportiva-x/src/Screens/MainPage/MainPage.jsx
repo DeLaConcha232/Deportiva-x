@@ -4,13 +4,13 @@ import Discount from '../../components/Discount/Discount';
 import Cookies from '../../components/Cookies/Cookies';
 import Carousel from '../../components/carousel/carousel';
 import NavBar from '../../components/NavBar/NavBar';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Element } from 'react-scroll';
 import useTawkTo from '../../components/livechat/useTawkTo';
 import axios from 'axios';
 import Whatsapp from '../../components/whatsapp/Whatsapp';
 import Footer from '../../components/Footer/Footer';
-
+import CollageCatalog from '../../components/CollageCatalog/CollageCatalog';
 
 const API_URL = 'https://api-deportiva-x.ngrok.io';
 
@@ -98,17 +98,9 @@ export default function MainPage() {
             <Discount />
             <main id='mainContent'>
                 <Whatsapp />
-                <article className='collage-container'>
-                    <section className='collage'>
-                        <a href="" className='calzado square'><h1>Calzado</h1><img src="../../../public/assets/MainPage/tenis-main-collage.png" alt="Calzado" className='img-collage' /></a>
-                        <a href="" className='deportes square'><h1>Deportes</h1><img src="../../../public/assets/MainPage/balon-main-collage.png" alt="Deportes" className='img-collage' /></a>
-                        <a href="" className='jerseys square'><h1>Jerseys</h1> <img src="../../../public/assets/MainPage/jersey-main-collage.png" alt="Jerseys" className='img-collage' /></a>
-                        <a href="" className='accesorios square'><h1>Accesorios</h1><img src="../../../public/assets/MainPage/accesories-main-collage.png" alt="Accesorios" className='img-collage' /></a>
-                        <a href="" className='niños square'><img src="../../../public/assets/MainPage/childs-main-collage.png" alt="Niños" className='img-collage childs' /><h1>Niños</h1></a>
-                        <a href="" className='hombres square'><h1>Hombre</h1><img src="../../../public/assets/MainPage/man-main-collage.png" alt="Hombre" className='img-collage' /></a>
-                        <a href="" className='mujeres square'><h1>Mujer</h1><img src="../../../public/assets/MainPage/woman-main-collage.png" alt="Mujer" className='img-collage' /></a>
-                    </section>
-                </article>
+                <Link to='/collage'>
+                    <CollageCatalog />
+                </Link>
                 {userId && userId !== "undefined" && wishlistProducts.length > 0 && (
                     <Element className='carousel-products wishlist'>
                         <Carousel
