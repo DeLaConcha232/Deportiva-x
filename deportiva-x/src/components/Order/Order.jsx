@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Order.css';
 
 
@@ -19,7 +20,9 @@ export default function Order() {
                             <h3>N° Pedido:DX204853</h3>
                         </div>
                         <div className='container-btn-order'>
-                            <button className='btn-order'>Seguimiento</button>
+                            <Link to='/detailsOrder'>
+                                <button className='btn-order'>Seguimiento</button>
+                            </Link>
                             <button className='btn-order'>Cancelar Pedido</button>
                         </div>
                     </section>

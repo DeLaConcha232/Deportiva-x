@@ -8,7 +8,9 @@ import Orders from './Screens/Orders/Orders';
 import Products from './Screens/Products/Products';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import ShoppingCart from './Screens/ShoppingCart/ShoppingCart.jsx';
+import DetailsOrder from './Screens/DetailsOrders/DetailsOrder.jsx';
 import { useEffect } from 'react';
+
 
 function App() {
   useEffect(() => {
@@ -29,6 +31,7 @@ function App() {
         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path='/product/:idProductos' element={<Products />} /> {/* Asegúrate de que esta ruta coincide */}
         <Route path='/ShoppingCart' element={<ShoppingCart/>} />
+        <Route path='/detailsOrder' element={<DetailsOrder />} />
       </Routes>
     </BrowserRouter>
   );

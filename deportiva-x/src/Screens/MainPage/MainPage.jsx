@@ -9,6 +9,8 @@ import { Element } from 'react-scroll';
 import useTawkTo from '../../components/livechat/useTawkTo';
 import axios from 'axios';
 import Whatsapp from '../../components/whatsapp/Whatsapp';
+import Footer from '../../components/Footer/Footer';
+
 
 const API_URL = 'https://api-deportiva-x.ngrok.io';
 
@@ -154,6 +156,7 @@ export default function MainPage() {
                 </article>
             </main>
             <Cookies />
+            <Footer />
         </>
     );
 }
