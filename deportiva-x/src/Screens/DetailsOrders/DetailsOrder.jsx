@@ -32,7 +32,9 @@ export default function DetailsOrder() {
                             <section className='container-title-info'>
                                 <h1>Nombre Producto</h1>
                             </section>
-                            <Link to='/orders' className='btn-DetailsOrder' onClick={() => Swal1()}>Solicitar Devolucion</Link>
+                            <Link to='/orders'>
+                                <button className='btn-DetailsOrder' onClick={() => Swal1()}>Solicitar Devolucion</button>
+                            </Link>
                         </section>
                         <section className='contain-info1'>
                             <div>
@@ -62,7 +64,9 @@ export default function DetailsOrder() {
                                 <h1>Fecha ||  Precio</h1>
                                 <h2>Numero de Pedido: DX204853</h2>
                             </div>
-                            <button className='btn-DetailsOrder' onClick={() => Swal1()}>Solicitar Devolucion</button>
+                            <Link to='/orders'>
+                                <button className='btn-DetailsOrder' onClick={() => Swal1()}>Solicitar Devolucion</button>
+                            </Link>
                         </section>
                         <section className='container-entregaYtotales'>
                             <section className='container-entrega'>

@@ -1,0 +1,94 @@
+
+
+/* Galery College */
+.collage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    color: white;
+}
+
+.collage {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+        "calzado calzado deportes "
+        "mujer jerseys accesorios "
+        "niños niños hombre";
+    grid-gap: 1rem;
+
+    .square {
+        background-color: #eaeeef;
+        color: rgb(0, 0, 0);
+        padding: 1rem;
+        border-radius: 1rem;
+        text-decoration: none;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .img-collage {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .calzado {
+        grid-area: calzado;
+    }
+
+    .deportes {
+        grid-area: deportes;
+    }
+
+    .jerseys {
+        grid-area: jerseys;
+    }
+
+    .accesorios {
+        grid-area: accesorios;
+    }
+
+    .niños {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        grid-area: niños;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .childs {
+            width: 50%;
+            height: auto;
+            margin: 1rem;
+        }
+    }
+
+    .hombres {
+        grid-area: hombre;
+    }
+
+    .mujeres {
+        grid-area: mujer;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .collage-container {
+        padding: 2rem 10rem;
+    }
+}
+
+@media(min-width: 1024px) {
+    .collage-container {
+        width: 100%;
+        padding: 1rem 1rem;
+    }
+}
