@@ -34,7 +34,30 @@ export default function MainPage() {
         navigate(`/product/${id}`);
     };
 
+    const useLiveChat = () => {
+        useEffect(() => {
+            // Cargar el script de LiveChat
+            const s1 = document.createElement("script");
+            s1.async = true;
+            s1.src = 'https://cdn.livechatinc.com/tracking.js';
+            s1.type = 'text/javascript';
+            s1.onload = () => {
+                window.__lc = window.__lc || {};
+                window.__lc.license = 18359016;
+                window.__lc.integration_name = "manual_onboarding";
+                window.__lc.product_name = "livechat";
+                console.log("LiveChat script loaded");
+            };
+            document.body.appendChild(s1);
+
+            return () => {
+                document.body.removeChild(s1);
+            };
+        }, []);
+    };
+
     useTawkTo();
+
 
     const calzadoProductos = [
         { id: 1, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Gimnasio y Entrenamiento/Tenis Adidas Amplimove Trainer Red.png" },
@@ -152,6 +175,7 @@ export default function MainPage() {
                         products={ninosProductos.map(p => ({ idProductos: p.id, imagen: p.img }))}
                     />
                 </article>
+
             </main>
             <Cookies />
         </>

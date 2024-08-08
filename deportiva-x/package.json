@@ -19,7 +19,9 @@
     "react-scroll": "^1.9.0",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.12.4",
+    "sweetalert2-react-content": "^5.0.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

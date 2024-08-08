@@ -11,13 +11,7 @@ import ShoppingCart from './Screens/ShoppingCart/ShoppingCart.jsx';
 import { useEffect } from 'react';
 
 function App() {
-  useEffect(() => {
-    // Limpiar el localStorage al montar la aplicación si no hay token
-    const token = localStorage.getItem('token');
-    if (!token) {
-      localStorage.clear(); // Limpia todo el localStorage si no hay token
-    }
-  }, []);
+
 
   return (
     <BrowserRouter>
@@ -28,7 +22,7 @@ function App() {
         <Route path='/' element={<MainPage />} />
         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path='/product/:idProductos' element={<Products />} /> {/* Asegúrate de que esta ruta coincide */}
-        <Route path='/ShoppingCart' element={<ShoppingCart/>} />
+        <Route path='/ShoppingCart' element={<ShoppingCart />} />
       </Routes>
     </BrowserRouter>
   );
