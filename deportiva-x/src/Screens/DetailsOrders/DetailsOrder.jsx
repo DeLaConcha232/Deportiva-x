@@ -1,9 +1,19 @@
 import './DetailsOrder.css';
 import NavBar from '../../components/NavBar/NavBar';
 import Discount from '../../components/Discount/Discount';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 export default function DetailsOrder() {
+
+    const Swal1 = () => {
+        Swal.fire({
+            icon: "success",
+            title: "Alright...",
+            text: "Your order was canceled!",
+            footer: '<a href="#">Have a Good Day</a>'
+        });
+    }
     return (
         <>
             <NavBar />
@@ -13,7 +23,7 @@ export default function DetailsOrder() {
                     <h1>Detalles del Pedido</h1>
                 </article>
                 <Link className='container-closeIcon-Details' to='/orders' >
-                    <img src="../../../public/assets/detalles de pedido/flecha izquierda.png" alt="closeIcon" className='closeIcon-DetailsOrder'/>
+                    <img src="../../../public/assets/detalles de pedido/flecha izquierda.png" alt="closeIcon" className='closeIcon-DetailsOrder' />
                 </Link>
                 <article className='container-everything'>
                     <section id='container1'>
@@ -22,7 +32,7 @@ export default function DetailsOrder() {
                             <section className='container-title-info'>
                                 <h1>Nombre Producto</h1>
                             </section>
-                            <button className='btn-DetailsOrder'>Solicitar Devolucion</button>
+                            <Link to='/orders' className='btn-DetailsOrder' onClick={() => Swal1()}>Solicitar Devolucion</Link>
                         </section>
                         <section className='contain-info1'>
                             <div>
@@ -52,7 +62,7 @@ export default function DetailsOrder() {
                                 <h1>Fecha ||  Precio</h1>
                                 <h2>Numero de Pedido: DX204853</h2>
                             </div>
-                            <button className='btn-DetailsOrder'>Solicitar Devolucion</button>
+                            <button className='btn-DetailsOrder' onClick={() => Swal1()}>Solicitar Devolucion</button>
                         </section>
                         <section className='container-entregaYtotales'>
                             <section className='container-entrega'>
