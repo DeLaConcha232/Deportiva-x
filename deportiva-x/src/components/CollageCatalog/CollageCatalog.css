@@ -1,5 +1,3 @@
-
-
 /* Galery College */
 .collage-container {
     display: flex;
@@ -24,7 +22,7 @@
     .square {
         background-color: #eaeeef;
         color: rgb(0, 0, 0);
-        padding: 1rem;
+        /* padding: 1rem; */
         border-radius: 1rem;
         text-decoration: none;
 
@@ -82,13 +80,120 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .collage-container {
-        padding: 2rem 10rem;
+        padding: 2rem 0;
     }
+
+    .collage {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+            "calzado calzado calzado deportes "
+            "calzado calzado calzado deportes "
+            "mujer hombre accesorios jerseys "
+            "mujer hombre niños jerseys ";
+
+        .square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            h1 {
+                font-size: 2rem;
+            }
+
+            .img-collage {
+                width: 50%;
+                height: auto;
+            }
+
+            .grande {
+                width: 50%;
+                height: auto;
+            }
+
+            .mediano {
+                width: 100%;
+                height: auto;
+            }
+
+            .pequeño {
+                width: 50%;
+                height: auto;
+            }
+        }
+
+        .niños {
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            flex-direction: column;
+            grid-area: niños;
+            h1 {
+                font-size: 2rem;
+            }
+
+            .childs {
+                margin: 0;
+            }
+        }
+    }
+
 }
 
 @media(min-width: 1024px) {
     .collage-container {
         width: 100%;
         padding: 1rem 1rem;
+    }
+    .collage {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+            "calzado calzado calzado deportes "
+            "calzado calzado calzado deportes "
+            "mujer hombre accesorios jerseys "
+            "mujer hombre niños jerseys ";
+
+        .square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .img-collage {
+                width: 50%;
+                height: auto;
+            }
+
+            .grande {
+                width: 50%;
+                height: auto;
+            }
+
+            .mediano {
+                width: 100%;
+                height: auto;
+            }
+
+            .pequeño {
+                width: 50%;
+                height: auto;
+            }
+        }
+
+        .niños {
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            flex-direction: column;
+            grid-area: niños;
+
+            .childs {
+                margin: 0;
+            }
+        }
     }
 }
