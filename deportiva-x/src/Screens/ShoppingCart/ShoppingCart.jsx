@@ -5,7 +5,6 @@ import Discount from '../../components/Discount/Discount';
 import ProductCart from '../../components/ProductCart/ProductCart';
 import Payment from '../../components/Payment/Payment';
 import Whatsapp from '../../components/whatsapp/Whatsapp';
-import Footer from '../../components/Footer/Footer';
 
 
 export default function ShoppingCart() {
@@ -73,7 +72,6 @@ export default function ShoppingCart() {
             <NavBar />
             <Discount />
             <Whatsapp />
-            <Footer />
             <main className='ContainerCart'>
                 <article className='container-productsCart'>
                     <h1>Tu Carrito</h1>
