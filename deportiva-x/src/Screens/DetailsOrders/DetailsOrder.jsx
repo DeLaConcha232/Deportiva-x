@@ -4,7 +4,6 @@ import Discount from '../../components/Discount/Discount';
 import Swal from 'sweetalert2';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Footer from '../../components/Footer/Footer';
 
 export default function DetailsOrder() {
     const location = useLocation();
@@ -108,7 +107,8 @@ export default function DetailsOrder() {
         <>
             <NavBar />
             <Discount />
-            <div className='container-DetailsOrder-all'>
+            <Footer />
+            <body className='container-DetailsOrder-all'>
                 <article className='container-title-Details'>
                     <h1>Detalles del Pedido</h1>
                 </article>
