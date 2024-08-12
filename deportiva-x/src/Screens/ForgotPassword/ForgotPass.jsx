@@ -18,6 +18,9 @@ export default function ForgotPass() {
                 <article className='container'>
                     <article className='title'>
                         <h1 className="">Forgot Password</h1>
+                        <Link to='/Login'>
+                            <h3 >Back to top </h3>
+                        </Link>
                         <p className='signin'>New Password</p>
                     </article>
                     <form action="Login" className='formulario'>
