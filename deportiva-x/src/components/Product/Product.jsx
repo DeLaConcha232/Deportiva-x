@@ -2,6 +2,7 @@ import './Product.css';
 import Carousel from '../../components/carousel/carousel';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 export default function Product() {
     const [product, setProduct] = useState(null);
@@ -207,6 +208,7 @@ export default function Product() {
                     </article>
                 )}
             </main>
+            <Footer />
         </>
     );
 }

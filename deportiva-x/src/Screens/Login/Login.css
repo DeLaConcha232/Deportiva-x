@@ -37,6 +37,7 @@
 
 .container{
     width: 70%;
+    padding: 0 3rem;
 }
 .title{
     display: flex;
