@@ -23,11 +23,16 @@ export default function MainPage() {
         if (userId) {
             axios.get(`${API_URL}/api/user/wishlist/${userId}`)
                 .then(response => {
-                    const wishlistData = response.data.$values;
+                    const wishlistData = response.data.$values || []; // Maneja el caso en que la lista esté vacía
                     setWishlistProducts(wishlistData);
                 })
                 .catch(error => {
-                    console.error('Error fetching wishlist:', error);
+                    if (error.response && error.response.status === 404) {
+                        // Si el error es un 404, simplemente asigna un array vacío a los productos
+                        setWishlistProducts([]);
+                    } else {
+                        console.error('Error fetching wishlist:', error);
+                    }
                 });
         }
     }, [userId]);
@@ -39,26 +44,27 @@ export default function MainPage() {
     useTawkTo();
 
     const calzadoProductos = [
-        { id: 1, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Gimnasio y Entrenamiento/Tenis Adidas Amplimove Trainer Red.png" },
-        { id: 2, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Casual/Tenis Nike Air Max Excee.png" },
+        { id: "ADBB001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Gimnasio y Entrenamiento/Tenis Adidas Amplimove Trainer Red.png" },
+        { id: "ADBF001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Casual/Tenis Nike Air Max Excee.png" },
         { id: 15, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Running/Tenis Nike Journey Run.png" },
-        { id: 16, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Tacos De Futbol/Tenis De Fútbol Nike Vapor 15 Academy Mercurial Dream Speed Mg.png" },
+        { id: "ADTB001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Tacos De Futbol/Tenis De Fútbol Nike Vapor 15 Academy Mercurial Dream Speed Mg.png" },
         { id: 17, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Calzado/Tenis De Basquetbol/Tenis Adidas Bounce Legends.png" },
         { id: 18, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Calzado/Gimnasio Y Entrenamiento/Tenis Adidas Dropset 2 Green.png" },
     ];
 
     const accesoriosProductos = [
         { id: 19, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Gorras/Gorra New Era 9forty Haas F1 Team Miami Race Special.png" },
-        { id: 20, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Bolsas Y Mochilas/Maleta Under Armour Gametime.png" },
+        { id: "ADBM001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Bolsas Y Mochilas/Maleta Under Armour Gametime.png" },
         { id: 21, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Bolsas Y Mochilas/Mochila Under Armour Studio Campus.png" },
-        { id: 22, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Termos y Cilindros/Botella Puma Training.png" },
+        { id: "ADTE001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Termos y Cilindros/Botella Puma Training.png" },
         { id: 23, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Gorras/Gorra Under_Armour Launch.png" },
         { id: 24, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Gorras/Gorra Under Armour Blitzing.png" },
     ];
 
+
     const deportesProductos = [
-        { id: 25, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Balones De Basquetbol/Balon Wilson Drv Pro Streak.png" },
-        { id: 26, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Balones De Fútbol/Balón De Fútbol Adidas Ucl Club Orange.png" },
+        { id: "ADBB001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Balones De Basquetbol/Balon Wilson Drv Pro Streak.png" },
+        { id: "ADBF001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Balones De Fútbol/Balón De Fútbol Adidas Ucl Club Orange.png" },
         { id: 27, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Guantes De Portera/Guantes Nike Match 2.png" },
         { id: 28, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Tablas De Skate/MUSA.png" },
         { id: 29, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Muñequeras Y Bandas/Banda Nathan Hypernight Reflective.png" },
@@ -98,9 +104,7 @@ export default function MainPage() {
             <Discount />
             <main id='mainContent'>
                 <Whatsapp />
-                <Link to='/collage'>
-                    <CollageCatalog />
-                </Link>
+                <CollageCatalog />
                 {userId && userId !== "undefined" && wishlistProducts.length > 0 && (
                     <Element className='carousel-products wishlist'>
                         <Carousel

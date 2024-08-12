@@ -8,7 +8,7 @@ namespace UserRegistrationApi.Models
         [Key]
         public int Id { get; set; }
         public int idUsuario { get; set; }
-        public int idProducto { get; set; }
+        public string idProducto { get; set; }
 
         [ForeignKey("idUsuario")]
         public virtual User User { get; set; }

@@ -46,7 +46,7 @@ export default function Product() {
                 if (response.ok) {
                     const wishlist = await response.json();
                     if (Array.isArray(wishlist.$values)) {
-                        setIsWishlisted(wishlist.$values.some(product => product.idProductos === parseInt(idProductos)));
+                        setIsWishlisted(wishlist.$values.some(product => product.idProductos === idProductos));
                     } else {
                         console.error('Wishlist data is not an array:', wishlist);
                     }
@@ -63,13 +63,13 @@ export default function Product() {
     }, [idProductos, userId]);
 
     const toggleWishlist = async (event) => {
-        event.preventDefault();  // Prevent form from submitting and page reloading
+        event.preventDefault();
 
         const url = isWishlisted
             ? 'https://api-deportiva-x.ngrok.io/api/user/wishlist/remove'
             : 'https://api-deportiva-x.ngrok.io/api/user/wishlist/add';
 
-        const body = JSON.stringify({ UserId: userId, ProductId: parseInt(idProductos) });
+        const body = JSON.stringify({ UserId: userId, ProductId: idProductos }); // Mantén idProductos como string
 
         try {
             const response = await fetch(url, {
@@ -96,10 +96,16 @@ export default function Product() {
             return;
         }
 
+        if (!selectedTalla) {
+            alert('Por favor selecciona una talla antes de añadir al carrito.');
+            return;
+        }
+
         const body = JSON.stringify({
             UserId: userId,
-            ProductId: parseInt(idProductos),
-            Cantidad: selectedCantidad
+            ProductId: idProductos, // Mantén idProductos como string
+            Cantidad: selectedCantidad,
+            Talla: selectedTalla // Agrega la talla seleccionada al cuerpo de la solicitud
         });
 
         try {
@@ -121,10 +127,11 @@ export default function Product() {
         }
     };
 
+
     if (!product) {
         return (
             <div className="loading-message">
-                <div className="loading-indicator"></div> {/* Spinner is now above the text */}
+                <div className="loading-indicator"></div>
                 <span className="loading-text">Loading product details...</span>
             </div>
         );
@@ -196,10 +203,6 @@ export default function Product() {
                         <h1>Detalles</h1>
                         <p>{product.descripcion}</p>
                     </section>
-                    {/* <section className='container-info'>
-                        <h1>Confeccion</h1>
-                        <p>{product.confeccion}</p>
-                    </section> */}
                 </article>
                 {relatedProducts.length > 0 && (
                     <article className='carousel-products'>

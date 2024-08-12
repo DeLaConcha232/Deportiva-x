@@ -73,8 +73,8 @@ function App() {
         <Route path='/ShoppingCart' element={<ShoppingCart />} />
         <Route path='/detailsOrder' element={<DetailsOrder />} />
 
-        <Route path='/collage' element={<CollageCatalog/>} />
-        <Route path="/category/:categoryName" element={<CatalogComponent products={products}/>} />
+        <Route path='/collage' element={<CollageCatalog />} />
+        <Route path="/category/:categoryName" element={<CatalogComponent products={products} />} />
 
       </Routes>
     </BrowserRouter>

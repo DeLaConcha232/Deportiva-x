@@ -33,7 +33,7 @@ namespace UserRegistrationApi.Controllers
         }
 
         [HttpGet("products/{id}")]
-        public async Task<IActionResult> GetProduct(int id)
+        public async Task<IActionResult> GetProduct(string id)
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null)
@@ -43,16 +43,27 @@ namespace UserRegistrationApi.Controllers
             return Ok(product);
         }
 
+        [HttpGet("productscatalog")]
+        public async Task<IActionResult> GetProductsByCategory([FromQuery] string category)
+        {
+            IQueryable<Product> productsQuery = _context.Products;
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                productsQuery = productsQuery.Where(p => p.Categoria == category);
+            }
+
+            var products = await productsQuery.ToListAsync();
+
+            return Ok(products);
+        }
+
+
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] User userDto)
         {
             try
             {
-                // if (userDto.Imagen == null)
-                // {
-                //     return BadRequest("The Imagen field is required.");
-                // }
-
                 var existingUser = await _context.Users.FirstOrDefaultAsync(u =>
                     u.Email == userDto.Email
                 );
@@ -72,7 +83,8 @@ namespace UserRegistrationApi.Controllers
                     Telefono = userDto.Telefono,
                     FechaRegistro = DateTime.Now,
                     descuentoInicial = 1,
-                    // Imagen = userDto.Imagen
+                    Wishlists = new List<UserWishlist>(), // Inicializar como lista vacía
+                    CarritoItems = new List<CarritoItems>(), // Inicializar como lista vacía
                 };
 
                 await _context.Users.AddAsync(newUser);
@@ -98,6 +110,7 @@ namespace UserRegistrationApi.Controllers
                 return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
         }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginCredentials credentials)
@@ -153,32 +166,32 @@ namespace UserRegistrationApi.Controllers
                 return NotFound("Product not found.");
             }
 
-            // Verifica si existe un carrito para el usuario
             var cart = await _context.Carrito.FirstOrDefaultAsync(c => c.idUsuarios == user.idUsuarios);
             if (cart == null)
             {
-                // Si no existe, crea uno nuevo
                 cart = new Carrito { idUsuarios = user.idUsuarios };
                 _context.Carrito.Add(cart);
                 await _context.SaveChangesAsync();
             }
 
-            // Verifica si el producto ya está en el carrito
-            var cartItem = await _context.CarritoItems.FirstOrDefaultAsync(ci => ci.idCarrito == cart.idCarrito && ci.idProductos == product.idProductos);
+            var cartItem = await _context.CarritoItems.FirstOrDefaultAsync(ci =>
+                ci.idCarrito == cart.idCarrito &&
+                ci.idProductos == product.idProductos &&
+                ci.Talla == cartItemDto.Talla); // Verifica si el producto con la talla ya está en el carrito
+
             if (cartItem != null)
             {
-                // Si ya está, incrementa la cantidad
                 cartItem.Cantidad += cartItemDto.Cantidad;
             }
             else
             {
-                // Si no está, agrega el nuevo producto al carrito
                 cartItem = new CarritoItems
                 {
                     idCarrito = cart.idCarrito,
                     idProductos = product.idProductos,
                     Cantidad = cartItemDto.Cantidad,
-                    Precio = product.Precio
+                    Precio = product.Precio,
+                    Talla = cartItemDto.Talla // Guarda la talla seleccionada
                 };
                 _context.CarritoItems.Add(cartItem);
             }
@@ -188,12 +201,52 @@ namespace UserRegistrationApi.Controllers
             return Ok();
         }
 
+
+
+
+        [HttpDelete("cart/clear/{userId}")]
+        public async Task<IActionResult> ClearCart(int userId)
+        {
+            // Encuentra el carrito del usuario
+            var cart = await _context.Carrito.FirstOrDefaultAsync(c => c.idUsuarios == userId);
+
+            if (cart == null)
+            {
+                return NotFound("Carrito no encontrado para el usuario.");
+            }
+
+            // Obtiene todos los items del carrito de este usuario
+            var cartItems = _context.CarritoItems.Where(ci => ci.idCarrito == cart.idCarrito);
+
+            // Elimina todos los items del carrito
+            _context.CarritoItems.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
+
+            // Verifica si es la primera compra del usuario y actualiza el descuento
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null && user.descuentoInicial == 1)
+            {
+                user.descuentoInicial = 0;
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok();
+        }
+
+
+
+
+
+
         public class CartItemDto
         {
             public int UserId { get; set; }
-            public int ProductId { get; set; }
+            public string ProductId { get; set; }
             public int Cantidad { get; set; }
+            public decimal Price { get; set; }
+            public string Talla { get; set; } // Nueva propiedad para la talla
         }
+
 
         [HttpGet("cart/{userId}")]
         public async Task<IActionResult> GetCartItems(int userId)
@@ -208,8 +261,28 @@ namespace UserRegistrationApi.Controllers
                 return NotFound("Cart not found.");
             }
 
-            return Ok(cart.CarritoItems);
+            var cartItems = cart.CarritoItems.Select(ci => new
+            {
+                ci.idCarritoItems,
+                ci.idProductos,
+                Nombre = ci.Productos?.Nombre ?? "Producto no disponible",
+                Precio = ci.Productos?.Precio ?? 0,
+                Imagen = ci.Productos?.Imagen ?? "Imagen no disponible",
+                ci.Cantidad,
+                ci.Talla // Incluye la talla aquí
+            }).ToList();
+
+            // Aquí es donde se agrega el debug
+            foreach (var item in cartItems)
+            {
+                Console.WriteLine($"Producto ID: {item.idProductos}, Nombre: {item.Nombre}, Precio: {item.Precio}, Imagen: {item.Imagen}");
+            }
+
+            return Ok(cartItems);
         }
+
+
+
 
         [HttpDelete("cart/remove/{idCarritoItems}")]
         public async Task<IActionResult> RemoveFromCart(int idCarritoItems)
@@ -286,17 +359,19 @@ namespace UserRegistrationApi.Controllers
                 return NotFound("Wishlist not found.");
             }
 
+            // Aquí 'wishlist' es una lista de strings porque 'idProducto' es un string
             var products = await _context.Products
-                .Where(p => wishlist.Contains(p.idProductos))
+                .Where(p => wishlist.Contains(p.idProductos)) // idProductos ahora es string
                 .ToListAsync();
 
             return Ok(products);
         }
 
+
         public class WishlistDto
         {
             public int UserId { get; set; }
-            public int ProductId { get; set; }
+            public string ProductId { get; set; }
         }
 
 
@@ -323,6 +398,255 @@ namespace UserRegistrationApi.Controllers
             }
 
             return Ok(products);
+        }
+
+        [HttpGet("orders/{userId}")]
+        public async Task<IActionResult> GetOrders(int userId)
+        {
+            var orders = await _context.Orders
+                .Where(o => o.UserId == userId)
+                .Select(o => new
+                {
+                    o.Id,
+                    o.OrderDate,
+                    o.Estado,
+                    o.TotalAmount,
+                    OrderItems = o.OrderItems.Select(oi => new
+                    {
+                        oi.ProductId,
+                        oi.Quantity,
+                        oi.Price,
+                        ProductImage = oi.Product.Imagen // Aquí se obtiene la imagen del producto
+                    }).ToList()
+                })
+                .ToListAsync();
+
+            return Ok(orders);
+        }
+
+        [HttpDelete("orders/cancel/{orderId}")]
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+
+            Console.WriteLine($"CancelOrder called with orderId: {orderId}");
+
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+
+            if (order == null)
+            {
+                Console.WriteLine($"Order not found for orderId: {orderId}");
+                return NotFound("Order not found.");
+            }
+
+            // Devolver el stock a los productos asociados al pedido
+            foreach (var orderItem in order.OrderItems)
+            {
+                var product = await _context.Products.FindAsync(orderItem.ProductId);
+                if (product != null)
+                {
+                    product.Stock += orderItem.Quantity;  // Devolver la cantidad al stock
+                    _context.Products.Update(product);
+                    Console.WriteLine($"Updated stock for productId: {orderItem.ProductId}, new stock: {product.Stock}");
+                }
+                else
+                {
+                    Console.WriteLine($"Product not found for productId: {orderItem.ProductId}");
+                }
+            }
+
+            // Eliminar el pedido y sus items de la base de datos
+            _context.OrderItems.RemoveRange(order.OrderItems);
+            Console.WriteLine($"OrderItems removed for orderId: {orderId}");
+
+            _context.Orders.Remove(order);
+            Console.WriteLine($"Order removed for orderId: {orderId}");
+
+            await _context.SaveChangesAsync();
+            Console.WriteLine("Changes saved to the database");
+
+            return Ok(new { message = "Order canceled and removed successfully." });
+        }
+
+
+
+
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserDetails(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(new
+            {
+                user.Nombre,
+                user.Email,
+                user.Domicilio,
+                user.Postalcode,
+                user.Telefono,
+                user.descuentoInicial // Asegúrate de que el valor de descuentoInicial se incluya aquí
+            });
+        }
+
+
+
+
+        [HttpPost("orders")]
+        public async Task<IActionResult> CreateOrder([FromBody] OrderDto orderDto)
+        {
+            if (orderDto == null || orderDto.CartItems == null || !orderDto.CartItems.Any())
+            {
+                return BadRequest("Invalid order data.");
+            }
+
+            // Verificación de datos incompletos en los productos
+            foreach (var item in orderDto.CartItems)
+            {
+                if (string.IsNullOrEmpty(item.ProductId) || item.Cantidad <= 0 || item.Price <= 0)
+                {
+                    return BadRequest("Incomplete product data in the order.");
+                }
+            }
+
+            var user = await _context.Users.FindAsync(orderDto.UserId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Aplica el descuento del 25% si es la primera compra
+            var totalAmount = orderDto.Total;
+            bool discountApplied = false;
+            if (user.descuentoInicial == 1)
+            {
+                totalAmount *= 0.75m; // Aplica el 25% de descuento
+                discountApplied = true;
+            }
+
+            var order = new Order
+            {
+                UserId = orderDto.UserId,
+                TotalAmount = totalAmount,
+                OrderDate = DateTime.Now,
+                Estado = "Pendiente",  // Puedes ajustar el estado según sea necesario
+                OrderItems = new List<OrderItem>()
+            };
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            foreach (var item in orderDto.CartItems)
+            {
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.Id,
+                    ProductId = item.ProductId,
+                    Quantity = item.Cantidad,
+                    Price = item.Price
+                };
+
+                // Actualiza el stock del producto
+                var product = await _context.Products.FindAsync(item.ProductId);
+                if (product != null)
+                {
+                    if (product.Stock < item.Cantidad)
+                    {
+                        return BadRequest("No hay suficiente stock disponible.");
+                    }
+
+                    product.Stock -= item.Cantidad;  // Disminuye el stock según la cantidad ordenada
+                    _context.Products.Update(product);
+                }
+
+                order.OrderItems.Add(orderItem);
+                _context.OrderItems.Add(orderItem);
+            }
+
+            await _context.SaveChangesAsync();
+
+            // Limpia el carrito del usuario
+            await ClearCart(user.idUsuarios);
+
+            // Actualiza el campo descuentoInicial a 0 si se aplicó el descuento
+            if (discountApplied)
+            {
+                user.descuentoInicial = 0;
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(new { OrderId = order.Id });
+        }
+
+
+
+        [HttpPut("{userId}/updatediscount")]
+        public async Task<IActionResult> UpdateUserDiscount(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            user.descuentoInicial = 0;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "User discount updated successfully." });
+        }
+
+
+
+        public class OrderDto
+        {
+            public int UserId { get; set; }  // ID del usuario que realiza la orden
+            public decimal Total { get; set; }  // Total de la orden
+            public List<CartItemDto> CartItems { get; set; }  // Lista de items en la orden
+        }
+
+        public class OrderItemDto
+        {
+            public string ProductId { get; set; }  // ID del producto
+            public int Quantity { get; set; }  // Cantidad de productos
+            public decimal Price { get; set; }  // Precio unitario del producto
+        }
+
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email && u.Telefono == request.Phone);
+                if (user == null)
+                {
+                    return NotFound(new { message = "Invalid email or phone number." });
+                }
+
+                user.Contrasena = HashNewPassword(request.NewPassword);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Password has been reset successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        public class ResetPasswordRequest
+        {
+            public string Email { get; set; }
+            public string Phone { get; set; }
+            public string NewPassword { get; set; }
+        }
+
+        private string HashNewPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
 

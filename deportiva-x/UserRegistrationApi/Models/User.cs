@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,12 +20,12 @@ namespace UserRegistrationApi.Models
         public string Telefono { get; set; }
         public DateTime FechaRegistro { get; set; }
         public byte descuentoInicial { get; set; } // Cambiado a byte
-                                                   // public string Imagen { get; set; }
+
 
         // Navegación virtual
-        public virtual ICollection<UserWishlist> Wishlists { get; set; }
+        public virtual ICollection<UserWishlist> Wishlists { get; set; } = new List<UserWishlist>();
 
-        // Añadir esto para la relación con CarritoItems
-        public virtual ICollection<CarritoItems> CarritoItems { get; set; }
+        // Relación con CarritoItems
+        public virtual ICollection<CarritoItems> CarritoItems { get; set; } = new List<CarritoItems>();
     }
 }

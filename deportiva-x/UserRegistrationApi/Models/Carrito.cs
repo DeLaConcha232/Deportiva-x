@@ -18,11 +18,14 @@ namespace UserRegistrationApi.Models
         public int idCarritoItems { get; set; }
         public int idCarrito { get; set; }
         public Carrito Carrito { get; set; }
-        public int idProductos { get; set; }
-        public int UseridUsuarios { get; set; } // Nueva propiedad
+        public string idProductos { get; set; }
+        public int UseridUsuarios { get; set; }
+        public int UserId { get; set; }
         public Product Productos { get; set; }
         public int Cantidad { get; set; }
         public decimal Precio { get; set; }
+        public string Talla { get; set; } // Nueva propiedad para la talla seleccionada
     }
+
 
 }
