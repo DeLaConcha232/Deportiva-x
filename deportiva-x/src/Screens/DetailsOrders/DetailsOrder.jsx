@@ -2,8 +2,9 @@ import './DetailsOrder.css';
 import NavBar from '../../components/NavBar/NavBar';
 import Discount from '../../components/Discount/Discount';
 import Swal from 'sweetalert2';
-import { Link, useLocation, useNavigate } from 'react-router-dom'; // Importa ambos hooks desde react-router-dom
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Footer from '../../components/Footer/Footer';
 
 export default function DetailsOrder() {
     const location = useLocation();
@@ -15,7 +16,7 @@ export default function DetailsOrder() {
     const [originalTotal, setOriginalTotal] = useState(0);
     const [discountAmount, setDiscountAmount] = useState(0);
     const userId = localStorage.getItem('userId');
-    const selectedOrderId = localStorage.getItem('selectedOrderId');  // Recupera el ID de la orden desde localStorage
+    const selectedOrderId = localStorage.getItem('selectedOrderId');
 
     const cancelOrder = async () => {
         try {
@@ -23,9 +24,6 @@ export default function DetailsOrder() {
                 console.error("Order ID is not available.");
                 return;
             }
-
-            console.log(`Attempting to cancel order with ID: ${selectedOrderId}`);
-            console.log(`Using URL: https://api-deportiva-x.ngrok.io/api/user/orders/cancel/${selectedOrderId}`);
 
             const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/orders/cancel/${selectedOrderId}`, {
                 method: 'DELETE',
@@ -35,12 +33,9 @@ export default function DetailsOrder() {
                 }
             });
 
-            console.log("HTTP status:", response.status);
             const responseBody = await response.text();
-            console.log("Response body:", responseBody);
 
             if (response.ok) {
-                console.log("Order canceled successfully.");
                 Swal.fire({
                     icon: "success",
                     title: "Alright...",
@@ -48,7 +43,6 @@ export default function DetailsOrder() {
                     footer: '<a href="#">Have a Good Day</a>'
                 });
             } else {
-                console.error('Error text from server:', responseBody);
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -56,7 +50,6 @@ export default function DetailsOrder() {
                 });
             }
         } catch (error) {
-            console.error('Error caught in catch block:', error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -64,8 +57,6 @@ export default function DetailsOrder() {
             });
         }
     };
-
-
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -215,6 +206,7 @@ export default function DetailsOrder() {
                     <h1>Recuerda que cuentas con 30 dias a partir de la entrega de tu pedido para iniciar un proceso de devolucion</h1>
                 </article>
             </div>
+            <Footer />
         </>
     );
 }

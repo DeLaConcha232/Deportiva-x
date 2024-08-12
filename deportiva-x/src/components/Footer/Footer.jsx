@@ -63,9 +63,9 @@ export default function App() {
         </section>
 
         <section className='mb-4'>
-          <p>
+          {/* <p>
             Aviso de privacidad
-          </p>
+          </p> */}
         </section>
 {/* 
         <section className=''>

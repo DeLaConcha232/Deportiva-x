@@ -44,6 +44,9 @@ export default function ForgotPass() {
                 <article className='container'>
                     <article className='title'>
                         <h1>Forgot Password</h1>
+                        <Link to='/Login'>
+                            <h3 >Back to top </h3>
+                        </Link>
                         <p className='signin'>Enter your email, phone number, and new password</p>
                     </article>
                     <form onSubmit={handleResetPassword} className='formulario'>

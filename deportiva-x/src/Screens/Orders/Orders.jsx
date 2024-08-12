@@ -5,6 +5,8 @@ import Order from '../../components/Order/Order';
 import NavBar from '../../components/NavBar/NavBar';
 import Whatsapp from '../../components/whatsapp/Whatsapp';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../components/Footer/Footer';
+
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
@@ -51,6 +53,7 @@ export default function Orders() {
             <NavBar />
             <Discount />
             <Whatsapp />
+            <Footer />
             <main className='container-orders'>
                 <article className='container-title-orders'>
                     <h1 className='title-orders'>Pedidos</h1>
