@@ -2,34 +2,26 @@ import React from 'react';
 import './ProductCart.css';
 
 export default function ProductCart({ item, onRemove }) {
-    if (!item) {
-        return null; // O un mensaje de error adecuado
-    }
+    const handleQuantityChange = (event) => {
+        console.log(`Quantity for item ${item.idCarritoItems} changed to ${event.target.value}`);
+        // Implementa aquí la lógica para actualizar la cantidad, si es necesario
+    };
 
     return (
         <div className='Container-ProductCart'>
             <article className='container-ProductImg'>
-                <img src={item.imagen} alt={item.nombre} className='ProductImg' />
+                <img src={item.imagen || "default-image.png"} alt={item.nombre || "Producto"} className='ProductImg' />
             </article>
             <article className='container-ProductInfo'>
                 <section className='container-MainInfo'>
-                    <h1 className='title-mainInfo'>{item.nombre}</h1>
-                    <h1 className='title-mainInfo'>${item.precio.toFixed(2)}</h1>
+                    <h1 className='title-mainInfo'>{item.nombre || "Nombre no disponible"}</h1>
+                    <h1 className='title-mainInfo'>${item.precio ? item.precio.toFixed(2) : "Precio no disponible"}</h1>
                 </section>
                 <section className='container-MainSize'>
-                    <h2 className='subtitle-mainSize'>Talla: {item.productos.tallaDb}</h2>
+                    <h2 className='subtitle-mainSize'>Talla: {item.talla || "Talla no disponible"}</h2>
                 </section>
                 <section className='container-MainAmount'>
-                    <select
-                        name="cantidad"
-                        id={`cantidad-${item.idCarritoItems}`}
-                        value={item.cantidad}
-                        onChange={handleQuantityChange} // Add this line
-                    >
-                        {[...Array(10).keys()].map(n => (
-                            <option key={n + 1} value={n + 1}>{n + 1}</option>
-                        ))}
-                    </select>
+                    {/* Selección de cantidad comentada para simplificar */}
                 </section>
             </article>
             <article className='container-productClose'>
