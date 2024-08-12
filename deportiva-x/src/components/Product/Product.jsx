@@ -2,11 +2,8 @@ import './Product.css';
 import Carousel from '../../components/carousel/carousel';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-<<<<<<< HEAD
 import Swal from 'sweetalert2';
-=======
 import Footer from '../Footer/Footer';
->>>>>>> main
 
 export default function Product() {
     const [product, setProduct] = useState(null);
