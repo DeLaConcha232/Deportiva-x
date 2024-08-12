@@ -49,7 +49,7 @@ export default function SignUp() {
             </header>
             <main id='signup'>
                 <Link to='/'>
-                    <img src="../../../public/assets/Logo Final_2 PNG.png" alt="Brand-logo" className='logo' />
+                    <img src="../../../public/assets/Brand-logo.png" alt="Brand-logo" className='logo' />
                 </Link>
                 <article className='container cont'>
                     <article className='title titleSign'>

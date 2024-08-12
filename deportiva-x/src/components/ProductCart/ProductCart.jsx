@@ -17,7 +17,19 @@ export default function ProductCart({ item, onRemove }) {
                     <h1 className='title-mainInfo'>${item.precio.toFixed(2)}</h1>
                 </section>
                 <section className='container-MainSize'>
-                    <h2 className='subtitle-mainSize'>Talla: {item.talla}</h2>
+                    <h2 className='subtitle-mainSize'>Talla: {item.productos.tallaDb}</h2>
+                </section>
+                <section className='container-MainAmount'>
+                    <select
+                        name="cantidad"
+                        id={`cantidad-${item.idCarritoItems}`}
+                        value={item.cantidad}
+                        onChange={handleQuantityChange} // Add this line
+                    >
+                        {[...Array(10).keys()].map(n => (
+                            <option key={n + 1} value={n + 1}>{n + 1}</option>
+                        ))}
+                    </select>
                 </section>
             </article>
             <article className='container-productClose'>

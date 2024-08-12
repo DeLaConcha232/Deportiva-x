@@ -53,13 +53,7 @@ const products = [
 
 
 function App() {
-  useEffect(() => {
-    // Limpiar el localStorage al montar la aplicación si no hay token
-    const token = localStorage.getItem('token');
-    if (!token) {
-      localStorage.clear(); // Limpia todo el localStorage si no hay token
-    }
-  }, []);
+
 
   return (
     <BrowserRouter>

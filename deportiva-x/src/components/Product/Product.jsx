@@ -2,15 +2,18 @@ import './Product.css';
 import Carousel from '../../components/carousel/carousel';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function Product() {
     const [product, setProduct] = useState(null);
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [isWishlisted, setIsWishlisted] = useState(false);
+    const [cartItems, setCartItems] = useState([]);
     const { idProductos } = useParams();
     const userId = localStorage.getItem('userId');
     const [selectedTalla, setSelectedTalla] = useState('');
     const [selectedCantidad, setSelectedCantidad] = useState(1);
+    const [isAddingToCart, setIsAddingToCart] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -20,12 +23,11 @@ export default function Product() {
                     const data = await response.json();
                     setProduct(data);
 
-                    // Fetch related products by category
                     const relatedResponse = await fetch(`https://api-deportiva-x.ngrok.io/api/user/products?category=${data.categoria}`);
                     if (relatedResponse.ok) {
                         const relatedData = await relatedResponse.json();
                         if (Array.isArray(relatedData.$values)) {
-                            setRelatedProducts(relatedData.$values.filter(p => p.idProductos !== data.idProductos)); // Exclude the current product
+                            setRelatedProducts(relatedData.$values.filter(p => p.idProductos !== data.idProductos));
                         } else {
                             console.error('Related data is not an array:', relatedData);
                         }
@@ -37,6 +39,20 @@ export default function Product() {
                 }
             } catch (error) {
                 console.error('Error fetching product:', error);
+            }
+        };
+
+        const fetchCartItems = async () => {
+            try {
+                const response = await fetch(`https://api-deportiva-x.ngrok.io/api/user/cart/${userId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setCartItems(data.$values || data);
+                } else {
+                    console.error('Failed to fetch cart items:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching cart items:', error);
             }
         };
 
@@ -59,6 +75,7 @@ export default function Product() {
         };
 
         fetchProduct();
+        fetchCartItems();
         checkWishlist();
     }, [idProductos, userId]);
 
@@ -96,11 +113,6 @@ export default function Product() {
             return;
         }
 
-        if (!selectedTalla) {
-            alert('Por favor selecciona una talla antes de añadir al carrito.');
-            return;
-        }
-
         const body = JSON.stringify({
             UserId: userId,
             ProductId: idProductos, // Mantén idProductos como string
@@ -120,10 +132,20 @@ export default function Product() {
             if (!response.ok) {
                 console.error('Failed to add to cart:', response.statusText);
             } else {
-                alert('Producto añadido al carrito');
+                Swal.fire({
+                    title: 'Producto añadido al carrito',
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                setCartItems([...cartItems, { productos: product, cantidad: selectedCantidad }]);
             }
         } catch (error) {
             console.error('Error adding to cart:', error);
+        } finally {
+            setIsAddingToCart(false);
         }
     };
 
@@ -161,7 +183,7 @@ export default function Product() {
                                         value={selectedTalla}
                                         onChange={(e) => setSelectedTalla(e.target.value)}
                                     >
-                                        <option value="0">Elige</option>
+                                        <option value="">Elige</option>
                                         {product.tallaDb && product.tallaDb.length > 0 ? (
                                             product.tallaDb.split(',').map((talla, index) => (
                                                 <option key={index} value={talla.trim()}>{talla.trim()}</option>
@@ -187,7 +209,14 @@ export default function Product() {
                             </section>
 
                             <section className='container-btn-product'>
-                                <button type='button' className='btn-carrito' onClick={addToCart}>Añadir al Carrito</button>
+                                <button
+                                    type='button'
+                                    className='btn-carrito'
+                                    onClick={addToCart}
+                                    disabled={isAddingToCart}
+                                >
+                                    {isAddingToCart ? 'Añadiendo...' : 'Añadir al Carrito'}
+                                </button>
                                 <img
                                     src={isWishlisted ? '../../../public/assets/Product/me-gusta-color.png' : '../../../public/assets/Product/me-gusta.png'}
                                     alt="Wishlist Button"

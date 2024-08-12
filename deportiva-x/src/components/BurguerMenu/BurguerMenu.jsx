@@ -15,6 +15,7 @@ export default function BurguerMenu() {
 
     const handleLogout = () => {
         localStorage.removeItem('token'); // Elimina el token del localStorage
+        localStorage.removeItem('userId'); // Elimina el userId del localStorage
         setIsLoggedIn(false);
         setOpen(false);
         navigate('/login'); // Redirige al usuario a la página de inicio de sesión
