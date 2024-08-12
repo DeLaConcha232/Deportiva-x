@@ -3,7 +3,6 @@ import NavBar from '../../components/NavBar/NavBar';
 import Discount from '../../components/Discount/Discount';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import Footer from '../../components/Footer/Footer';
 
 export default function DetailsOrder() {
 
@@ -19,7 +18,6 @@ export default function DetailsOrder() {
         <>
             <NavBar />
             <Discount />
-            <Footer />
             <body className='container-DetailsOrder-all'>
                 <article className='container-title-Details'>
                     <h1>Detalles del Pedido</h1>
