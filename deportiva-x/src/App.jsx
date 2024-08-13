@@ -16,8 +16,6 @@ import { useEffect } from 'react';
 import CatalogComponent from './components/CatalogComponent/CatalogComponent';
 import CollageCatalog from './components/CollageCatalog/CollageCatalog';
 
-import product from './components/Product/Product';
-
 // productos para el catálogo
 const products = [
   {

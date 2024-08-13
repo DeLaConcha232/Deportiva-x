@@ -35,10 +35,19 @@ export default function BurguerMenu() {
                             {/* {isLoggedIn && (
                                 <img src="../../../public/assets/Carrito de compras/IMG_7410.WEBP" alt="" className='brandLogo-burguer' />
                             )} */}
+
                             <Link to='/' className='btn-burguer' onClick={() => setOpen(false)}>Inicio</Link>
                             <Link to='/orders' className='btn-burguer' onClick={() => setOpen(false)}>Pedidos</Link>
-                            <ScrollLink to="wishlist" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</ScrollLink>
+                            {isLoggedIn ? (
+                                <ScrollLink to="wishlist" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</ScrollLink>
+                            ) : (
+                                <Link to='/orders' className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</Link>
+                            )}
+                            {/* <ScrollLink to="wishlist" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</ScrollLink> */}
                             {/* <ScrollLink to="View" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Vistos</ScrollLink> */}
+                            {!isLoggedIn && (
+                                <Link to='/Login' className='btn-burguer'>Log In</Link>
+                            )}
                             {isLoggedIn && (
                                 <button className='btn-burguer log-out' onClick={handleLogout}>Log Out</button>
                             )}
