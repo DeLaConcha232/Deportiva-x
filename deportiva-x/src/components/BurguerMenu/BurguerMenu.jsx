@@ -21,6 +21,16 @@ export default function BurguerMenu() {
         navigate('/login'); // Redirige al usuario a la página de inicio de sesión
     };
 
+    const handleScrollAndNavigate = (target) => {
+        return () => {
+            setOpen(false);
+            navigate('/');
+            setTimeout(() => {
+                document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+            }, 100); // Ajusta el tiempo si es necesario
+        };
+    };
+
     return (
         <>
             <div className='Containers'>
@@ -35,11 +45,12 @@ export default function BurguerMenu() {
                             {/* {isLoggedIn && (
                                 <img src="../../../public/assets/Carrito de compras/IMG_7410.WEBP" alt="" className='brandLogo-burguer' />
                             )} */}
+                            {/* onClick={() => setOpen(false)} */}
 
                             <Link to='/' className='btn-burguer' onClick={() => setOpen(false)}>Inicio</Link>
                             <Link to='/orders' className='btn-burguer' onClick={() => setOpen(false)}>Pedidos</Link>
                             {isLoggedIn ? (
-                                <ScrollLink to="wishlist" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</ScrollLink>
+                                <ScrollLink to="wishlist" smooth={true} duration={500} className='btn-burguer' onClick={handleScrollAndNavigate('wishlist')}>Favoritos</ScrollLink>
                             ) : (
                                 <Link to='/orders' className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</Link>
                             )}
