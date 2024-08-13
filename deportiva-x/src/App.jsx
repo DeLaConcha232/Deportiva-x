@@ -9,6 +9,8 @@ import Products from './Screens/Products/Products';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import ShoppingCart from './Screens/ShoppingCart/ShoppingCart.jsx';
 import DetailsOrder from './Screens/DetailsOrders/DetailsOrder.jsx';
+import ResetPassword from './Screens/ResetPassword/ResetPassword'; // Asegúrate de que la ruta es correcta
+
 
 import { useEffect } from 'react';
 import CatalogComponent from './components/CatalogComponent/CatalogComponent';
@@ -71,6 +73,7 @@ function App() {
 
         <Route path='/collage' element={<CollageCatalog />} />
         <Route path="/category/:categoryName" element={<CatalogComponent products={products} />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
 
       </Routes>
     </BrowserRouter>

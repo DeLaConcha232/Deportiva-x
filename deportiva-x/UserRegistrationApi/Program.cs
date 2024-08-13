@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using UserRegistrationApi.Models;
+using UserRegistrationApi.Services;  // Agregar esto
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,6 +61,10 @@ builder
             ClockSkew = TimeSpan.Zero
         };
     });
+
+// Agregar los servicios de correo y forgot password
+builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<ForgotPasswordService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

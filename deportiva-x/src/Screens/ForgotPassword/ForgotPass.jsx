@@ -4,23 +4,22 @@ import './Forgot.css';
 
 export default function ForgotPass() {
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [newPassword, setNewPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
-    const handleResetPassword = async (e) => {
+    const handleForgotPassword = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://api-deportiva-x.ngrok.io/api/user/resetpassword', {
+            const response = await fetch('https://api-deportiva-x.ngrok.io/api/account/forgot-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, phone, newPassword })
+                body: JSON.stringify({ email })
             });
 
             if (response.ok) {
-                setMessage('Password reset successful!');
-                navigate('/login'); // Redirigir al login después de restablecer la contraseña
+                setMessage('An email has been sent to reset your password.');
+                // Opcional: podrías redirigir al usuario después de mostrar el mensaje
+                // navigate('/login');
             } else {
                 const errorData = await response.json();
                 setMessage(`Error: ${errorData.message}`);
@@ -45,11 +44,11 @@ export default function ForgotPass() {
                     <article className='title'>
                         <h1>Forgot Password</h1>
                         <Link to='/Login'>
-                            <h3 >Back to top </h3>
+                            <h3>Back to top</h3>
                         </Link>
-                        <p className='signin'>Enter your email, phone number, and new password</p>
+                        <p className='signin'>Enter your email to receive a password reset link</p>
                     </article>
-                    <form onSubmit={handleResetPassword} className='formulario'>
+                    <form onSubmit={handleForgotPassword} className='formulario'>
                         <span>EMAIL</span>
                         <input
                             type='email'
@@ -57,22 +56,8 @@ export default function ForgotPass() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        <span>PHONE</span>
-                        <input
-                            type='text'
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            required
-                        />
-                        <span>NEW PASSWORD</span>
-                        <input
-                            type='password'
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            required
-                        />
                         <div className='formulario' id='buttons'>
-                            <button type="submit" className='btn'>Reset Password</button>
+                            <button type="submit" className='btn'>Send Reset Link</button>
                         </div>
                     </form>
                     {message && <p>{message}</p>}

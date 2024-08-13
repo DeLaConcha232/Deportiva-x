@@ -636,10 +636,16 @@ namespace UserRegistrationApi.Controllers
         {
             try
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email && u.Telefono == request.Phone);
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
                 if (user == null)
                 {
-                    return NotFound(new { message = "Invalid email or phone number." });
+                    return NotFound(new { message = "Invalid email." });
+                }
+
+                // Verifica el token si es necesario
+                if (!IsValidToken(request.Token))
+                {
+                    return BadRequest(new { message = "Invalid or expired token." });
                 }
 
                 user.Contrasena = HashNewPassword(request.NewPassword);
@@ -656,9 +662,16 @@ namespace UserRegistrationApi.Controllers
         public class ResetPasswordRequest
         {
             public string Email { get; set; }
-            public string Phone { get; set; }
             public string NewPassword { get; set; }
+            public string Token { get; set; } // Incluye el token si es necesario
         }
+
+        private bool IsValidToken(string token)
+        {
+            // Aquí puedes añadir lógica para validar el token si es necesario
+            return true;
+        }
+
 
         private string HashNewPassword(string password)
         {
