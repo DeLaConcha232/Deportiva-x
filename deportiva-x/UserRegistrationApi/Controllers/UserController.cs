@@ -43,6 +43,21 @@ namespace UserRegistrationApi.Controllers
             return Ok(product);
         }
 
+        // [HttpGet("productscatalog")]
+        // public async Task<IActionResult> GetProductsByCategory([FromQuery] string category)
+        // {
+        //     IQueryable<Product> productsQuery = _context.Products;
+
+        //     if (!string.IsNullOrEmpty(category))
+        //     {
+        //         productsQuery = productsQuery.Where(p => p.Categoria == category);
+        //     }
+
+        //     var products = await productsQuery.ToListAsync();
+
+        //     return Ok(products);
+        // }
+
         [HttpGet("productscatalog")]
         public async Task<IActionResult> GetProductsByCategory([FromQuery] string category)
         {
@@ -50,13 +65,14 @@ namespace UserRegistrationApi.Controllers
 
             if (!string.IsNullOrEmpty(category))
             {
-                productsQuery = productsQuery.Where(p => p.Categoria == category);
+                // Filtra productos que contengan la categoría especificada
+                productsQuery = productsQuery.Where(p => p.Categoria.Contains(category));
             }
 
             var products = await productsQuery.ToListAsync();
-
             return Ok(products);
         }
+
 
 
         [HttpPost("register")]

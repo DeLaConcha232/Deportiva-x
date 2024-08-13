@@ -15,6 +15,7 @@ export default function DetailsOrder() {
     const [appliedDiscount, setAppliedDiscount] = useState(false);
     const [originalTotal, setOriginalTotal] = useState(0);
     const [discountAmount, setDiscountAmount] = useState(0);
+    const [finalTotal, setFinalTotal] = useState(0);  // Agregar esta línea para manejar el total final
     const userId = localStorage.getItem('userId');
     const selectedOrderId = localStorage.getItem('selectedOrderId');
 
@@ -89,16 +90,24 @@ export default function DetailsOrder() {
             const isDiscountApplied = order.totalAmount < originalTotal;
             setAppliedDiscount(isDiscountApplied);
 
+            let finalTotal = originalTotal; // Inicialmente, el total es el original
+
             if (isDiscountApplied) {
                 const discountAmount = originalTotal * 0.25;
                 setDiscountAmount(discountAmount);
+                finalTotal = originalTotal - discountAmount; // Se resta el descuento del total
             }
+
+            setFinalTotal(finalTotal); // Aquí se guarda el total final
 
             if (order.orderItems.$values.length > 0) {
                 setMainProductImage(order.orderItems.$values[0].productImage);
             }
         }
     }, [order]);
+
+    // Asegúrate de usar 'finalTotal' en lugar de 'order.totalAmount' en el renderizado
+
 
     if (!order || !userDetails) {
         return <p>Loading...</p>;
@@ -142,7 +151,7 @@ export default function DetailsOrder() {
                                 </div>
                                 <div>
                                     <h1>Total</h1>
-                                    <h2>${order.totalAmount.toFixed(2)}</h2>
+                                    <h2>${finalTotal.toFixed(2)}</h2>  {/* Actualiza para mostrar el total final */}
                                 </div>
                             </section>
                         </section>
@@ -152,7 +161,7 @@ export default function DetailsOrder() {
                         <section className='container-info2'>
                             <img src={mainProductImage || 'default-image.png'} alt="img producto" />
                             <div className='container-underground'>
-                                <h1>{new Date(order.orderDate).toLocaleDateString()} || ${order.totalAmount.toFixed(2)}</h1>
+                                <h1>{new Date(order.orderDate).toLocaleDateString()} || ${finalTotal.toFixed(2)}</h1>  {/* Aquí también */}
                                 <h2>Numero de Pedido: DX{order.id.toString().padStart(6, '0')}</h2>
                             </div>
                             {appliedDiscount && (
@@ -189,7 +198,7 @@ export default function DetailsOrder() {
                                     )}
                                     <div>
                                         <h2>Total:</h2>
-                                        <h2>${order.totalAmount.toFixed(2)}</h2>
+                                        <h2>${finalTotal.toFixed(2)}</h2>  {/* Aquí también */}
                                     </div>
                                 </div>
                             </section>

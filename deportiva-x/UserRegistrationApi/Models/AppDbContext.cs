@@ -17,6 +17,11 @@ namespace UserRegistrationApi.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
+
+
             modelBuilder.Entity<User>().HasKey(u => u.idUsuarios);
             modelBuilder.Entity<User>().Property(u => u.idUsuarios).ValueGeneratedOnAdd();
 
@@ -72,10 +77,6 @@ namespace UserRegistrationApi.Models
                 .WithOne(oi => oi.Order)
                 .HasForeignKey(oi => oi.OrderId);
 
-            modelBuilder.Entity<Order>()
-                .HasMany(o => o.OrderItems)
-                .WithOne(oi => oi.Order)
-                .HasForeignKey(oi => oi.OrderId);
         }
 
 
