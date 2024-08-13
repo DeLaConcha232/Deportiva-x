@@ -66,11 +66,15 @@
             background-color: #000000;
 
             select {
-                background: transparent;
+                background-color: #000000;
                 color: #ffffff;
                 border: none;
                 font-size: 1rem;
                 width: 100%;
+                option{
+                    background-color: #000000;
+                    color: #ffffff;
+                }
             }
         }
     }

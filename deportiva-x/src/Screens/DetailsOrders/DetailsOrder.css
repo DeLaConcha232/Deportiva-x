@@ -335,6 +335,8 @@
     }
 
     .container-closeIcon-Details {
+        width: auto;
+        height: auto;
         .closeIcon-DetailsOrder {
             width: 4rem;
             height: auto;
