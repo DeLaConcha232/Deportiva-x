@@ -56,9 +56,9 @@ export default function ForgotPass() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        <div className='formulario' id='buttons'>
+                        <Link to='/reset-password' className='formulario' id='buttons'>
                             <button type="submit" className='btn'>Send Reset Link</button>
-                        </div>
+                        </Link>
                     </form>
                     {message && <p>{message}</p>}
                 </article>
