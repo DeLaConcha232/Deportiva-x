@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Asegúrate de importar Link y useNavigate
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 import './Forgot.css';
 
 export default function ForgotPass() {
@@ -17,9 +18,17 @@ export default function ForgotPass() {
             });
 
             if (response.ok) {
-                setMessage('An email has been sent to reset your password.');
-                // Opcional: podrías redirigir al usuario después de mostrar el mensaje
-                // navigate('/login');
+                // setMessage('An email has been sent to reset your password.');
+                Swal.fire({
+                    title: 'Correo enviado',
+                    text: 'Se ha enviado un correo con las instrucciones para cambiar tu contraseña.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/login'); // Redirige al usuario al login después de confirmar
+                    }
+                });
             } else {
                 const errorData = await response.json();
                 setMessage(`Error: ${errorData.message}`);
@@ -56,9 +65,9 @@ export default function ForgotPass() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        <Link to='/reset-password' className='formulario' id='buttons'>
+                        <div className='formulario' id='buttons'>
                             <button type="submit" className='btn'>Send Reset Link</button>
-                        </Link>
+                        </div>
                     </form>
                     {message && <p>{message}</p>}
                 </article>

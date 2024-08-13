@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 import './Order.css';
 
 export default function Order({ order }) {
+    // Verificar si order y orderItems existen y contienen datos válidos
+    if (!order || !order.orderItems || !order.orderItems.$values || order.orderItems.$values.length === 0) {
+        return <p>Información de la orden no disponible.</p>;
+    }
+
     // Calcular el total de la orden sumando los precios de todos los productos
     const totalAmount = order.orderItems.$values.reduce((acc, item) => acc + item.price, 0);
 
@@ -14,8 +19,8 @@ export default function Order({ order }) {
                 <div className='order-details'>
                     <section className='container-img-order'>
                         <img
-                            src={firstProduct.productImage}
-                            alt={firstProduct.productName}
+                            src={firstProduct.productImage || 'default-image.png'} // Usa una imagen por defecto si no está disponible
+                            alt={firstProduct.productName || 'Producto sin nombre'}
                             className='small-img'
                         />
                     </section>

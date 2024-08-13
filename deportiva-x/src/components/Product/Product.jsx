@@ -111,6 +111,16 @@ export default function Product() {
     };
 
     const addToCart = async () => {
+        if (!selectedTalla) {
+            Swal.fire({
+                title: 'Por favor selecciona una talla',
+                icon: 'warning',
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            return; // Salir de la función si no se ha seleccionado una talla
+        }
+
         if (!userId || !product) {
             console.error('User ID or Product is not defined');
             return;
@@ -249,4 +259,3 @@ export default function Product() {
         </>
     );
 }
-
