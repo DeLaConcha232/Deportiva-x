@@ -5,7 +5,7 @@ export default function Whatsapp() {
 
     
     const handleClickWhatsapp = () => {
-        const phoneNumber = '4495654099'; // Reemplaza con el número de teléfono al que deseas redirigir
+        const phoneNumber = '4494537534'; // Reemplaza con el número de teléfono al que deseas redirigir
         const message = 'Hola, me gustaría obtener más información'; // Mensaje opcional prellenado
         const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
