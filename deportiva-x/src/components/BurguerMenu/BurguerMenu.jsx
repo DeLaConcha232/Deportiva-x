@@ -30,7 +30,10 @@ export default function BurguerMenu() {
                             <img src="../../../public/assets/MainPage/Close-icon.png" alt="" className='btn-close-burguer' onClick={() => setOpen(false)} />
                         </div>
                         <section className='container-menu2'>
-                            <img src="../../../public/assets/Brand-logo.png" alt="" className='brandLogo-burguer' />
+                            <img src={isLoggedIn ? "../../../public/assets/Carrito de compras/IMG_7410.WEBP" : "../../../public/assets/Brand-logo.png"} alt="" className='brandLogo-burguer' />
+                            {/* {isLoggedIn && (
+                                <img src="../../../public/assets/Carrito de compras/IMG_7410.WEBP" alt="" className='brandLogo-burguer' />
+                            )} */}
                             <Link to='/' className='btn-burguer' onClick={() => setOpen(false)}>Inicio</Link>
                             <Link to='/orders' className='btn-burguer' onClick={() => setOpen(false)}>Pedidos</Link>
                             <ScrollLink to="wishlist" smooth={true} duration={500} className='btn-burguer' onClick={() => setOpen(false)}>Favoritos</ScrollLink>
