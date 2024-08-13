@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+
 
 export default function ResetPassword() {
     const [newPassword, setNewPassword] = useState('');
@@ -30,7 +33,8 @@ export default function ResetPassword() {
 
             if (response.ok) {
                 setMessage('Password reset successfully!');
-                navigate('/login'); // Redirige al login después de restablecer la contraseña
+                Swal3();
+                // navigate('/login'); // Redirige al login después de restablecer la contraseña
             } else {
                 const errorData = await response.json();
                 setMessage(`Error: ${errorData.message}`);
@@ -40,32 +44,63 @@ export default function ResetPassword() {
         }
     };
 
+    const Swal3 = () => {
+        Swal.fire({
+            title: "Password reset successfully!",
+            text: "You will be redirected to the login page",
+            icon: "success",
+            confirmButtonText: "si",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate('/login'); // Redirige al login después de confirmar
+            }
+        });
+    };
+
+
 
     return (
-        <div>
-            <h1>Reset Password</h1>
-            <form onSubmit={handleResetPassword}>
-                <div>
-                    <label>New Password:</label>
-                    <input
-                        type="password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Confirm Password:</label>
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Reset Password</button>
-            </form>
-            {message && <p>{message}</p>}
-        </div>
+        <>
+            <header id='headerLogin'>
+                <nav>
+                    <img src="../../../public/assets/Login/burguer-menu.png" alt="burguerMenu" className='burguer-Menu' />
+                </nav>
+            </header>
+            <main id='mainLogin'>
+                <Link to='/'>
+                    <img src="../../../public/assets/Logo Final_2 PNG.png" alt="Brand-logo" className='logo' />
+                </Link>
+                <article className='container'>
+                    <article className='title'>
+                        <h1>Reset Password</h1>
+                        <Link to='/Login'>
+                            <h3>Back to top</h3>
+                        </Link>
+                        <p className='signin'>Enter your email to receive a password reset link</p>
+                    </article>
+                    <form onSubmit={handleResetPassword} className='formulario'>
+                        <span>New Password:</span>
+                        <input
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            required
+                        />
+                        <span>Confirm Password:</span>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                        <section className='formulario' id='buttons'>
+                            <button type="submit" className='btn' onSubmit={() => Swal3()}>Reset Password</button>
+                        </section>
+                    </form>
+                    {message && <p>{message}</p>}
+                </article>
+            </main>
+
+        </>
     );
 }

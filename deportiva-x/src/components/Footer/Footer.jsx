@@ -60,8 +60,8 @@ export default function App() {
           </MDBBtn>
         </section>
 
-        <section className='mb-4' onClick={() => Swal2()}>
-          <button className='avisoPrivacidad'>Aviso de privacidad</button>
+        <section className='mb-4'>
+          <button className='avisoPrivacidad' onClick={() => Swal2()}>Aviso de privacidad</button>
         </section>
 
         <section className=''>
@@ -71,28 +71,6 @@ export default function App() {
 
               <p>Inspirar a cada persona a alcanzar su máximo potencial físico y mental a través del deporte, ofreciendo productos de alta calidad, accesibles y con un servicio al cliente excepcional. Nos comprometemos a promover un estilo de vida saludable y activo, apoyando a nuestros clientes en su camino hacia la excelencia deportiva.</p>
 
-              {/* <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul> */}
             </MDBCol>
 
             <MDBCol lg='4' md='6' className='mb-4 mb-md-0'>
@@ -100,39 +78,13 @@ export default function App() {
               <p>Ser la tienda deportiva líder en México, reconocida por nuestra amplia gama de productos, innovación en el servicio al cliente, y nuestra dedicación para fomentar una comunidad deportiva unida y saludable. Aspiramos a ser la primera opción para deportistas y aficionados al deporte, brindando no solo productos, sino también inspiración y motivación para un futuro más activo y saludable.</p>
             </MDBCol>
 
-            {/* <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol> */}
           </MDBRow>
         </section>
       </MDBContainer>
 
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
         © 2024 Copyright: __ 
-        <a className='text-white' href='https://mdbootstrap.com/'>
+        <a className='text-white' href='#'>
           Deportiva - X
         </a>
       </div>
