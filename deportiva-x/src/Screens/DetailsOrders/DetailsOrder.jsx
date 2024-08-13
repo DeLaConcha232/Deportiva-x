@@ -15,7 +15,7 @@ export default function DetailsOrder() {
     const [appliedDiscount, setAppliedDiscount] = useState(false);
     const [originalTotal, setOriginalTotal] = useState(0);
     const [discountAmount, setDiscountAmount] = useState(0);
-    const [finalTotal, setFinalTotal] = useState(0);  // Agregar esta línea para manejar el total final
+    const [finalTotal, setFinalTotal] = useState(0);
     const userId = localStorage.getItem('userId');
     const selectedOrderId = localStorage.getItem('selectedOrderId');
 
@@ -108,7 +108,6 @@ export default function DetailsOrder() {
 
     // Asegúrate de usar 'finalTotal' en lugar de 'order.totalAmount' en el renderizado
 
-
     if (!order || !userDetails) {
         return <p>Loading...</p>;
     }
@@ -151,7 +150,7 @@ export default function DetailsOrder() {
                                 </div>
                                 <div>
                                     <h1>Total</h1>
-                                    <h2>${finalTotal.toFixed(2)}</h2>  {/* Actualiza para mostrar el total final */}
+                                    <h2>${finalTotal.toFixed(2)}</h2>
                                 </div>
                             </section>
                         </section>
@@ -161,7 +160,7 @@ export default function DetailsOrder() {
                         <section className='container-info2'>
                             <img src={mainProductImage || 'default-image.png'} alt="img producto" />
                             <div className='container-underground'>
-                                <h1>{new Date(order.orderDate).toLocaleDateString()} || ${finalTotal.toFixed(2)}</h1>  {/* Aquí también */}
+                                <h1>{new Date(order.orderDate).toLocaleDateString()} || ${finalTotal.toFixed(2)}</h1>
                                 <h2>Numero de Pedido: DX{order.id.toString().padStart(6, '0')}</h2>
                             </div>
                             {appliedDiscount && (
@@ -198,11 +197,24 @@ export default function DetailsOrder() {
                                     )}
                                     <div>
                                         <h2>Total:</h2>
-                                        <h2>${finalTotal.toFixed(2)}</h2>  {/* Aquí también */}
+                                        <h2>${finalTotal.toFixed(2)}</h2>
                                     </div>
                                 </div>
                             </section>
                         </section>
+
+                        {/* Nueva sección para mostrar la lista de productos comprados */}
+                        <section className='container-product-list'>
+                            <h1>Productos Comprados</h1>
+                            <ul>
+                                {order.orderItems.$values.map((item, index) => (
+                                    <li key={`${item.id}-${index}`}>
+                                        {item.productName} - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+
                         <section className='container-MetodoPago'>
                             <div>
                                 <h1>Metodo de Pago</h1>

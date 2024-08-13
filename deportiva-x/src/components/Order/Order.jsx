@@ -11,19 +11,18 @@ export default function Order({ order }) {
     return (
         <article className='container-order'>
             <section className='container-info-order'>
-                <h3>N° Pedido: DX{order.id.toString().padStart(6, '0')}</h3>
-                <div className='container-product-order'>
+                <div className='order-details'>
                     <section className='container-img-order'>
-                        {/* Mostrar la imagen del primer producto */}
-                        <img src={firstProduct.productImage} alt={firstProduct.productName} />
+                        <img
+                            src={firstProduct.productImage}
+                            alt={firstProduct.productName}
+                            className='small-img'
+                        />
                     </section>
                     <div className='info-order'>
-                        {/* Mostrar solo la fecha de la orden */}
+                        <h3>N° Pedido: DX{order.id.toString().padStart(6, '0')}</h3>
                         <h2>{new Date(order.orderDate).toLocaleDateString()}</h2>
-                        <div className='info2'>
-                            {/* Mostrar el total acumulado */}
-                            <h1>Total: ${totalAmount.toFixed(2)}</h1>
-                        </div>
+                        <h1>Total: ${totalAmount.toFixed(2)}</h1>
                     </div>
                 </div>
                 <div className='container-btn-order'>
@@ -36,6 +35,7 @@ export default function Order({ order }) {
         </article>
     );
 }
+
 
 
 

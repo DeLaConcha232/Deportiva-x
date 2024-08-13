@@ -77,7 +77,9 @@ export default function Product() {
 
         fetchProduct();
         fetchCartItems();
-        checkWishlist();
+        if (userId) {
+            checkWishlist();
+        }
     }, [idProductos, userId]);
 
     const toggleWishlist = async (event) => {
@@ -87,7 +89,7 @@ export default function Product() {
             ? 'https://api-deportiva-x.ngrok.io/api/user/wishlist/remove'
             : 'https://api-deportiva-x.ngrok.io/api/user/wishlist/add';
 
-        const body = JSON.stringify({ UserId: userId, ProductId: idProductos }); // Mantén idProductos como string
+        const body = JSON.stringify({ UserId: userId, ProductId: idProductos });
 
         try {
             const response = await fetch(url, {
@@ -116,9 +118,9 @@ export default function Product() {
 
         const body = JSON.stringify({
             UserId: userId,
-            ProductId: idProductos, // Mantén idProductos como string
+            ProductId: idProductos,
             Cantidad: selectedCantidad,
-            Talla: selectedTalla // Agrega la talla seleccionada al cuerpo de la solicitud
+            Talla: selectedTalla
         });
 
         try {
@@ -218,12 +220,14 @@ export default function Product() {
                                 >
                                     {isAddingToCart ? 'Añadiendo...' : 'Añadir al Carrito'}
                                 </button>
-                                <img
-                                    src={isWishlisted ? '../../../public/assets/Product/me-gusta-color.png' : '../../../public/assets/Product/me-gusta.png'}
-                                    alt="Wishlist Button"
-                                    className="img-favoritos"
-                                    onClick={toggleWishlist}
-                                />
+                                {userId && (
+                                    <img
+                                        src={isWishlisted ? '../../../public/assets/Product/me-gusta-color.png' : '../../../public/assets/Product/me-gusta.png'}
+                                        alt="Wishlist Button"
+                                        className="img-favoritos"
+                                        onClick={toggleWishlist}
+                                    />
+                                )}
                             </section>
                         </form>
                     </div>
@@ -236,7 +240,8 @@ export default function Product() {
                 </article>
                 {relatedProducts.length > 0 && (
                     <article className='carousel-products'>
-                        <Carousel title={`Más en ${product.categoria}`} products={relatedProducts} />
+                        {/* <Carousel title={`Más en ${product.categoria}`} products={relatedProducts} /> */}
+                        <Carousel title={`Más Productos de la tienda`} products={relatedProducts} />
                     </article>
                 )}
             </main>
@@ -244,3 +249,4 @@ export default function Product() {
         </>
     );
 }
+

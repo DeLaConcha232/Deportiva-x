@@ -419,6 +419,8 @@ namespace UserRegistrationApi.Controllers
         [HttpGet("orders/{userId}")]
         public async Task<IActionResult> GetOrders(int userId)
         {
+            Console.WriteLine($"Fetching orders for userId: {userId}");
+
             var orders = await _context.Orders
                 .Where(o => o.UserId == userId)
                 .Select(o => new
@@ -437,8 +439,18 @@ namespace UserRegistrationApi.Controllers
                 })
                 .ToListAsync();
 
+            if (!orders.Any())
+            {
+                Console.WriteLine("No orders found for this user.");
+            }
+            else
+            {
+                Console.WriteLine($"{orders.Count} orders found for this user.");
+            }
+
             return Ok(orders);
         }
+
 
         [HttpDelete("orders/cancel/{orderId}")]
         public async Task<IActionResult> CancelOrder(int orderId)
