@@ -12,9 +12,16 @@ namespace UserRegistrationApi.Models
         public DbSet<UserWishlist> UserWishlist { get; set; }
         public DbSet<CarritoItems> CarritoItems { get; set; }
         public DbSet<Carrito> Carrito { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
+
+
             modelBuilder.Entity<User>().HasKey(u => u.idUsuarios);
             modelBuilder.Entity<User>().Property(u => u.idUsuarios).ValueGeneratedOnAdd();
 
@@ -64,6 +71,12 @@ namespace UserRegistrationApi.Models
             modelBuilder.Entity<Carrito>()
                 .Property(c => c.UseridUsuarios)
                 .HasColumnName("UseridUsuarios");
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderItems)
+                .WithOne(oi => oi.Order)
+                .HasForeignKey(oi => oi.OrderId);
+
         }
 
 

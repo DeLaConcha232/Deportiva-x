@@ -6,7 +6,7 @@ namespace UserRegistrationApi.Models
 {
     public class Product
     {
-        public int idProductos { get; set; }
+        public string idProductos { get; set; }
         public string Nombre { get; set; }
         public decimal Precio { get; set; }
         public string Descripcion { get; set; }

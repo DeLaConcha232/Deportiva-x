@@ -9,6 +9,8 @@ import Products from './Screens/Products/Products';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import ShoppingCart from './Screens/ShoppingCart/ShoppingCart.jsx';
 import DetailsOrder from './Screens/DetailsOrders/DetailsOrder.jsx';
+import ResetPassword from './Screens/ResetPassword/ResetPassword'; // Asegúrate de que la ruta es correcta
+
 
 import { useEffect } from 'react';
 import CatalogComponent from './components/CatalogComponent/CatalogComponent';
@@ -53,13 +55,7 @@ const products = [
 
 
 function App() {
-  useEffect(() => {
-    // Limpiar el localStorage al montar la aplicación si no hay token
-    const token = localStorage.getItem('token');
-    if (!token) {
-      localStorage.clear(); // Limpia todo el localStorage si no hay token
-    }
-  }, []);
+
 
   return (
     <BrowserRouter>
@@ -73,8 +69,9 @@ function App() {
         <Route path='/ShoppingCart' element={<ShoppingCart />} />
         <Route path='/detailsOrder' element={<DetailsOrder />} />
 
-        <Route path='/collage' element={<CollageCatalog/>} />
-        <Route path="/category/:categoryName" element={<CatalogComponent products={products}/>} />
+        <Route path='/collage' element={<CollageCatalog />} />
+        <Route path="/category/:categoryName" element={<CatalogComponent products={products} />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
 
       </Routes>
     </BrowserRouter>
