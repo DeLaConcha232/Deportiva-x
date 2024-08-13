@@ -77,7 +77,9 @@ export default function Product() {
 
         fetchProduct();
         fetchCartItems();
-        checkWishlist();
+        if (userId) {
+            checkWishlist();
+        }
     }, [idProductos, userId]);
 
     const toggleWishlist = async (event) => {
@@ -87,7 +89,7 @@ export default function Product() {
             ? 'https://api-deportiva-x.ngrok.io/api/user/wishlist/remove'
             : 'https://api-deportiva-x.ngrok.io/api/user/wishlist/add';
 
-        const body = JSON.stringify({ UserId: userId, ProductId: idProductos }); // Mantén idProductos como string
+        const body = JSON.stringify({ UserId: userId, ProductId: idProductos });
 
         try {
             const response = await fetch(url, {
@@ -109,16 +111,45 @@ export default function Product() {
     };
 
     const addToCart = async () => {
+        if (isAddingToCart) return; // Evitar múltiples clics si ya se está añadiendo al carrito
+
+        if (!selectedTalla) {
+            Swal.fire({
+                title: 'Por favor selecciona una talla',
+                icon: 'warning',
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            return; // Salir de la función si no se ha seleccionado una talla
+        }
+
         if (!userId || !product) {
             console.error('User ID or Product is not defined');
             return;
         }
 
+        // Verificar si el producto ya está en el carrito
+        const isProductInCart = cartItems.some(
+            (item) => item.productos && item.productos.idProductos === idProductos && item.talla === selectedTalla
+        );
+
+        if (isProductInCart) {
+            Swal.fire({
+                title: 'Este producto ya está en el carrito',
+                icon: 'info',
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            return;
+        }
+
+        setIsAddingToCart(true); // Bloquear el botón mientras se procesa la solicitud
+
         const body = JSON.stringify({
             UserId: userId,
-            ProductId: idProductos, // Mantén idProductos como string
+            ProductId: idProductos,
             Cantidad: selectedCantidad,
-            Talla: selectedTalla // Agrega la talla seleccionada al cuerpo de la solicitud
+            Talla: selectedTalla
         });
 
         try {
@@ -141,14 +172,15 @@ export default function Product() {
                         Swal.showLoading();
                     }
                 });
-                setCartItems([...cartItems, { productos: product, cantidad: selectedCantidad }]);
+                setCartItems([...cartItems, { productos: product, cantidad: selectedCantidad, talla: selectedTalla }]);
             }
         } catch (error) {
             console.error('Error adding to cart:', error);
         } finally {
-            setIsAddingToCart(false);
+            setIsAddingToCart(false); // Permitir clics nuevamente después de completar la solicitud
         }
     };
+
 
 
     if (!product) {
@@ -218,12 +250,14 @@ export default function Product() {
                                 >
                                     {isAddingToCart ? 'Añadiendo...' : 'Añadir al Carrito'}
                                 </button>
-                                <img
-                                    src={isWishlisted ? '../../../public/assets/Product/me-gusta-color.png' : '../../../public/assets/Product/me-gusta.png'}
-                                    alt="Wishlist Button"
-                                    className="img-favoritos"
-                                    onClick={toggleWishlist}
-                                />
+                                {userId && (
+                                    <img
+                                        src={isWishlisted ? '../../../public/assets/Product/me-gusta-color.png' : '../../../public/assets/Product/me-gusta.png'}
+                                        alt="Wishlist Button"
+                                        className="img-favoritos"
+                                        onClick={toggleWishlist}
+                                    />
+                                )}
                             </section>
                         </form>
                     </div>
@@ -236,7 +270,8 @@ export default function Product() {
                 </article>
                 {relatedProducts.length > 0 && (
                     <article className='carousel-products'>
-                        <Carousel title={`Más en ${product.categoria}`} products={relatedProducts} />
+                        {/* <Carousel title={`Más en ${product.categoria}`} products={relatedProducts} /> */}
+                        <Carousel title={`Más Productos de la tienda`} products={relatedProducts} />
                     </article>
                 )}
             </main>

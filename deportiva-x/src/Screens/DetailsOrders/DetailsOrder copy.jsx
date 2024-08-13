@@ -206,21 +206,13 @@ export default function DetailsOrder() {
                         {/* Nueva sección para mostrar la lista de productos comprados */}
                         <section className='container-product-list'>
                             <h1>Productos Comprados</h1>
-                            {/* <ul>
-                                {order.orderItems.$values.map((item, index) => (
-                                    <li key={`${item.id}-${index}`}>
-                                        <strong>{item.productName}</strong> - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
-                                    </li>
-                                ))}
-                            </ul> */}
                             <ul>
                                 {order.orderItems.$values.map((item, index) => (
                                     <li key={`${item.id}-${index}`}>
-                                        <strong>{item.productName}</strong> - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
+                                        {item.productName} - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
                                     </li>
                                 ))}
                             </ul>
-
                         </section>
 
                         <section className='container-MetodoPago'>

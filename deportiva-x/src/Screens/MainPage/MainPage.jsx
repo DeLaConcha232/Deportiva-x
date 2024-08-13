@@ -79,28 +79,28 @@ export default function MainPage() {
         { id: "ADTE001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Termos y Cilindros/Botella Puma Training.png" },
         { id: "ADTE002", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Termos y Cilindros/Botella Nike Big Mouth.png" },
         { id: "ADBM001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Bolsas Y Mochilas/Maleta Under Armour Gametime.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Espinilleras/Espinilleras Adidas Messi Club.png" },
+        { id: "ADEP001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Espinilleras/Espinilleras Adidas Messi Club.png" },
         { id: "NNMO001", img: "../../../public/assets/Imagenes Productos PNG/Niño/Accesorios/Mochilas/Mochila Jordan Hbr Jumpman 2.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Gorras/Gorra Under Armour Blitzing.png" },
+        { id: "MUGO001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Gorras/Gorra Under Armour Blitzing.png" },
     ];
 
 
     const deportesProductos = [
         { id: "ADBB001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Balones De Basquetbol/Balon Wilson Drv Pro Streak.png" },
         { id: "ADBF001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Balones De Fútbol/Balón De Fútbol Adidas Ucl Club Orange.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Guantes De Portero/Guantes Adidas Tiro Club.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Tablas De Skate/MUSA.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Muñequeras Y Bandas/Banda Nathan Hypernight Reflective.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Niño/Accesorios/Balones De Fútbol/Balón De Fútbol Adidas Ucl League Knockout Mini.png" },
+        { id: "ADGU001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Guantes De Portero/Guantes Adidas Tiro Club.png" },
+        { id: "ADSK001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Accesorios/Tablas De Skate/MUSA.png" },
+        { id: "ADMB001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Accesorios/Muñequeras Y Bandas/Banda Nathan Hypernight Reflective.png" },
+        { id: "NNBF001", img: "../../../public/assets/Imagenes Productos PNG/Niño/Accesorios/Balones De Fútbol/Balón De Fútbol Adidas Ucl League Knockout Mini.png" },
     ];
 
     const mujerProductos = [
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Chamarras/Chamarra Adidas Tiro Cut 3.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Pants/Pantalón Adidas Tiro 24.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Sudaderas/Sudadera Under Armour Essential 2.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Calcetines/Calcetines Asics Quick Lyte Plus 3 Pares.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Tops Deportivos/Top Adidas All Me.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Jerseys Equipos De Fútbol/Jersey Adidas Selección Nacional De México Visita 2024.png" },
+        { id: "MUCH001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Chamarras/Chamarra Adidas Tiro Cut 3.png" },
+        { id: "MUPA001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Pants/Pantalón Adidas Tiro 24.png" },
+        { id: "MUSU001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Sudaderas/Sudadera Under Armour Essential 2.png" },
+        { id: "MUCA001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Calcetines/Calcetines Asics Quick Lyte Plus 3 Pares.png" },
+        { id: "MUTO001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Tops Deportivos/Top Adidas All Me.png" },
+        { id: "MUJE001", img: "../../../public/assets/Imagenes Productos PNG/Mujer/Ropa/Jerseys Equipos De Fútbol/Jersey Adidas Selección Nacional De México Visita 2024.png" },
     ];
 
     const hombreProductos = [
@@ -108,17 +108,17 @@ export default function MainPage() {
         { id: "HOPL001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Ropa/Playeras/Playera Adidas Gym Training Tee.png" },
         { id: "HOSH001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Ropa/Shorts/Short Adidas Tiro 24.png" },
         { id: "NNSU001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Ropa/Sudaderas/Sudadera Under Armour Project Rock.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Ropa/Pants/Pantalón Adidas House Of Tiro Woven.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Hombre/Ropa/Jerseys Equipos De Basquetbol/Jersey Jordan Dri-Fit Nba Swingman Memphis Grizzlies.png" },
+        { id: "HOPA002", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Ropa/Pants/Pantalón Adidas House Of Tiro Woven.png" },
+        { id: "HOJE001", img: "../../../public/assets/Imagenes Productos PNG/Hombre/Ropa/Jerseys Equipos De Basquetbol/Jersey Jordan Dri-Fit Nba Swingman Memphis Grizzlies.png" },
     ];
 
     const ninosProductos = [
         { id: "NNCA001", img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Calcetines/Calcetines Adidas Star Wars 3 Pack.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Jerseys Equipos De Fútbol/Jersey Adidas Jamaica Local.png" },
+        { id: "NNJE003", img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Jerseys Equipos De Fútbol/Jersey Adidas Jamaica Local.png" },
         { id: "NNPA001", img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Pants/Pantalón Adidas Messi.png" },
         { id: "NNPL001", img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Playeras/Playera Under Armour Ua Tech.png" },
         { id: "NNJE001", img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Jerseys Equipos De Fútbol/Jersey Puma Chivas Visita.png" },
-        { id: 0, img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Jerseys Equipos De Basquetbol/Jersey Nike Denver Nuggets Icon Edition.png" },
+        { id: "NNJE002", img: "../../../public/assets/Imagenes Productos PNG/Niño/Ropa/Jerseys Equipos De Basquetbol/Jersey Nike Denver Nuggets Icon Edition.png" },
     ];
 
     return (
