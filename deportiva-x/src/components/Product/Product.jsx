@@ -111,6 +111,8 @@ export default function Product() {
     };
 
     const addToCart = async () => {
+        if (isAddingToCart) return; // Evitar múltiples clics si ya se está añadiendo al carrito
+
         if (!selectedTalla) {
             Swal.fire({
                 title: 'Por favor selecciona una talla',
@@ -125,6 +127,23 @@ export default function Product() {
             console.error('User ID or Product is not defined');
             return;
         }
+
+        // Verificar si el producto ya está en el carrito
+        const isProductInCart = cartItems.some(
+            (item) => item.productos && item.productos.idProductos === idProductos && item.talla === selectedTalla
+        );
+
+        if (isProductInCart) {
+            Swal.fire({
+                title: 'Este producto ya está en el carrito',
+                icon: 'info',
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            return;
+        }
+
+        setIsAddingToCart(true); // Bloquear el botón mientras se procesa la solicitud
 
         const body = JSON.stringify({
             UserId: userId,
@@ -153,14 +172,15 @@ export default function Product() {
                         Swal.showLoading();
                     }
                 });
-                setCartItems([...cartItems, { productos: product, cantidad: selectedCantidad }]);
+                setCartItems([...cartItems, { productos: product, cantidad: selectedCantidad, talla: selectedTalla }]);
             }
         } catch (error) {
             console.error('Error adding to cart:', error);
         } finally {
-            setIsAddingToCart(false);
+            setIsAddingToCart(false); // Permitir clics nuevamente después de completar la solicitud
         }
     };
+
 
 
     if (!product) {

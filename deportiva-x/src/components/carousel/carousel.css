@@ -80,7 +80,7 @@ html{
 .slick-prev::before,
 .slick-next::before {
     font-size: 2rem; /* Tamaño del icono de la flecha */
-    color: white; /* Color de la flecha */
+    color: rgb(150, 150, 150); /* Color de la flecha */
 }
 
 .slick-prev {

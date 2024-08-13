@@ -434,6 +434,7 @@ namespace UserRegistrationApi.Controllers
                         oi.ProductId,
                         oi.Quantity,
                         oi.Price,
+                        ProductName = oi.Product.Nombre, // Aquí se obtiene el nombre del producto
                         ProductImage = oi.Product.Imagen // Aquí se obtiene la imagen del producto
                     }).ToList()
                 })
@@ -450,6 +451,7 @@ namespace UserRegistrationApi.Controllers
 
             return Ok(orders);
         }
+
 
 
         [HttpDelete("orders/cancel/{orderId}")]
