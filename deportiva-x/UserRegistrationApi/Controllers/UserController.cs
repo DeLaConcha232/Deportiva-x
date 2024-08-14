@@ -434,6 +434,7 @@ namespace UserRegistrationApi.Controllers
                         oi.ProductId,
                         oi.Quantity,
                         oi.Price,
+                        oi.Talla,
                         ProductName = oi.Product.Nombre, // Aquí se obtiene el nombre del producto
                         ProductImage = oi.Product.Imagen // Aquí se obtiene la imagen del producto
                     }).ToList()
@@ -454,51 +455,94 @@ namespace UserRegistrationApi.Controllers
 
 
 
+        // [HttpDelete("orders/cancel/{orderId}")]
+        // public async Task<IActionResult> CancelOrder(int orderId)
+        // {
+        //     var order = await _context.Orders
+        //         .Include(o => o.OrderItems)
+        //         .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        //     if (order == null)
+        //     {
+        //         return NotFound("Order not found.");
+        //     }
+
+        //     foreach (var orderItem in order.OrderItems)
+        //     {
+        //         var product = await _context.Products.FindAsync(orderItem.ProductId);
+        //         if (product != null)
+        //         {
+        //             product.Stock += orderItem.Quantity;
+
+        //             if (!string.IsNullOrEmpty(orderItem.Talla))
+        //             {
+        //                 var tallas = product.TallaDb.Split(',').Select(t => t.Trim()).ToList();
+        //                 tallas.Add(orderItem.Talla);  // Volver a agregar la talla
+        //                 product.TallaDb = string.Join(",", tallas);
+        //             }
+
+        //             _context.Products.Update(product);
+        //         }
+        //     }
+
+        //     _context.OrderItems.RemoveRange(order.OrderItems);
+        //     _context.Orders.Remove(order);
+
+        //     await _context.SaveChangesAsync();
+
+        //     return Ok(new { message = "Order canceled and removed successfully." });
+        // }
+
+
         [HttpDelete("orders/cancel/{orderId}")]
         public async Task<IActionResult> CancelOrder(int orderId)
         {
-
-            Console.WriteLine($"CancelOrder called with orderId: {orderId}");
-
             var order = await _context.Orders
                 .Include(o => o.OrderItems)
                 .FirstOrDefaultAsync(o => o.Id == orderId);
 
             if (order == null)
             {
-                Console.WriteLine($"Order not found for orderId: {orderId}");
                 return NotFound("Order not found.");
             }
 
-            // Devolver el stock a los productos asociados al pedido
             foreach (var orderItem in order.OrderItems)
             {
                 var product = await _context.Products.FindAsync(orderItem.ProductId);
                 if (product != null)
                 {
-                    product.Stock += orderItem.Quantity;  // Devolver la cantidad al stock
+                    // Sumar la cantidad cancelada al stock del producto
+                    product.Stock += orderItem.Quantity;
+
+                    // Verifica si hay una talla asociada al producto
+                    if (!string.IsNullOrEmpty(orderItem.Talla))
+                    {
+                        // Convertir el string de tallas en una lista
+                        var tallas = product.TallaDb.Split(',').Select(t => t.Trim()).ToList();
+
+                        // Verifica si la talla ya está en la lista
+                        if (!tallas.Contains(orderItem.Talla))
+                        {
+                            // Agregar la talla nuevamente si no está ya presente
+                            tallas.Add(orderItem.Talla);
+                        }
+
+                        // Convertir la lista de nuevo a un string y actualizar la base de datos
+                        product.TallaDb = string.Join(",", tallas);
+                    }
+
                     _context.Products.Update(product);
-                    Console.WriteLine($"Updated stock for productId: {orderItem.ProductId}, new stock: {product.Stock}");
-                }
-                else
-                {
-                    Console.WriteLine($"Product not found for productId: {orderItem.ProductId}");
                 }
             }
 
-            // Eliminar el pedido y sus items de la base de datos
+            // Eliminar los items de la orden y la orden misma
             _context.OrderItems.RemoveRange(order.OrderItems);
-            Console.WriteLine($"OrderItems removed for orderId: {orderId}");
-
             _context.Orders.Remove(order);
-            Console.WriteLine($"Order removed for orderId: {orderId}");
 
             await _context.SaveChangesAsync();
-            Console.WriteLine("Changes saved to the database");
 
             return Ok(new { message = "Order canceled and removed successfully." });
         }
-
 
 
 
@@ -534,7 +578,6 @@ namespace UserRegistrationApi.Controllers
                 return BadRequest("Invalid order data.");
             }
 
-            // Verificación de datos incompletos en los productos
             foreach (var item in orderDto.CartItems)
             {
                 if (string.IsNullOrEmpty(item.ProductId) || item.Cantidad <= 0 || item.Price <= 0)
@@ -549,12 +592,11 @@ namespace UserRegistrationApi.Controllers
                 return NotFound("User not found.");
             }
 
-            // Aplica el descuento del 25% si es la primera compra
             var totalAmount = orderDto.Total;
             bool discountApplied = false;
             if (user.descuentoInicial == 1)
             {
-                totalAmount *= 0.75m; // Aplica el 25% de descuento
+                totalAmount *= 0.75m;
                 discountApplied = true;
             }
 
@@ -563,7 +605,7 @@ namespace UserRegistrationApi.Controllers
                 UserId = orderDto.UserId,
                 TotalAmount = totalAmount,
                 OrderDate = DateTime.Now,
-                Estado = "Pendiente",  // Puedes ajustar el estado según sea necesario
+                Estado = "Pendiente",
                 OrderItems = new List<OrderItem>()
             };
 
@@ -577,10 +619,10 @@ namespace UserRegistrationApi.Controllers
                     OrderId = order.Id,
                     ProductId = item.ProductId,
                     Quantity = item.Cantidad,
-                    Price = item.Price
+                    Price = item.Price,
+                    Talla = item.Talla // Guardar la talla seleccionada
                 };
 
-                // Actualiza el stock del producto
                 var product = await _context.Products.FindAsync(item.ProductId);
                 if (product != null)
                 {
@@ -589,7 +631,15 @@ namespace UserRegistrationApi.Controllers
                         return BadRequest("No hay suficiente stock disponible.");
                     }
 
-                    product.Stock -= item.Cantidad;  // Disminuye el stock según la cantidad ordenada
+                    product.Stock -= item.Cantidad;
+
+                    if (!string.IsNullOrEmpty(product.TallaDb))
+                    {
+                        var tallas = product.TallaDb.Split(',').Select(t => t.Trim()).ToList();
+                        tallas.Remove(item.Talla);  // Remover la talla seleccionada
+                        product.TallaDb = string.Join(",", tallas);
+                    }
+
                     _context.Products.Update(product);
                 }
 
@@ -599,10 +649,8 @@ namespace UserRegistrationApi.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Limpia el carrito del usuario
             await ClearCart(user.idUsuarios);
 
-            // Actualiza el campo descuentoInicial a 0 si se aplicó el descuento
             if (discountApplied)
             {
                 user.descuentoInicial = 0;
@@ -611,6 +659,8 @@ namespace UserRegistrationApi.Controllers
 
             return Ok(new { OrderId = order.Id });
         }
+
+
 
 
 

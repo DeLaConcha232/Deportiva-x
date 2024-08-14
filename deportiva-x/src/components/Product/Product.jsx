@@ -130,7 +130,7 @@ export default function Product() {
 
         // Verificar si el producto ya está en el carrito
         const isProductInCart = cartItems.some(
-            (item) => item.productos && item.productos.idProductos === idProductos && item.talla === selectedTalla
+            (item) => item.idProductos === idProductos && item.talla === selectedTalla
         );
 
         if (isProductInCart) {
@@ -172,7 +172,9 @@ export default function Product() {
                         Swal.showLoading();
                     }
                 });
-                setCartItems([...cartItems, { productos: product, cantidad: selectedCantidad, talla: selectedTalla }]);
+
+                const updatedCartItems = [...cartItems, { idProductos: idProductos, cantidad: selectedCantidad, talla: selectedTalla }];
+                setCartItems(updatedCartItems);
             }
         } catch (error) {
             console.error('Error adding to cart:', error);
@@ -180,8 +182,6 @@ export default function Product() {
             setIsAddingToCart(false); // Permitir clics nuevamente después de completar la solicitud
         }
     };
-
-
 
     if (!product) {
         return (
@@ -210,7 +210,7 @@ export default function Product() {
                             <section className='container-select-product'>
                                 <div className='select1 select-btn'>
                                     <h1>TALLA</h1>
-                                    <select
+                                    {/* <select
                                         name="talla"
                                         id="select-talla"
                                         value={selectedTalla}
@@ -224,7 +224,26 @@ export default function Product() {
                                         ) : (
                                             <option value="">No hay tallas disponibles</option>
                                         )}
+                                    </select> */}
+                                    <select
+                                        name="talla"
+                                        id="select-talla"
+                                        value={selectedTalla}
+                                        onChange={(e) => setSelectedTalla(e.target.value)}
+                                    >
+                                        <option value="">Elige</option>
+                                        {product.tallaDb && product.tallaDb.length > 0 ? (
+                                            product.tallaDb.split(',')
+                                                .map(talla => talla.trim())
+                                                .filter(talla => talla !== "") // Filtra las opciones vacías
+                                                .map((talla, index) => (
+                                                    <option key={index} value={talla}>{talla}</option>
+                                                ))
+                                        ) : (
+                                            <option value="">No hay tallas disponibles</option>
+                                        )}
                                     </select>
+
                                 </div>
                                 <div className='select2 select-btn'>
                                     <h1>CANTIDAD</h1>
@@ -234,9 +253,13 @@ export default function Product() {
                                         value={selectedCantidad}
                                         onChange={(e) => setSelectedCantidad(e.target.value)}
                                     >
-                                        {cantidadOptions.map((cantidad, index) => (
-                                            <option key={index} value={cantidad}>{cantidad}</option>
-                                        ))}
+                                        {cantidadOptions.length > 0 ? (
+                                            cantidadOptions.map((cantidad, index) => (
+                                                <option key={index} value={cantidad}>{cantidad}</option>
+                                            ))
+                                        ) : (
+                                            <option value="">No hay stock</option>
+                                        )}
                                     </select>
                                 </div>
                             </section>
@@ -246,7 +269,7 @@ export default function Product() {
                                     type='button'
                                     className='btn-carrito'
                                     onClick={addToCart}
-                                    disabled={isAddingToCart}
+                                    disabled={isAddingToCart || cantidadOptions.length === 0}
                                 >
                                     {isAddingToCart ? 'Añadiendo...' : 'Añadir al Carrito'}
                                 </button>
@@ -270,7 +293,6 @@ export default function Product() {
                 </article>
                 {relatedProducts.length > 0 && (
                     <article className='carousel-products'>
-                        {/* <Carousel title={`Más en ${product.categoria}`} products={relatedProducts} /> */}
                         <Carousel title={`Más Productos de la tienda`} products={relatedProducts} />
                     </article>
                 )}

@@ -37,7 +37,7 @@ builder.Services.AddCors(options =>
     );
 });
 
-// Configuración del JWT
+// JWT Generation
 var jwtSettings = configuration.GetSection("JwtSettings");
 var jwtSecret = jwtSettings.GetValue<string>("Secret");
 var key = Encoding.ASCII.GetBytes(jwtSecret);
