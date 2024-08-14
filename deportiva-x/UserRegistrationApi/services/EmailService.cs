@@ -9,15 +9,15 @@ namespace UserRegistrationApi.Services
         {
             var fromAddress = new MailAddress("forgotdeportiva-x@deportiva-x.com", "Deportiva-X Support");
             var toAddress = new MailAddress(toEmail);
-            const string fromPassword = "vythen-xuhzev-1Wavso";  // Reemplaza esto con la contraseña real de tu cuenta
+            const string fromPassword = "vythen-xuhzev-1Wavso";  // pssw
             const string subject = "Reset your password";
             string body = $"Please click the link to reset your password: {resetLink}";
 
             var smtp = new SmtpClient
             {
-                Host = "smtp.hostinger.com",  // SMTP de Hostinger
-                Port = 587, // Usa 465 si prefieres SSL
-                EnableSsl = true,  // Esto debe ser true para usar SSL/TLS
+                Host = "smtp.hostinger.com",  // SMTP Hostinger
+                Port = 587, // 456 x ssl
+                EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)

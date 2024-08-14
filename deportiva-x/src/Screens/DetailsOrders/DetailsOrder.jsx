@@ -209,14 +209,14 @@ export default function DetailsOrder() {
                             {/* <ul>
                                 {order.orderItems.$values.map((item, index) => (
                                     <li key={`${item.id}-${index}`}>
-                                        <strong>{item.productName}</strong> - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
+                                        <strong>{item.productName}</strong> - Talla: {item.talla} - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
                                     </li>
                                 ))}
                             </ul> */}
                             <ul>
                                 {order.orderItems.$values.map((item, index) => (
                                     <li key={`${item.id}-${index}`}>
-                                        <strong>{item.productName}</strong> - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
+                                        <strong>{item.productName}</strong> - Talla: {item.talla || 'No especificada'} - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
                                     </li>
                                 ))}
                             </ul>
